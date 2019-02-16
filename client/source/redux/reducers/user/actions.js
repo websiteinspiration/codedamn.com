@@ -1,7 +1,6 @@
 import { GOT_USER_SETTINGS } from './types'
 import { FIRE_NOTIFICATION } from 'reducers/notifizer/types';
 import axios from 'axios'
-import { updateCSRFToken } from 'reducers/system/actions'
 
 export const getUserSettings = _ => async dispatch => {
 	const { data: json } = await axios.post(`/settings`)
@@ -24,7 +23,7 @@ export const saveUserSettings = payload => async dispatch => {
 		throw json
 	}
 
-	dispatch(updateCSRFToken())
+ //	dispatch(updateCSRFToken())
 
 	//dispatch({ type: GOT_USER_SETTINGS, payload: json })
 }

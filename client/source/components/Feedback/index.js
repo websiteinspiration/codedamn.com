@@ -3,10 +3,10 @@ import styles from './styles.scss'
 import css from 'react-css-modules'
 import { Button, TextField } from '@material-ui/core'
 import axios from 'axios'
-import { fireNotification } from 'reducers/notifizer/actions'
+import { successNotification, errorNotification } from 'reducers/notifizer/actions'
 import { connect } from 'react-redux'
 
-@connect(null, { fireNotification })
+@connect(null, { successNotification, errorNotification })
 @css(styles, { handleNotFoundStyleName: 'log', allowMultiple: true })
 export default class Feedback extends React.Component {
 
@@ -22,21 +22,15 @@ export default class Feedback extends React.Component {
 	async sendFeedback() {
 
 		const { name, email, message } = this.state
+		const { successNotification, errorNotification } = this.props
 		const captcha = document.querySelector(`[name='g-recaptcha-response']`).value
 
 		//const res = await fetch('/send-feedback', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({name, message, captcha}) })
 		const { data } = await axios.post('/send-feedback', { name, email, message, captcha })
 		if (data.status == "ok") {
-			//
-			this.props.fireNotification({
-				heading: 'Success',
-				body: 'Your message is received! We\'ll get back to you soon!'
-			})
+			successNotification('Your message is received! We\'ll get back to you soon!')
 		} else {
-			this.props.fireNotification({
-				heading: 'Error',
-				body: 'There were some errors sending your feedback. Try again?'
-			})
+			errorNotification('There were some errors sending your feedback. Try again?')
 		}
 	}
 
