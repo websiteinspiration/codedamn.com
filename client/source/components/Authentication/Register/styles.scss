@@ -1,0 +1,177 @@
+@import "~@assets/scss/variables";
+
+$gridElems: divider, heading, heading2, email, name, captcha, username, password, cpassword, submit, forgot, register, heading;
+
+@each $elem in $gridElems {
+	.#{$elem} {
+		grid-area: #{$elem};
+	}
+}
+
+div.grid {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.register-form {
+	display: grid;
+	grid-template-areas: 
+		" . . ."
+		"heading heading heading2"
+		"name username socialregister"
+		"email email socialregister"
+		"password cpassword socialregister"
+		"captcha captcha socialregister"
+		"submit submit socialregister"
+		"divider divider socialregister"
+		"register register socialregister"
+		" . . .";
+	grid-template-rows: 1fr;
+	grid-template-columns: 1fr 1fr 2fr;
+	justify-items: center;
+	align-items: center;
+	grid-row-gap: 10px;
+	grid-column-gap: 25px;
+	padding: 30px;
+	background: white;
+	border: 1px solid $border;
+	width: 880px;
+	margin: 20px auto;
+}
+
+.divider {
+	margin: 20px 0;
+	width: 100%;
+}
+
+.register-form.oauth {
+	grid-template-areas: 
+		". . "
+		"heading heading"
+		"name username"
+		"email email"
+		"password cpassword"
+		"captcha captcha"
+		"register submit"
+		". . ";
+	grid-template-rows: 1fr;
+	grid-template-columns: 1fr 1fr;
+	.divider {
+		display: none;
+	}
+}
+
+.social-register {
+	grid-area: socialregister;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    align-self: stretch;
+    padding-left: 20px;
+    border-left: 2px solid $border;
+}
+
+.heading, .heading2 {
+	align-self: end;
+	font-size: 24px;
+	font-weight: normal;
+	justify-self: center;
+}
+
+.heading2 {
+	text-align: right;
+}
+
+.icon {
+	margin-right: 10px;
+    height: 30px;
+}
+/*
+@media only screen and (max-width: 870px) {
+	.register-form {
+		grid-template-areas: 
+		". . . . "
+		". heading heading ."
+		". name username ."
+		". email email ."
+		". password cpassword ."
+		". captcha captcha ."
+		". register submit ."
+		". heading2 heading2 ."
+		". socialregister socialregister ."
+		". . . .";
+		grid-template-rows: 1fr auto auto auto auto auto auto auto auto 1fr;
+		grid-template-columns: 1fr auto auto auto 1fr;
+		grid-row-gap: 25px;
+	}
+
+	.social-register {
+		border: 0;
+		padding: 0;
+		button {
+			margin-top: 10px;
+		}
+	}
+}
+
+@media only screen and (max-width: 530px) {
+	.register-form {
+		grid-template-areas: 
+		"heading "
+		" name"
+		"username"
+		" email "
+		"password"
+		" cpassword "
+		" captcha "
+		"submit"
+		" register  "
+		" heading2 "
+		" socialregister ";
+		grid-template-rows: auto;
+		grid-template-columns: 1fr;
+		grid-row-gap: 25px;
+		padding: 10px;
+	}
+}*/
+
+@media only screen and (max-width: 900px) {
+	div.register-form {
+		width: 100%;
+		margin: 20px;
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	div.register-form {
+		grid-template-areas: 
+		"heading2 heading2"
+		"socialregister socialregister"
+		"divider divider"
+		"heading heading"
+		"name name"
+		"username username"
+		"email email"
+		"password password"
+		"cpassword cpassword"
+		"captcha captcha"
+		"register submit";
+		grid-template-rows: 1fr;
+		grid-template-columns: 1fr 1fr;
+		grid-row-gap: 10px;
+	}
+
+	.heading2 {
+		text-align: center;
+	}
+
+	div.social-register {
+		border-left: 0;
+		padding: 0;
+		& > button {
+			margin-top: 10px;
+		}
+	}
+}

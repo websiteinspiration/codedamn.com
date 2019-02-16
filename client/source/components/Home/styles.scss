@@ -1,0 +1,245 @@
+.splash {
+    background: url('/assets/images/cover.jpg') no-repeat center center;
+    background-size: cover;
+	display: flex;
+	padding-top: 100px;
+	padding-bottom: 100px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    color: white;
+}
+
+.graph h1 {
+	margin-left: 30px
+}
+
+.tagline {
+    width: 80%;
+    height: 20%;
+    opacity: 1;
+    color: #ffffff;
+    font-size: 52px;
+
+    font-weight: bold;
+    text-align: center;
+}
+.tagline {
+	text-transform: uppercase
+}
+
+.capitalize {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 800;
+	display: block;
+}
+
+@media only screen and (max-width: 900px) {
+    .tagline {
+        font-size: 18px;
+    }
+}
+
+.startnow {
+    border-radius: 35.5px;
+    background-color: #e83f3f;
+
+    padding: 21px 94px 21px 94px;
+    margin-top: 116px;
+
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.13);
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
+
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 900px) {
+    .startnow {
+        margin-top: 1em;
+
+        width: 151px;
+        height: 50px;
+        font-size: 14px;
+
+        padding: 15px 35px 15px 35px;
+    }
+}
+
+.learn-compete {
+    display: flex;    
+    align-items: stretch;
+    justify-content: space-around;
+	margin: 100px auto;
+	max-width: 1024px;
+    text-align: center;
+    font-weight: 100;
+	line-height: 40px;
+	
+    .learn-box {
+        flex: 1;
+		text-align: center;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+		flex-direction: column;
+    }
+
+    .compete-box {
+        flex: 1;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .learn-compete {
+        display: flex;    
+        justify-content: flex-start;
+        flex-direction: column;
+
+        margin-bottom: 60px;
+
+        h1 {
+            font-weight: 100;
+        }
+
+        > .learn-box {
+            padding: 20px;
+
+            width: 100%;
+        }
+    
+        > .compete-box {
+            padding: 20px;
+
+            width: 100%;
+            align-items: center;
+        }
+    }
+}
+
+.learn-iconset {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: center;
+    justify-content: center;
+}
+
+/* ICON BOX COMPONENT STYLES */
+
+.icon-box {
+    display: flex;
+    justify-content: center;
+	align-items: center;
+    align-content: flex-start;
+    flex-direction: column;
+	position: relative;
+    text-align: center;
+    color: #e83f3f;
+
+    width: 133px;
+	height: 133px;
+	
+	&:before {
+		position: absolute;
+		top: 0;
+		left: 0;
+		content: '';
+		width: 100%;
+		height: 100%;
+		z-index: 10;
+		cursor: pointer;
+	}
+
+    .icon-box-image {
+        size: 49px 49px;
+		padding-bottom: 10px;
+    }
+
+    span, span::before, span::after {
+        transition: all 0.25s;
+        position: relative;
+    }
+
+    $lineHeight: 2px;
+    span {
+        &::before {
+            background-color: #e83f3f;
+            height: $lineHeight;
+            content: '';
+            width: 40px;
+
+            position: absolute;
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;
+
+            top: -$lineHeight;
+        }
+	}
+	
+	&:hover span::before {
+	   top: calc(1em + #{$lineHeight} + 10px);
+	}
+}
+
+
+@media only screen and (max-width: 900px) {
+}
+
+
+/* BUTTON STYLE */
+
+.learn-compete-button {
+    font-weight: bold;
+    text-align: center;
+
+    width: 210px;
+    height: 61px;
+
+    margin-top: 1em;
+
+    border-radius: 4px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #e8e8e8;
+    background-color: #fafafa;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    transition: all 1s;
+
+    position: relative;
+    a {
+        position: absolute;
+        top: 0; bottom: 0;
+        left: 0; right: 0;
+    }
+
+    span { flex: 1; }
+}
+
+@media only screen and (max-width: 900px) {
+    .learn-compete-button {
+        width: 100%;
+        margin: 10px;
+    }
+}
+
+.learn-compete-button:hover {
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.12);
+}

@@ -1,0 +1,17 @@
+.root {
+	width: 100%;
+    margin-top: 9px;
+    overflow-x: auto;
+}
+
+.table tr td {
+	font-weight: 300
+}
+
+@media only screen and (max-width: 720px) {
+	.table tr {
+		td:nth-child(3), td:nth-child(4), th:nth-child(3), th:nth-child(4) {
+			display: none;
+		}
+	}
+}

@@ -1,0 +1,7 @@
+export const USER_LOGGED_IN = 'USER_LOGGED_IN'
+export const USER_LOGGED_OUT = 'USER_LOGGED_OUT'
+export const SET_CSRF_TOKEN = 'SET_CSRF_TOKEN'
+export const SET_KEY_VALUE = 'SET_KEY_VALUE'
+export const STORE_DAMN_TABLE = 'STORE_DAMN_TABLE'
+export const SET_HEADER_TYPE = 'SET_HEADER_TYPE'
+export const CLEAR_REG_FORM = 'CLEAR_REG_FORM'

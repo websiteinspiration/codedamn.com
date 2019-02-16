@@ -1,0 +1,28 @@
+.reset {
+	display: grid;
+	grid-template-rows: 1fr auto auto auto 1fr;
+	grid-template-columns: 1fr auto auto 1fr;
+	grid-gap: 30px;
+	grid-template-areas: 
+		". . . ."
+		". heading heading ."
+		". email email ."
+		". captcha submit ."
+		". . . ."
+}
+
+.email {
+	grid-area: email;
+}
+
+.captcha {
+	grid-area: captcha;
+}
+
+.submit {
+	grid-area: submit;
+}
+
+.heading {
+	grid-area: heading;
+}

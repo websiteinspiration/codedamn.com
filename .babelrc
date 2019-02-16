@@ -1,0 +1,23 @@
+{
+	"env": {
+		"test": {
+			"presets": ["@babel/env"],
+			"plugins": ["dynamic-import-node"]
+		},
+		"development": {
+			"presets": [["@babel/env", { "modules": false }]]
+		},
+		"production": {
+			"presets": [["@babel/env", { "modules": false }]]
+		}
+	},
+	"presets": ["@babel/react"],
+	"plugins": [
+		"@babel/plugin-syntax-dynamic-import",
+		"@babel/proposal-optional-chaining",
+		"@babel/transform-runtime", 
+		"@babel/transform-react-jsx",
+		["@babel/plugin-proposal-decorators", { "legacy": true }],
+		["@babel/plugin-proposal-class-properties", { "loose": false }]
+	]
+}

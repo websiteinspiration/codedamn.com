@@ -1,0 +1,1 @@
+export const GRAPHQL = document.location.hostname === 'localhost' ? `${location.protocol}//localhost:1400/graphql` : 'https://codedamn.com/graphql'

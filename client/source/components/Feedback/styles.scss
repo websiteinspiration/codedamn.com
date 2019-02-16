@@ -1,0 +1,81 @@
+.n60 {
+	width: 880px;
+	margin: 20px auto;
+	//color: white
+}
+
+.feedbackParent {
+	h1 {
+		text-align: center;
+		margin-bottom: 30px;
+	}
+	p {
+		line-height: 32px
+	}
+}
+
+.name {
+	grid-area: name;
+}
+.email {
+	grid-area: email;
+}
+.message {
+	grid-area: message;
+}
+.captcha {
+	grid-area: captcha;
+}
+
+.submit {
+	grid-area: submit;
+}
+
+.container {
+	display: grid;
+	grid-gap: 30px;
+	grid-template-areas: 
+		"name email"
+		"message message"
+		"captcha submit";
+	grid-template-columns: 1fr 1fr;
+}
+/*
+@media only screen and (max-width: 980px) {
+	.n60 {
+		padding: 20px;
+		margin: 0;
+		width: 100%;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	.container {
+		grid-template-areas: 
+			"name"
+			"email"
+			"message"
+			"captcha"
+			"submit"
+	}
+}*/
+
+@media only screen and (max-width: 900px) {
+	div.n60 {
+		padding: 20px;
+		margin: 0;
+		width: 100%;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	div.container {
+		grid-template-areas: 
+			"name"
+			"email"
+			"message"
+			"captcha"
+			"submit";
+		grid-template-columns: 1fr;
+	}
+}
