@@ -20,14 +20,14 @@ module.exports = merge(common[0], {
 	historyApiFallback: {
 		index: 'index.prod.html'
 	},
-	/*proxy: {
+	proxy: {
         '/': {
             target: `http://localhost:1337`, // only for POST?
             bypass: function(req, res, proxyOptions) {
                 if(req.method != 'POST') return false;
             }
         }
-    },*/
+    }
   },
   output: {
 	pathinfo: false

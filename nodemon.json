@@ -1,0 +1,6 @@
+{
+    "watch": ["./server/compiled/server.js"],
+	"ignore": ["node_modules/*.*"],
+	"ext": "js",
+	"exec": "node --inspect=7331 ./server/compiled/server.js"
+}

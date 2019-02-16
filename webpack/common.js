@@ -4,6 +4,7 @@ const copyWP = require('copy-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
 const source = path.resolve(__dirname, '../client/source')
 const compiled = path.resolve(__dirname, '../client/compiled')
+const server = path.resolve(__dirname, '../server/')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -69,25 +70,25 @@ module.exports = [
 // server now
 {
 	entry: {
-		server: path.resolve(__dirname, '../index.ts')
+		server: path.resolve(server, 'index.ts')
 	},
 	externals: [nodeExternals()],
 	devtool: 'source-map',
 	target: 'node',
 	resolve: {
 		alias: {
-			'@controllers': path.resolve(__dirname, '../controllers'),
-			'@interfaces': path.resolve(__dirname, '../interfaces'),
-			'@middlewares': path.resolve(__dirname, '../middlewares'),
-			'@models': path.resolve(__dirname, '../models'),
-			'@root': path.resolve(__dirname, '../'),
-			'decorators': path.resolve(__dirname, '../decorators'),
+			'@controllers': path.resolve(server, 'controllers'),
+			'@interfaces': path.resolve(server, 'interfaces'),
+			'middlewares': path.resolve(server, 'middlewares'),
+			'models': path.resolve(server, 'models'),
+			'@root': server,
+			'decorators': path.resolve(server, 'decorators'),
 		},
 		extensions: [ '.tsx', '.ts', '.js' ]
 	},
 	output: {
 		path: path.resolve(__dirname, '../'),
-		filename: './server/server.js',
+		filename: './server/compiled/server.js',
 		libraryTarget: 'commonjs',
 		publicPath: path.resolve(__dirname, '../')
 	},

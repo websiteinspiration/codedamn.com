@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+	  "module": "commonjs",
+	  "noImplicitAny": false,
+	  "removeComments": true,
+	  "esModuleInterop": true,
+	  "experimentalDecorators": true,
+	  "target": "es2017",
+	  "baseUrl": "./server",
+	  "sourceMap": true,
+	  "inlineSources": true,
+	  "paths": {
+		  "@controllers/*": ["controllers/*"],
+		  "@interfaces/*": ["interfaces/*"],
+		  "middlewares/*": ["middlewares/*"],
+		  "models/*": ["models/*"],
+		  "@root/*": ["*"],
+		  "@decorators/*": ["decorators/*"]
+	  }
+	},
+	"include": ["./server/"],
+	"exclude": ["node_modules", "./server/compiled"]
+}
