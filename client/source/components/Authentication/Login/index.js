@@ -1,22 +1,22 @@
 import React from 'react'
-import Loading from '@components/Loading'
+import Loading from 'components/Loading'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-import { userLoggedIn } from '@reducers/system/actions'
+import { userLoggedIn } from 'reducers/system/actions'
 import styles from './styles.scss'
 import css from 'react-css-modules'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import axios from 'axios'
-import { errorNotification, infoNotification, successNotification } from '@reducers/notifizer/actions'
-import { setKeyValueRegister } from '@reducers/system/actions'
-import Component from '@decorators/Component'
+import { errorNotification, infoNotification, successNotification } from 'reducers/notifizer/actions'
+import { setKeyValueRegister } from 'reducers/system/actions'
+import Component from 'decorators/Component'
 
-import { GRAPHQL } from '@components/globals'
+import { GRAPHQL } from 'components/globals'
 
-const mapStateToProps = ({system}, {location:{search}}) => {
+const mapStateToProps = ({ system }, { location: { search } }) => {
 	let query = {}
-	if(search) {
+	if (search) {
 		// present
 		const pairs = (search[0] === '?' ? search.substr(1) : search).split('&')
 		for (let i = 0; i < pairs.length; i++) {
@@ -40,35 +40,35 @@ export default class Login extends React.Component {
 	state = { busy: false, username: "", password: "" }
 
 	componentDidMount() {
-		if(!window.gapi) {
+		if (!window.gapi) {
 			const script = document.createElement('script')
 			script.src = "https://apis.google.com/js/platform.js"
 			script.async = true
 			document.head.appendChild(script)
 		}
 
-		if(!window.FB) {
+		if (!window.FB) {
 			const script = document.createElement('script')
-			script.src = "https://connect.facebook.net/en_US/sdk.js"			
+			script.src = "https://connect.facebook.net/en_US/sdk.js"
 			script.async = true
 			document.head.appendChild(script)
 		}
 
 		this.intv = setInterval(() => {
-			if(!window.gapi) return
+			if (!window.gapi) return
 			clearInterval(this.intv)
 			this.onGoogleSigninPress()
 		}, 200)
 
 		this.intv2 = setInterval(() => {
-			if(!window.FB) return
+			if (!window.FB) return
 			clearInterval(this.intv2)
 			FB.init({
-				appId      : '261251371039658',
-				cookie     : true,  // enable cookies to allow the server to access 
-									// the session
-				xfbml      : true,  // parse social plugins on this page
-				version    : 'v2.8' // use graph api version 2.8
+				appId: '261251371039658',
+				cookie: true,  // enable cookies to allow the server to access 
+				// the session
+				xfbml: true,  // parse social plugins on this page
+				version: 'v2.8' // use graph api version 2.8
 			})
 
 			this.setState({ enableFacebookOAuth: true })
@@ -87,7 +87,7 @@ export default class Login extends React.Component {
 	}
 
 	OAuthFailed(error, provider) {
-		if(provider === 'google') {
+		if (provider === 'google') {
 			this.props.errorNotification("Error logging you in! Error message: " + error.error)
 		}
 
@@ -111,7 +111,7 @@ export default class Login extends React.Component {
 			}
 		})
 
-		if(!data.loginWithOAuth) { // account not found
+		if (!data.loginWithOAuth) { // account not found
 			const profile = user.getBasicProfile()
 			const name = profile.getName()
 			const email = profile.getEmail()
@@ -120,11 +120,11 @@ export default class Login extends React.Component {
 			this.handleRegistrationChange('oauthtoken', id)
 			this.handleRegistrationChange('oauthprovider', 'google')
 
-			if(name) {
+			if (name) {
 				this.handleRegistrationChange('name', name)
 				//this.handleChange('')
 			}
-			if(email) {
+			if (email) {
 				this.handleRegistrationChange('email', email)
 				this.handleRegistrationChange('oauthEmailFreeze', true)
 			}
@@ -137,7 +137,7 @@ export default class Login extends React.Component {
 			this.props.userLoggedIn(data.loginWithOAuth)
 			this.setState({ busy: false })
 		}
-		
+
 	}
 
 	handleRegistrationChange(key, value) {
@@ -162,13 +162,13 @@ export default class Login extends React.Component {
 				variables: { username, password }
 			})
 
-			if(data.result) {
-				successNotification("Hi "+data.result.name+"!")
+			if (data.result) {
+				successNotification("Hi " + data.result.name + "!")
 				this.props.userLoggedIn(data.result)
 			} else {
 				errorNotification("Invalid login details")
 			}
-		} catch(e) {
+		} catch (e) {
 			console.error(e)
 			errorNotification('Unknown error logging you in')
 		} finally {
@@ -177,7 +177,7 @@ export default class Login extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if(nextProps.isUserLoggedIn) {
+		if (nextProps.isUserLoggedIn) {
 			this.props.history.push('/panel')
 		}
 	}
@@ -187,9 +187,9 @@ export default class Login extends React.Component {
 	}
 
 	async onFacebookLogin(response) {
-		if(response.status === 'connected') {
+		if (response.status === 'connected') {
 
-			this.setState({ busy: true }) 
+			this.setState({ busy: true })
 
 			const { data: { data } } = await axios.post(GRAPHQL, {
 				query: `query($id: String!) {
@@ -204,7 +204,7 @@ export default class Login extends React.Component {
 				}
 			})
 
-			if(!data.loginWithOAuth) { // account not found
+			if (!data.loginWithOAuth) { // account not found
 				FB.api('/me?fields=id,name,email', rep2 => {
 					const { name, email } = rep2
 
@@ -212,11 +212,11 @@ export default class Login extends React.Component {
 					this.handleRegistrationChange('oauthtoken', response.authResponse.accessToken)
 					this.handleRegistrationChange('oauthprovider', 'facebook')
 
-					if(name) {
+					if (name) {
 						this.handleRegistrationChange('name', name)
 						//this.handleChange('')
 					}
-					if(email) {
+					if (email) {
 						this.handleRegistrationChange('email', email)
 						this.handleRegistrationChange('oauthEmailFreeze', true)
 					}
@@ -230,7 +230,7 @@ export default class Login extends React.Component {
 
 				this.props.userLoggedIn(data.loginWithOAuth)
 				this.setState({ busy: false })
-				
+
 			}
 		} else {
 			console.error(response)
@@ -240,14 +240,14 @@ export default class Login extends React.Component {
 
 	render() {
 
-		if(this.state.busy) return <Loading />
+		if (this.state.busy) return <Loading />
 
 		return (
-			<form styleName="login-form" onSubmit={ e => { e.preventDefault(); this.loginUser() } }>
+			<form styleName="login-form" onSubmit={e => { e.preventDefault(); this.loginUser() }}>
 				<h1 styleName="heading">Login to your account</h1>
 				<TextField
 					id="something2"
-					
+
 					styleName="username"
 					label="Username/Email"
 					variant="outlined"
@@ -259,7 +259,7 @@ export default class Login extends React.Component {
 
 				<TextField
 					id="something1"
-					
+
 					styleName="password"
 					label="Password"
 					variant="outlined"
@@ -281,14 +281,14 @@ export default class Login extends React.Component {
 					<Link to={{ pathname: "/register", search: this.props.search }}>Register an account</Link>
 				</div>
 				<div styleName="social-login">
-					<Button color="primary" disabled={!this.state.enableGoogleOAuth} buttonRef={ref=> this.googleOAuth = ref} variant="contained" size="large">
-							<img src="/assets/images/png/google.png" styleName="icon" />
-							Sign In with Google
+					<Button color="primary" disabled={!this.state.enableGoogleOAuth} buttonRef={ref => this.googleOAuth = ref} variant="contained" size="large">
+						<img src="/assets/images/png/google.png" styleName="icon" />
+						Sign In with Google
 					</Button>
 
-					<Button color="primary" onClick={_ => window.FB.login(this.onFacebookLogin.bind(this), { scope: 'public_profile,email' })} disabled={!this.state.enableFacebookOAuth} buttonRef={ref=> this.facebookOAuth = ref} variant="contained" size="large">
-							<img src="/assets/images/png/facebook.png" styleName="icon" />
-							Sign In with Facebook
+					<Button color="primary" onClick={_ => window.FB.login(this.onFacebookLogin.bind(this), { scope: 'public_profile,email' })} disabled={!this.state.enableFacebookOAuth} buttonRef={ref => this.facebookOAuth = ref} variant="contained" size="large">
+						<img src="/assets/images/png/facebook.png" styleName="icon" />
+						Sign In with Facebook
 					</Button>
 				</div>
 			</form>

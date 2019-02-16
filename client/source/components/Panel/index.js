@@ -2,38 +2,38 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styles from './styles.scss'
 import css from 'react-css-modules'
-import Component from '@decorators/Component'
+import Component from 'decorators/Component'
 import { Card, CardActionArea, CardContent, CardMedia, Typography, Button } from '@material-ui/core'
-import Loading from '@components/Loading'
+import Loading from 'components/Loading'
 
-import { checkForUpdates } from '@reducers/system/actions'
+import { checkForUpdates } from 'reducers/system/actions'
 
 const greetings = ['Hey', 'Hello', 'Hi']
-const greeting = greetings[Math.floor(Math.random()*greetings.length)]
+const greeting = greetings[Math.floor(Math.random() * greetings.length)]
 
-const mapStateToProps = ({system}) => ({
+const mapStateToProps = ({ system }) => ({
 	user: system.user
 })
 
 const isMobile = {
-    Android: function() {
-        return navigator.userAgent.match(/Android/i);
-    },
-    BlackBerry: function() {
-        return navigator.userAgent.match(/BlackBerry/i);
-    },
-    iOS: function() {
-        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-    },
-    Opera: function() {
-        return navigator.userAgent.match(/Opera Mini/i);
-    },
-    Windows: function() {
-        return navigator.userAgent.match(/IEMobile/i);
-    },
-    any: function() {
-        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-    }
+	Android: function () {
+		return navigator.userAgent.match(/Android/i);
+	},
+	BlackBerry: function () {
+		return navigator.userAgent.match(/BlackBerry/i);
+	},
+	iOS: function () {
+		return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+	},
+	Opera: function () {
+		return navigator.userAgent.match(/Opera Mini/i);
+	},
+	Windows: function () {
+		return navigator.userAgent.match(/IEMobile/i);
+	},
+	any: function () {
+		return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+	}
 }
 
 
@@ -48,7 +48,7 @@ export default class Panel extends React.Component {
 
 	render() {
 
-		if(!this.props.user) return <Loading />
+		if (!this.props.user) return <Loading />
 
 		const { name, damns, status } = this.props.user
 
@@ -77,7 +77,7 @@ export default class Panel extends React.Component {
 		]
 
 		return (
-<>				
+			<>
 				<div styleName="greeting-section">
 					<h1>{greeting} {name}!</h1>
 					<p>You're worth {damns || 0} damns and you're <b>{status}</b> at codedamn.</p>
@@ -88,28 +88,28 @@ export default class Panel extends React.Component {
 
 					{links.map(block => {
 						return (
-						<Card key={block.link} styleName={`card ${block.bg || ''}`}> {/* styleName="block" onClick={() => this.props.history.push(`/${block.creator}/${block.slug}`)}> */ }
-							<CardActionArea onClick={_ => window.ga?.('send', 'event', 'Vertical Visit', 'panel', block.link)} href={block.link}>
-							<CardMedia
-								styleName="media"
-								title={block.heading}
-								image={block.icon}
-								/>
-							
-							<CardContent>
-								<Typography gutterBottom variant="headline" component="h2">
-									{block.heading}
-								</Typography>
-								<Typography component="p">
-									{block.description}
-								</Typography>
-							</CardContent>
-							</CardActionArea>
-						</Card>)
+							<Card key={block.link} styleName={`card ${block.bg || ''}`}> {/* styleName="block" onClick={() => this.props.history.push(`/${block.creator}/${block.slug}`)}> */}
+								<CardActionArea onClick={_ => window.ga('send', 'event', 'Vertical Visit', 'panel', block.link)} href={block.link}>
+									<CardMedia
+										styleName="media"
+										title={block.heading}
+										image={block.icon}
+									/>
+
+									<CardContent>
+										<Typography gutterBottom variant="headline" component="h2">
+											{block.heading}
+										</Typography>
+										<Typography component="p">
+											{block.description}
+										</Typography>
+									</CardContent>
+								</CardActionArea>
+							</Card>)
 					})}
 
 				</div>
-</>
+			</>
 		)
 	}
 }

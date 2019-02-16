@@ -1,0 +1,24 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"noImplicitAny": false,
+		"removeComments": true,
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"target": "es2017",
+		"baseUrl": "./",
+		"sourceMap": true,
+		"inlineSources": true,
+		"paths": {
+			"components/*": [
+				"client/source/components"
+			],
+			"reducers/*": [
+				"client/source/redux/reducers"
+			]
+		}
+	},
+	"exclude": [
+		"node_modules"
+	]
+}

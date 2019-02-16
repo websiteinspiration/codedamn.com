@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { successNotification, errorNotification } from '@reducers/notifizer/actions'
+import { successNotification, errorNotification } from 'reducers/notifizer/actions'
 import { TextField, Button } from '@material-ui/core'
 import axios from 'axios'
 import css from 'react-css-modules'
@@ -18,12 +18,12 @@ export default class PasswordReset extends React.Component {
 		script.async = true
 		document.head.appendChild(script)
 	}
-	
+
 	async resetPass() {
 		const { successNotification, errorNotification } = this.props
 		const { data } = await axios.post('/password-reset', { email: this.state.email, 'g-recaptcha-response': document.querySelector(`[name='g-recaptcha-response']`).value })
 
-		if(data.status == "ok") {
+		if (data.status == "ok") {
 			successNotification("Your password has been reset! Check your inbox")
 			//alert('Password reset successful. Check your inbox')
 		} else {

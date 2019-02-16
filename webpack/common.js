@@ -16,9 +16,9 @@ module.exports = [
 	},
 	resolve: {
 		alias: {
-			'@components': path.resolve(source, 'components'),
-			'@decorators': path.resolve(source, 'decorators'),
-			'@reducers': path.resolve(source, 'redux/reducers'),
+			'components': path.resolve(source, 'components'),
+			'decorators': path.resolve(source, 'decorators'),
+			'reducers': path.resolve(source, 'redux/reducers'),
 			'@assets': path.resolve(source, 'assets')
 		}
 	},
@@ -81,7 +81,7 @@ module.exports = [
 			'@middlewares': path.resolve(__dirname, '../middlewares'),
 			'@models': path.resolve(__dirname, '../models'),
 			'@root': path.resolve(__dirname, '../'),
-			'@decorators': path.resolve(__dirname, '../decorators'),
+			'decorators': path.resolve(__dirname, '../decorators'),
 		},
 		extensions: [ '.tsx', '.ts', '.js' ]
 	},

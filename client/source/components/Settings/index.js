@@ -2,11 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styles from './styles.scss'
 import css from 'react-css-modules'
-import Loading from '@components/Loading'
-import { getUserSettings, saveUserSettings } from '@reducers/user/actions'
+import Loading from 'components/Loading'
+import { getUserSettings, saveUserSettings } from 'reducers/user/actions'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import Component from '@decorators/Component'
+import Component from 'decorators/Component'
 
 const mapStateToProps = ({user, system}) => ({
 	settings: user.settings,

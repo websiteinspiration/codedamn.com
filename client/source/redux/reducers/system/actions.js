@@ -4,9 +4,9 @@ import {
 } from './types'
 import axios from 'axios'
 
-import { history } from '@reducers/../store' // TODO: Clean fix this.
-import { GRAPHQL } from '@components/globals'
-import { successNotification } from '@reducers/notifizer/actions'
+import { history } from 'reducers/../store' // TODO: Clean fix this.
+import { GRAPHQL } from 'components/globals'
+import { successNotification } from 'reducers/notifizer/actions'
 
 export const setKeyValueRegister = payload => ({ type: SET_KEY_VALUE, payload })
 export const userLoggedIn = payload => ({ type: USER_LOGGED_IN, payload })

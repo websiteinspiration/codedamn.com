@@ -1,0 +1,42 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"noImplicitAny": false,
+		"removeComments": true,
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"target": "es2017",
+		"baseUrl": "./",
+		"sourceMap": true,
+		"inlineSources": true,
+		"paths": {
+			"components/*": [
+				"client/source/components"
+			],
+			"reducers/*": [
+				"client/source/redux/reducers"
+			],
+			"@controllers/*": [
+				"./controllers/*"
+			],
+			"@interfaces/*": [
+				"./interfaces/*"
+			],
+			"@middlewares/*": [
+				"./middlewares/*"
+			],
+			"@models/*": [
+				"./models/*"
+			],
+			"@root/*": [
+				"./*"
+			],
+			"@decorators/*": [
+				"./decorators/*"
+			]
+		}
+	},
+	"exclude": [
+		"node_modules"
+	]
+}

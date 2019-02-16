@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import styles from './styles.scss'
-import { hideNotifizer } from '@reducers/notifizer/actions'
+import { hideNotifizer } from 'reducers/notifizer/actions'
 import css from 'react-css-modules'
 import { CheckCircle as CheckCircleIcon, Error as ErrorIcon, Info as InfoIcon, Close as CloseIcon, Warning as WarningIcon } from '@material-ui/icons'
 import { IconButton, Snackbar, SnackbarContent } from '@material-ui/core'

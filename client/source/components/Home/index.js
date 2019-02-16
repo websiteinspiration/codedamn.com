@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './styles.scss'
 import css from 'react-css-modules'
-import Component from '@decorators/Component'
+import Component from 'decorators/Component'
 
 @Component({ title: 'codedamn', gridClass: styles.grid, sharedHeightClass: styles.shareHeight })
 @css(styles, { handleNotFoundStyleName: 'log', allowMultiple: true })
@@ -33,7 +33,7 @@ export default class Home extends React.Component {
 							Become a rockstar <strong>developer</strong> and <br />
 							<strong> master the hottest tech</strong> in the market right
 							now!
-				</p>
+						</p>
 						<div styleName='learn-iconset'>
 							<IconBox source='/assets/images/svg/html-5-logo.svg'
 								label='HTML' />

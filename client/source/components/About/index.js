@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import css from 'react-css-modules'
 import styles from './styles.scss'
-import Component from '@decorators/Component'
+import Component from 'decorators/Component'
 import { connect } from 'react-redux'
 
 @connect(null, {  })

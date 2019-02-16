@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './styles.scss'
 import css from 'react-css-modules'
-import Loading from '@components/Loading'
+import Loading from 'components/Loading'
 
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -10,8 +10,8 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import { connect } from 'react-redux'
-import { getDamnTable } from '@reducers/system/actions'
-import Component from '@decorators/Component'
+import { getDamnTable } from 'reducers/system/actions'
+import Component from 'decorators/Component'
 
 const mapStateToProps = ({ system }) => ({
 	damntable: system.damntable
@@ -26,37 +26,37 @@ export default class DamnTable extends React.Component {
 		this.props.getDamnTable()
 	}
 
-    render() {
+	render() {
 		const { damntable } = this.props
-		if(!damntable) return <Loading />
+		if (!damntable) return <Loading />
 
-        return (
+		return (
 			<Paper styleName="root">
-			<Table styleName="table">
-			  <TableHead>
-				<TableRow>
-				  <TableCell>Rank</TableCell>
-				  <TableCell>Username</TableCell>
-				  <TableCell>Name</TableCell>
-				  <TableCell>Date of join</TableCell>
-				  <TableCell>Damns</TableCell>
-				</TableRow>
-			  </TableHead>
-			  <TableBody>
-				{damntable.sort((u1, u2) => u2.damns - u1.damns).map((entry, index) => {
-				  return (
-					<TableRow key={index}>
-					  <TableCell>#{index+1}</TableCell>
-					  <TableCell>{entry.username}</TableCell>
-					  <TableCell>{entry.name}</TableCell>
-					  <TableCell>{new Date(entry.doj).toDateString()}</TableCell>
-					  <TableCell>{entry.damns}</TableCell>
-					</TableRow>
-				  )
-				})}
-			  </TableBody>
-			</Table>
-		  </Paper>
-        )
-    }
+				<Table styleName="table">
+					<TableHead>
+						<TableRow>
+							<TableCell>Rank</TableCell>
+							<TableCell>Username</TableCell>
+							<TableCell>Name</TableCell>
+							<TableCell>Date of join</TableCell>
+							<TableCell>Damns</TableCell>
+						</TableRow>
+					</TableHead>
+					<TableBody>
+						{damntable.sort((u1, u2) => u2.damns - u1.damns).map((entry, index) => {
+							return (
+								<TableRow key={index}>
+									<TableCell>#{index + 1}</TableCell>
+									<TableCell>{entry.username}</TableCell>
+									<TableCell>{entry.name}</TableCell>
+									<TableCell>{new Date(entry.doj).toDateString()}</TableCell>
+									<TableCell>{entry.damns}</TableCell>
+								</TableRow>
+							)
+						})}
+					</TableBody>
+				</Table>
+			</Paper>
+		)
+	}
 }
