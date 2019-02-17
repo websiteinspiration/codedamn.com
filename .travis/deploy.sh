@@ -3,6 +3,8 @@ set -e
 pwd
 
 git config --global push.default simple
+git add .
+git commit -m "Deploying"
 git remote add production ssh://dev@$CODEDAMNIP/~/new-codedamn
 git push --force production master # push our updates
 
