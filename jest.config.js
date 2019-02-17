@@ -19,5 +19,5 @@ module.exports = {
 	],
 	//preset: "babel-jest",
 	setupFiles: ["enzyme-react-16-adapter-setup"],
-	setupTestFrameworkScriptFile: "./jest/jest.setup.js"
+	//setupTestFrameworkScriptFile: "./jest/jest.setup.js"
 }
