@@ -3,14 +3,19 @@ node_js:
 - 11.6.0
 cache: npm
 before_install:
-- openssl aes-256-cbc -K $encrypted_c9a499920aae_key -iv $encrypted_c9a499920aae_iv
-  -in .travis/deploy_rsa.enc -out .travis/deploy_rsa -d
-- eval "$(ssh-agent -s)"
-- cp .travis/deploy_rsa ~/.ssh/deploy_rsa
-- chmod 600 ~/.ssh/deploy_rsa
-- ssh-add ~/.ssh/deploy_rsa
+  - openssl aes-256-cbc -K $encrypted_c9a499920aae_key -iv $encrypted_c9a499920aae_iv
+    -in .travis/deploy_rsa.enc -out .travis/deploy_rsa -d
+  - eval "$(ssh-agent -s)"
+  - cp .travis/deploy_rsa ~/.ssh/deploy_rsa
+  - chmod 600 ~/.ssh/deploy_rsa
+  - ssh-add ~/.ssh/deploy_rsa
+install:
+  - npm install
 before_script:
   - echo -e "Host $CODEDAMNIP\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+script:
+  - npm test
+  - npm run wp-prod
 deploy:
 - provider: script
   skip_cleanup: true

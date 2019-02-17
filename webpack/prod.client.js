@@ -80,7 +80,7 @@ module.exports = merge(common[0], {
 		}),
 		new SentryPlugin({
 			release: require('../package.json').version,
-			include: './frontend/compiled/assets/sourcemaps',
+			include: './client/compiled/assets/sourcemaps',
 			ignore: ['node_modules', 'webpack.config.js'],
 			debug: false,
 			configFile: 'sentry-client.properties'
