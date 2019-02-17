@@ -5,6 +5,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const SentryPlugin = require('@sentry/webpack-plugin')
+const path = require('path')
 
 module.exports = merge(common[0], {
   mode: 'production',
@@ -83,7 +84,7 @@ module.exports = merge(common[0], {
 			include: './client/compiled/assets/sourcemaps',
 			ignore: ['node_modules', 'webpack.config.js'],
 			debug: false,
-			configFile: 'sentry-client.properties'
+			configFile: path.resolve(__dirname, '../sentry-client.properties')
 		})
 	]
 })
