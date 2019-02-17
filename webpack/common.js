@@ -46,7 +46,6 @@ module.exports = [
 		  ]
 	},
 	plugins: [
-		new CleanWebpackPlugin(['../client/compiled/*.*']),
 		new copyWP([
 			{ from: path.resolve(source, 'assets/images'), to: path.resolve(compiled, 'assets/images') },
 			{ from: path.resolve(source, 'assets/fonts'), to: path.resolve(compiled, 'assets/fonts') }
@@ -54,7 +53,7 @@ module.exports = [
 		new HtmlWebpackPlugin({
 			title: 'codedamn',
 			sentryReleaseVersion: require('../package.json').version,
-			filename: path.resolve(__dirname, '../index.prod.html'),
+			filename: path.resolve(__dirname, '../build/index.prod.html'),
 			template: './client/source/index.html',
 			minify: {
 				removeComments: true,
