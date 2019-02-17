@@ -1,4 +1,4 @@
-<html><head>
+export default `<html><head>
 	<meta content="width=device-width" name="viewport">
 	<style>
 	/* #### Mobile Phones Portrait #### */
@@ -664,3 +664,4 @@ Welcome&nbsp;to&nbsp;<a alt="codedamn" href="https://codedamn.com" style="text-d
 </div>
 </center> 
 </body></html>
+`

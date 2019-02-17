@@ -1,7 +1,5 @@
 *
 !build/
 !build/**
-!server/
-!server/**
 !package.json
 !package-lock.json

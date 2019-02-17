@@ -5,11 +5,9 @@ import { user } from '@interfaces/user'
 import * as nodemailer from 'nodemailer'
 import * as bcrypt from 'bcrypt'
 import Joi from 'joi'
-import * as fs from 'fs'
-import * as path from 'path'
 import { registrationSchema, settingsSchema, oauthSchema } from './schema'
 
-const welcomeTemplate = fs.readFileSync(path.resolve(__dirname, 'welcome.html.txt'), 'utf8')
+const welcomeTemplate = require('./welcome.html')
 const { ZOHO_PASSWORD } = process.env
 // Create the transporter with the required configuration for Gmail
 // change the user and pass !
