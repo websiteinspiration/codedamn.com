@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const copyWP = require('copy-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
 const source = path.resolve(__dirname, '../client/source')
-const compiled = path.resolve(__dirname, '../client/compiled')
+const compiled = path.resolve(__dirname, '../build/client')
 const server = path.resolve(__dirname, '../server/')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
@@ -88,7 +88,7 @@ module.exports = [
 	},
 	output: {
 		path: path.resolve(__dirname, '../'),
-		filename: './server/compiled/server.js',
+		filename: './build/server/server.js',
 		libraryTarget: 'commonjs',
 		publicPath: path.resolve(__dirname, '../')
 	},

@@ -8,7 +8,7 @@ module.exports = merge(common[1], {
 	plugins: [
 		new SentryPlugin({
 			release: require('../package.json').version,
-			include: '../server/compiled',
+			include: '../build/server',
 			ignore: ['node_modules'],
 			debug: false,
 			configFile: path.resolve(__dirname, '../sentry-server.properties')
