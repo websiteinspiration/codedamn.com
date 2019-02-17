@@ -9,7 +9,8 @@ before_install:
 - cp .travis/deploy_rsa ~/.ssh/deploy_rsa
 - chmod 600 ~/.ssh/deploy_rsa
 - ssh-add ~/.ssh/deploy_rsa
-
+before_script:
+  - echo -e "Host $CODEDAMNIP\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 deploy:
 - provider: script
   skip_cleanup: true
