@@ -16,6 +16,7 @@ before_script:
   - echo -e "Host $CODEDAMNIP\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 script:
   - npm test
+  - export NODE_ENV=production
   - npm run wp-prod
 deploy:
 - provider: script
