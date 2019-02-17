@@ -41,7 +41,7 @@ export default class Feedback extends React.Component {
 	render() {
 		return (
 			<div styleName="n60 feedbackParent">
-				<h1>Welcome to codedamn v1.0</h1>
+				<h1>Welcome to codedamn</h1>
 				<p>Thank you so much for making it so far! codedamn aims to bring value to developers all around the globe and connect them with appropirate communities. This platform is being actively developed and worked upon. <b>There are bugs, glitches, vulnerabilties, holes, broken elements, wrong resolutions, incorrect content, bad code, and WHAT NOT!</b> We understand all of that and want YOU to be a part of the team. Send a bug report or anything which annoys you using the form below. Since it's a feedback form, you can also praise us a little if you want ;)</p>
 				<form styleName="container" onSubmit={e => { e.preventDefault() }}>
 

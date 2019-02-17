@@ -2,26 +2,26 @@ import User from 'models/user'
 import xdebug from 'debug'
 import { checkAuth } from '../functions'
 
-const { FACEBOOK_APP_ID, FACEBOOK_ACCESS_TOKEN, GOOGLE_AUD_ID, RECAPTCHA_SECRET, COOKIE_SECRET } = process.env
+const { FACEBOOK_APP_ID, FACEBOOK_ACCESS_TOKEN, GOOGLE_AUD_ID, RECAPTCHA_SECRET, COOKIE_SECRET, NODE_ENV } = process.env
 
 import fetch from 'node-fetch'
 import cookie from 'cookie-signature'
+import { Request } from 'express'
 
 const debug = xdebug('cd:users/MutationResolvers')
 
 const resolvers = {
-	async fcmToken({token}, req) {
+	async fcmToken({token}, req: Request) {
 		checkAuth({ req })
 		const username = req.session.user.username
-
 		await User.setFCMToken(username, token)
 		return true
 	},
-	async logout(_, req) {
-		req.session.destroy()
+	async logout(_, req: Request) {
+		req.session.destroy(_ => _)
 		return true
 	},
-	async changeSettings({ newusername, newname, newpassword, newcpassword }, req) {
+	async changeSettings({ newusername, newname, newpassword, newcpassword }, req: Request) {
 		checkAuth({ req })
 
 		const res = await User.saveSettings({ 
@@ -34,7 +34,7 @@ const resolvers = {
 		if(res.status === 'ok') {
 			req.session.user.username = newusername
 			req.session.user.name = newname
-			req.session.save()
+			req.session.save(_ => _)
 			
 			return {
 				username: newusername,
@@ -45,7 +45,7 @@ const resolvers = {
 		throw new Error(res.data) 
 	},
 
-	async registerWithOAuth({ name, email, oauthprovider, id, username }, req) {
+	async registerWithOAuth({ name, email, oauthprovider, id, username }, req: Request) {
 		
 		const regIPaddress = String(req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim()
 		
@@ -112,10 +112,10 @@ const resolvers = {
 		return { error, data }
 	},
 
-	async registerWithoutOAuth({ name, email, username, password, cpassword, captcha }, req) {
+	async registerWithoutOAuth({ name, email, username, password, cpassword, captcha }, req: Request) {
 
 	const regIPaddress = String(req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim()
-	console.log(process.env)
+
 	const result = await fetch(`https://www.google.com/recaptcha/api/siteverify?response=${captcha}&secret=${RECAPTCHA_SECRET}`, {
         method: 'GET'
     })
@@ -141,7 +141,7 @@ const resolvers = {
 			
 			const token = encodeURIComponent(cookie.sign(req.sessionID, COOKIE_SECRET))
 
-			if(process.env.NODE_ENV === 'production') {
+			if(NODE_ENV === 'production') {
 				User.sendWelcomeEmail({ email, name, type: `no oauth graphql` })
 			}
 

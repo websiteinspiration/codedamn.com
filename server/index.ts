@@ -1,4 +1,3 @@
-
 import express from 'express'
 import * as path from 'path'
 import helmet from 'helmet'
@@ -18,6 +17,10 @@ import dotenv from 'dotenv'
 dotenv.config({
 	path: path.resolve(__dirname, '../.env')
 })
+
+if(process.env.CODEDAMN_ENVIRONMENTS_CONFIGURED !== "true") {
+	throw new Error('.env file not configured. Please see https://github.com/codedamn/codedamn.com')
+}
 
 import cspRules from './config/csp'
 import { resolver, schema } from './GraphQL'
@@ -43,14 +46,12 @@ NODE_ENV === 'production' && Sentry.init({
 ;(async () => {
 	const app = express()
 	
-	console.log(COOKIE_SECRET)
 	app.use(Sentry.Handlers.requestHandler())
 
     mongoose.connect(DB_CONNECTION_STRING)
 	const MongoStore = Store(session)
 	
 	if(NODE_ENV !== 'production') {
-		// assets
 		app.use('/assets', express.static(path.join(__dirname, 'frontend/compiled/assets')))
 	}
 
@@ -110,5 +111,5 @@ NODE_ENV === 'production' && Sentry.init({
 	routes(app) // register routes
 
 	app.use(Sentry.Handlers.errorHandler())
-	app.listen(PORT, _ => console.log(`Server listening on ${PORT}`))
+	app.listen(PORT, () => console.log(`Server listening on ${PORT}`))
 })()

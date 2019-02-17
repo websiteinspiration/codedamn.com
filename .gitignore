@@ -50,6 +50,7 @@ build/Release
 node_modules
 
 # Custom
+deploy_rsa
 .env
 index.prod.html
 compiled/

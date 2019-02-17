@@ -1,24 +1,24 @@
 import User from 'models/user'
-import { user } from '@interfaces/user'
 import * as cookie from 'cookie-signature'
 import * as Sentry from '@sentry/node'
 import xdebug from 'debug'
 import fetch from 'node-fetch'
 import { checkAuth, isLoggedIn } from '../functions'
+import { Request } from 'express';
 // deprecate checkAuth
 
 const debug = xdebug('cd:userResolver')
 
-const { FACEBOOK_APP_ID, COOKIE_SECRET, FACEBOOK_ACCESS_TOKEN } = process.env
+const { FACEBOOK_APP_ID, COOKIE_SECRET, FACEBOOK_ACCESS_TOKEN, GOOGLE_AUD_ID } = process.env
 
 const resolvers = {
 	// supported till v2.4.0
-	async activeDates(_, req) {
+	async activeDates(_, req: Request) {
 		checkAuth({ req })
 		return req.session.user.activeDates
 	},
 
-	async loginWithUsernamePassword({ username, password }, req) {
+	async loginWithUsernamePassword({ username, password }, req: Request) {
 		let data = await User.findDamnerByUsernamePassword(username, password)
 
 		if(data) {
@@ -50,7 +50,7 @@ const resolvers = {
 		}
 	},
 	
-	async loginWithOAuth({ oauthprovider, id }, req) {
+	async loginWithOAuth({ oauthprovider, id }, req: Request) {
 		
 		let user
 
@@ -63,7 +63,7 @@ const resolvers = {
 	
 			const email = res.email
 	
-			if(aud !== '300208123830-vhj94eso4u0uv1nk6mo3o73j3im7pvv1.apps.googleusercontent.com') {
+			if(aud !== GOOGLE_AUD_ID) {
 				debug(`Somebody messin around google OAuth => ${email}`)
 				return null
 			}
@@ -132,7 +132,7 @@ const resolvers = {
 	
 	},
 
-	async loginWithToken({ token }, req) {
+	async loginWithToken({ token }, req: Request) {
 		if(req.session.user) {
 			const user = req.session.user
 			return {
@@ -150,13 +150,13 @@ const resolvers = {
 	},
 
 	// deprecated in v2.5.0 app
-	async activeStreak(_, req) {
+	async activeStreak(_, req: Request) {
 		checkAuth({ req })
 
 		return req.session.user.streak
 	},
 
-	async profileData(_, req) {
+	async profileData(_, req: Request) {
 		
 		if(!isLoggedIn(req)) return null
 
@@ -178,7 +178,7 @@ const resolvers = {
 		}
 	},
 
-	async userflow({ timelineslug }, req) {
+	async userflow({ timelineslug }, req: Request) {
 
 		if(!isLoggedIn(req)) return null
 

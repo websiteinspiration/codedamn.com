@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+- 11.6.0
+cache: npm
+before_install:
+- openssl aes-256-cbc -K $encrypted_c9a499920aae_key -iv $encrypted_c9a499920aae_iv
+  -in .travis/deploy_rsa.enc -out .travis/deploy_rsa -d
+- eval "$(ssh-agent -s)"
+- cp .travis/deploy_rsa ~/.ssh/deploy_rsa
+- chmod 600 ~/.ssh/deploy_rsa
+- ssh-add ~/.ssh/deploy_rsa
+
+deploy:
+- provider: script
+  skip_cleanup: true
+  script: ".travis/deploy.sh"
+  on:
+    branch: master

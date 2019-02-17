@@ -5,7 +5,7 @@ import styles from './styles.scss'
 import Component from 'decorators/Component'
 import { connect } from 'react-redux'
 
-@connect(null, {  })
+@connect(null, {})
 @Component({ title: 'About Us', gridClass: styles.grid })
 @css(styles)
 export default class About extends React.Component {
@@ -16,10 +16,6 @@ export default class About extends React.Component {
 
 	render() {
 		return (
-			<>
-			<div styleName="full-video">
-				<iframe styleName="iframe" src="https://www.youtube.com/embed/SNSfDPsQ1Ps?rel=0&amp;controls=0&amp;showinfo=0" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
-			</div>
 			<div styleName="about">
 				<h1>Why?</h1>
 				<p>Why codedamn? I believed the world needed a better development hub on internet. A place where anyone who want to be a developer, and anyone who actually is a developer can feel home. codedamn enables different developers to connect and learn from the platform as well as from each other. At the same time, the platform enables you to validate what you've been learning. Plus, its all free, just like how making friends should be.</p>
@@ -33,7 +29,6 @@ export default class About extends React.Component {
 				<h1>Get to us!</h1>
 				<p>Hope you had fun reading about the platform! Please <Link to={'/feedback'}>contact us</Link> if you have any query through this page: <Link to={'/feedback'}>Feedback Page</Link></p>
 			</div>
-			</>
 		)
 	}
 }

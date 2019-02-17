@@ -1,4 +1,5 @@
 import * as xdebug from 'debug'
+import { Request, Response, NextFunction } from 'express';
 
 /**
  * 
@@ -8,8 +9,7 @@ import * as xdebug from 'debug'
  * @summary allows access to API resources only if user is logged in
  * @returns next() or { status: 'error' }
  */
-function loggedIn(req, res, next) {
-	debugger
+function loggedIn(req: Request, res: Response, next: NextFunction) {
 	if(!req.session.auth) {
 		return res.json({ status: 'error', data: 'unauthorized' })
 	}
