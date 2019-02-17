@@ -2,7 +2,10 @@
 set -e
 pwd
 
-git config --global push.default simple
+rm -rf .git
+rm -rf .gitignore
+mv .gitignore_travis .gitignore
+git init .
 git add .
 git commit -m "Deploying"
 git remote add production ssh://dev@$CODEDAMNIP/~/new-codedamn
