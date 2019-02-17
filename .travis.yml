@@ -10,7 +10,8 @@ before_install:
   - chmod 600 ~/.ssh/deploy_rsa
   - ssh-add ~/.ssh/deploy_rsa
 install:
-  - npm install
+  - npm ci
+  - npm i -g concurrently
 before_script:
   - echo -e "Host $CODEDAMNIP\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 script:
