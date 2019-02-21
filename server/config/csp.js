@@ -15,7 +15,7 @@ export default {
 	 // sandbox: ['allow-popups', 'allow-same-origin', 'allow-forms', 'allow-scripts'],
 	  reportUri: 'https://sentry.io/api/1226318/security/?sentry_key=718860c7f084473ab5d175647d6d74f3',
 	  objectSrc: ["codedamn.com"],
-	  upgradeInsecureRequests: ifProduction,
+	  upgradeInsecureRequests: false,
 	  workerSrc: false  // This is not set.
 	},
   
