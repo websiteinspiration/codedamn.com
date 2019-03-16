@@ -68,7 +68,7 @@ const resolvers = {
 				return null
 			}
 	
-			user = await User.findDamner({ $or: [{ googleID: sub }, { email }] }) // TODO: Remove this email ONLY WHEN all NON googleID accounts have been replaced with GOOGLE IDs
+			user = await User.findDamner({ googleID: sub }) // TODO: Remove this email ONLY WHEN all NON googleID accounts have been replaced with GOOGLE IDs
 		
 			// added on oct 16 2018 for existing users
 			if(user && user.profilepic == "https://codedamn.com/assets/images/avatar.jpg" && picture) {

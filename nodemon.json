@@ -1,6 +1,6 @@
 {
-    "watch": ["./server/compiled/server.js"],
+    "watch": ["./build/server/server.js"],
 	"ignore": ["node_modules/*.*"],
 	"ext": "js",
-	"exec": "node --inspect=7331 ./server/compiled/server.js"
+	"exec": "node --inspect=7331 ./build/server/server.js"
 }

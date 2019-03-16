@@ -95,6 +95,8 @@ NODE_ENV === 'production' && Sentry.init({
 		rootValue: resolver,
 		graphiql: NODE_ENV !== 'production',
 		formatError: error => {
+
+			debugger
 			
 			const errorObj = {
 				message: error.message,

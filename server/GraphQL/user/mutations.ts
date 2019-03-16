@@ -11,7 +11,7 @@ import { Request } from 'express'
 const debug = xdebug('cd:users/MutationResolvers')
 
 const resolvers = {
-	async fcmToken({token}, req: Request) {
+	async fcmToken({ token }, req: Request) {
 		checkAuth({ req })
 		const username = req.session.user.username
 		await User.setFCMToken(username, token)
@@ -24,55 +24,59 @@ const resolvers = {
 	async changeSettings({ newusername, newname, newpassword, newcpassword }, req: Request) {
 		checkAuth({ req })
 
-		const res = await User.saveSettings({ 
+		const res = await User.saveSettings({
 			username: newusername,
 			name: newname,
 			password: newpassword,
 			cpassword: newcpassword
 		}, req.session.user.username)
 
-		if(res.status === 'ok') {
+		if (res.status === 'ok') {
 			req.session.user.username = newusername
 			req.session.user.name = newname
 			req.session.save(_ => _)
-			
+
 			return {
 				username: newusername,
 				name: newname
 			}
 		}
 
-		throw new Error(res.data) 
+		throw new Error(res.data)
 	},
 
 	async registerWithOAuth({ name, email, oauthprovider, id, username }, req: Request) {
-		
+
 		const regIPaddress = String(req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim()
-		
+
 		let googleID, facebookID, profilepic = 'https://codedamn.com/assets/images/avatar.png'
 
-		if(oauthprovider === 'google') {
+		if (oauthprovider === 'google') {
 			const res = await fetch(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${id}`)
 			const { email: googleemail, aud, sub, picture } = await res.json()
 
 
-			if((googleemail && googleemail !== email) || aud !== GOOGLE_AUD_ID) {
+			if ((googleemail && googleemail !== email) || aud !== GOOGLE_AUD_ID) {
 				debug(`Somebody messin around => `, email)
 				return { status: 'error', data: 'Invalid OAuth request' }
 			}
 
 			googleID = sub
 
-			if(picture) {
+			if (picture) {
 				profilepic = picture
 			}
-		} else if(oauthprovider === 'facebook') {
+		} else if (oauthprovider === 'facebook') {
 
 			const res = await fetch(`https://graph.facebook.com/debug_token?input_token=${id}&access_token=${FACEBOOK_ACCESS_TOKEN}`)
-			const { data:{app_id, application, user_id} } = await res.json()
-		
+
+
+			const d = await res.json()
+
+			const { data: { app_id, application, user_id } } = d
+
 			// TODO: Move aud to environment?
-			if(app_id !== FACEBOOK_APP_ID || application !== 'codedamn') {
+			if (app_id !== FACEBOOK_APP_ID || application !== 'codedamn') {
 				debug(`Somebody messin around fb OAuth => `, email)
 				return { success: false, data: 'Invalid OAuth request' }
 			}
@@ -81,7 +85,7 @@ const resolvers = {
 
 			const { id: userID } = await res2.json()
 
-			if(userID !== user_id) {
+			if (userID !== user_id) {
 				debug(`Somebody messin around fbOAuth => `, email)
 				return { success: false, data: 'Invalid OAuth request' }
 			}
@@ -95,63 +99,69 @@ const resolvers = {
 		}
 
 		const { error, data } = await User.createOAuth({ profilepic, name, email, username, facebookID, googleID }, regIPaddress)
-	
-		const user: any = data
 
-		if(!error) {
-			
-			if(process.env.NODE_ENV === 'production') {
-				User.sendWelcomeEmail({ email, name, type: ' oauth '+oauthprovider })
-			}
-
-			debug(`Welcome (OAuth) ${name}`)
-			req.session.user = user
-			req.session.auth = true
+		if (error) {
+			return { error, data: null }
 		}
-		
-		return { error, data }
+
+
+		const user = (await User.findByID(data)).toJSON()
+		const token = encodeURIComponent(cookie.sign(req.sessionID, COOKIE_SECRET))
+		const progressBar = User.getProgressBar(user.damns)
+		const status = User.getStatus(user.damns)
+
+		if (process.env.NODE_ENV === 'production') {
+			User.sendWelcomeEmail({ email, name, type: ' oauth ' + oauthprovider })
+		}
+
+		debug(`Welcome (OAuth) ${name}`)
+		req.session.user = user
+		req.session.auth = true
+
+
+		return { error, data: { ...user, token, progressBar, status } }
 	},
 
 	async registerWithoutOAuth({ name, email, username, password, cpassword, captcha }, req: Request) {
 
-	const regIPaddress = String(req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim()
+		const regIPaddress = String(req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim()
 
-	const result = await fetch(`https://www.google.com/recaptcha/api/siteverify?response=${captcha}&secret=${RECAPTCHA_SECRET}`, {
-        method: 'GET'
-    })
+		const result = await fetch(`https://www.google.com/recaptcha/api/siteverify?response=${captcha}&secret=${RECAPTCHA_SECRET}`, {
+			method: 'GET'
+		})
 
-	const json = await result.json()
-	
-    if(json.success) { // Removing recaptcha mobile - Nov 14 2018
-        const { error, data } = await User.create({
-            name,
-            username,
-            email,
-			password,
-			cpassword
-		}, regIPaddress)
-		
+		const json = await result.json()
 
-        if(!error) {
-			const user = data
-			
-			debug(`Welcome (OAuth) ${name}`)
-			req.session.user = user
-			req.session.auth = true
-			
-			const token = encodeURIComponent(cookie.sign(req.sessionID, COOKIE_SECRET))
+		if (json.success) { // Removing recaptcha mobile - Nov 14 2018
+			const { error, data } = await User.create({
+				name,
+				username,
+				email,
+				password,
+				cpassword
+			}, regIPaddress)
 
-			if(NODE_ENV === 'production') {
-				User.sendWelcomeEmail({ email, name, type: `no oauth graphql` })
+
+			if (!error) {
+				const user = data
+
+				debug(`Welcome (OAuth) ${name}`)
+				req.session.user = user
+				req.session.auth = true
+
+				const token = encodeURIComponent(cookie.sign(req.sessionID, COOKIE_SECRET))
+
+				if (NODE_ENV === 'production') {
+					User.sendWelcomeEmail({ email, name, type: `no oauth graphql` })
+				}
+
+				return { error, data: { ...data, token } }
 			}
 
-			return { error, data: {...data, token } }
+			return { error, data }
 		}
-	
-		return { error, data }
-	}
-	
-	return { error: "Invalid captcha response" }
+
+		return { error: "Invalid captcha response" }
 
 	}
 }

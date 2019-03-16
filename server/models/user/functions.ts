@@ -51,6 +51,10 @@ class Functions {
 		})
 	}
 
+	static findByID(id) {
+		return User.findById(id)
+	}
+
 	static async setFCMToken(username: string, token: string): Promise<boolean> {
 		const res = await User.updateOne({ username }, { $set: { fcmToken: token } })
 		return !!res
@@ -149,8 +153,9 @@ class Functions {
 			...value
 		})
 
-		await user.save()
-		return { status: 'ok', data: user, error: null }
+		const _user = await user.save()
+		
+		return { status: 'ok', data: _user.id, error: null }
 	}
 
 	static async create(details, regIPaddress) {
