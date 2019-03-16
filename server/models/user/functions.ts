@@ -93,8 +93,9 @@ class Functions {
 		return users
 	}
 
-	static async getUserRank(damns) {
-		return ( await User.count({ damns: { $gt: damns }}) ) + 1
+	static async getUserRank(username: string): Promise<number> {
+		const user = await User.findOne({ username })
+		return ( await User.count({ damns: { $gt: user.damns }}) ) + 1
 	}
 
 	static async getDamns(username) {

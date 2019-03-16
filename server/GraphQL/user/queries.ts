@@ -12,11 +12,6 @@ const debug = xdebug('cd:userResolver')
 const { FACEBOOK_APP_ID, COOKIE_SECRET, FACEBOOK_ACCESS_TOKEN, GOOGLE_AUD_ID } = process.env
 
 const resolvers = {
-	// supported till v2.4.0
-	async activeDates(_, req: Request) {
-		checkAuth({ req })
-		return req.session.user.activeDates
-	},
 
 	async loginWithUsernamePassword({ username, password }, req: Request) {
 		let data = await User.findDamnerByUsernamePassword(username, password)
@@ -148,14 +143,6 @@ const resolvers = {
 			}
 		}
 	},
-
-	// deprecated in v2.5.0 app
-	async activeStreak(_, req: Request) {
-		checkAuth({ req })
-
-		return req.session.user.streak
-	},
-
 	async profileData(_, req: Request) {
 		
 		if(!isLoggedIn(req)) return null
@@ -171,6 +158,7 @@ const resolvers = {
 			firstTime: user.firstTime, 
 			status: User.getStatus(user.damns), 
 			damns: user.damns,
+			selfRank: User.getUserRank(user.username),
 			favtags: user.favtags,
 			doj: user.doj,
 			activeStreak: user.streak,
@@ -199,10 +187,6 @@ const resolvers = {
 }
 
 const queries = `
-activeDates: [String!]!
-activeStreak: Int
-
-
 loginWithUsernamePassword(username: String!, password: String!): User
 loginWithOAuth(oauthprovider: String!, id: String!): User
 loginWithToken(token: String!): User

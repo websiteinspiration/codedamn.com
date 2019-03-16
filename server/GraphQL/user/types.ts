@@ -28,5 +28,6 @@ type User {
 	doj: String
 	activeDates: [String]
 	activeStreak: Int
+	selfRank: Int!
 }
 `
