@@ -6,8 +6,6 @@ import * as nodemailer from 'nodemailer'
 import * as bcrypt from 'bcrypt'
 import Joi from 'joi'
 import { registrationSchema, settingsSchema, oauthSchema } from './schema'
-
-const welcomeTemplate = require('./welcome.html')
 const { ZOHO_PASSWORD } = process.env
 // Create the transporter with the required configuration for Gmail
 // change the user and pass !
@@ -235,7 +233,8 @@ class Functions {
 	static async sendWelcomeEmail({ email, name, type }) {
 		
 		const subject = `Wohoo! Welcome aboard! =?utf-8?Q?=F0=9F=92=BB=F0=9F=98=8E=F0=9F=8E=89?=`
-		const message = welcomeTemplate.replace(/\[user\]/g, name)
+		// better message
+		const message = `Hello ${name}! This email marks you've registered on codedamn. Welcome!`
 		sendEmail({ name, email: 'technotweaksteam@gmail.com', subject: 'New Registeration', message: name + ' | ' + email + ' just joined via ' + type })
 		
 		const res = await sendEmail({ name, email, subject, message })
