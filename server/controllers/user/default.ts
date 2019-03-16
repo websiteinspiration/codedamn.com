@@ -360,7 +360,7 @@ router.post('/damn-table', loggedIn, async (req, res) => {
 	const damns = req.session.user.damns
 
 	const data = await User.getDamnList()
-	const selfRank = await User.getUserRank(damns)
+	const selfRank = await User.getUserRank(req.session.user.username)
 
 	return res.json({ status: 'ok', data, selfRank }) // TODO: Fix this irregular response pattern by integrating this into API version
 })
