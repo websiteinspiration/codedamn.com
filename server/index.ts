@@ -69,7 +69,7 @@ NODE_ENV === 'production' && Sentry.init({
 
 	app.use(require('middlewares/rewards').default)
 
-	NODE_ENV === 'production' && app.use(csp(cspRules))
+	//NODE_ENV === 'production' && app.use(csp(cspRules)) ; relaxing csp for now
 
     app.use(bodyParser.json()) // 
     app.use(bodyParser.urlencoded({ extended: false })) // parsing POST data
