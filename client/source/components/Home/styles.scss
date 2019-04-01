@@ -6,6 +6,31 @@
     align-items: center;
     flex-direction: column;
     color: black;
+    width: 900px;
+    margin: 0 auto;
+}
+
+.boxes {
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+}
+
+.box {
+    display: flex;
+    margin-left: 20px;
+    font-size: 18px;
+    max-width: 250px;
+    margin-right: 20px;
+    text-align: center;
+    flex-direction: column;
+
+    svg {
+        display: block;
+        margin: 20px auto;
+        font-size: 50px;
+        height: 50px;
+    }
 }
 
 .graph h1 {
@@ -13,22 +38,11 @@
 }
 
 .tagline {
-    width: 80%;
-    height: 20%;
-    opacity: 1;
-    font-size: 52px;
-    font-weight: bold;
+    font-size: 56px;
+    font-weight: 500;
     text-align: center;
 }
-.tagline {
-	text-transform: uppercase
-}
 
-.capitalize {
-	font-family: 'Montserrat', sans-serif;
-	font-weight: 800;
-	display: block;
-}
 
 @media only screen and (max-width: 900px) {
     .tagline {
@@ -41,7 +55,7 @@
     background-color: #e83f3f;
 
     padding: 21px 94px 21px 94px;
-    margin-top: 116px;
+    margin-top: 60px;
 
     text-shadow: 0 2px 14px rgba(0, 0, 0, 0.13);
     font-size: 18px;
@@ -237,4 +251,45 @@
 
 .learn-compete-button:hover {
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.12);
+}
+
+.fullblocks {
+    display: flex;
+    flex-direction: column;
+}
+
+.block {
+    display: flex;
+    flex-direction: row;
+}
+
+.code, .desc {
+    flex: 1;
+    height: 30vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.desc {
+    h1 {
+        margin-bottom: 30px;
+    }
+    color: rgb(231, 231, 231);
+    background: rgb(56, 56, 56);
+}
+
+.learnbtn {
+    margin-top: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid #eee;
+    border-radius: 2px;
+    padding: 10px 15px;
+    transition: 0.2s linear all;
+    &:hover {
+        background: #eee;
+        color: rgb(56, 56, 56);
+    }
 }

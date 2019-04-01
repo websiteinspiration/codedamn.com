@@ -46,7 +46,8 @@ module.exports = merge(common[0], {
 						namedExport: true,
 						camelCase: true,
 						modules: true,
-						localIdentName: "[path]___[name]__[local]___[hash:base64:5]"
+						localIdentName: '[local]__[hash:base64:5]',
+						//localIdentName: "[path]___[name]__[local]___[hash:base64:5]"
 					}
 				},
 				{ 

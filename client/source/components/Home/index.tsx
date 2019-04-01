@@ -4,6 +4,8 @@ import styles from './styles.scss'
 import css from 'react-css-modules'
 import Component from 'decorators/Component'
 
+import { Code, Beenhere, LocalAtm } from '@material-ui/icons'
+
 function Home(props) {
 
 	const learnComplete = useRef(null)
@@ -16,13 +18,83 @@ function Home(props) {
 		<>
 			<div styleName='splash'>
 				<div styleName='tagline'>
-					<span styleName="capitalize">codedamn is a developer place</span>
+					<span styleName="capitalize">Coding, learning and connecting with developers around world</span>
 				</div>
 
+
+				<div styleName="boxes">
+					<div styleName="box">
+						<Code />
+						<p>Learn in demand technologies and skills</p>
+					</div>
+
+					<div styleName="box">
+						<Beenhere />
+						<p>Validate your skills and see them on your dev-profile</p>
+					</div>
+
+					<div styleName="box">
+						<LocalAtm />
+						<p>Win prizes for competitions organized!</p>
+					</div>
+				</div>
+			
 				<div styleName='startnow' onClick={_ => handleStartNow()}>
-					<span>Start Now!</span>
+					<span>Start for Free!</span>
+				</div>
+			
+			</div>
+
+
+			<div styleName="fullblocks">
+			<div styleName="block">
+					<div styleName="code">
+						some code
+					</div>
+					<div styleName="desc">
+						<h1>Frontend Web Development</h1>
+						<p>Average Salary: $100,000K</p>
+						<div styleName="learnbtn">Start Learning</div>
+					</div>
+				</div>
+
+
+				<div styleName="block">
+					<div styleName="desc">
+						<h1>Backend Development</h1>
+						<p>Average Salary: $100,000K</p>
+						<div styleName="learnbtn">Start Learning</div>
+					</div>
+					<div styleName="code">
+						some code
+					</div>
+				</div>
+
+
+				<div styleName="block">
+					<div styleName="code">
+						some code
+					</div>
+					<div styleName="desc">
+						<h1>Cross Platform Mobile Development</h1>
+						<p>Average Salary: $100,000K</p>
+						<div styleName="learnbtn">Start Learning</div>
+					</div>
+				</div>
+
+				<div styleName="block">
+					<div styleName="desc">
+						<h1>DevOps</h1>
+						<p>Average Salary: $100,000K</p>
+						<div styleName="learnbtn">Start Learning</div>
+					</div>
+					<div styleName="code">
+						some code
+					</div>
 				</div>
 			</div>
+
+			{/*
 
 			<div styleName='learn-compete' ref={learnComplete}>
 				<div styleName='learn-box'>
@@ -69,7 +141,7 @@ function Home(props) {
 					</div>
 				</div>
 				<input type="hidden" />
-			</div>
+			</div> */}
 		</>
 	)
 }
