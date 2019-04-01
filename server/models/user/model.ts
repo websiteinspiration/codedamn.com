@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { user } from '@interfaces/user'
+import { user } from 'interfaces/user'
 
 const noID = { _id: false }
 

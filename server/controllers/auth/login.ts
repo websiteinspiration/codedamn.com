@@ -3,7 +3,7 @@ import xdebug from 'debug'
 import User from 'models/user'
 import redirectAuthenticated from 'middlewares/AuthenticatedUsers/redirectAuthenticated'
 import fetch from 'node-fetch'
-import { user } from '@interfaces/user'
+import { user } from 'interfaces/user'
 import * as Sentry from '@sentry/node'
 const router = express.Router()
 const debug = xdebug('cd:Login')

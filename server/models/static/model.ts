@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { statics } from '@interfaces/static'
+import { statics } from 'interfaces/static'
 
 const noID = { _id: false }
 

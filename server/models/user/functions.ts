@@ -1,6 +1,6 @@
 import User from './model'
 import xdebug from 'debug'
-import { user } from '@interfaces/user'
+import { user } from 'interfaces/user'
 //import * as Mailjet from 'node-mailjet'
 import * as nodemailer from 'nodemailer'
 import * as bcrypt from 'bcrypt'

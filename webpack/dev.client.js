@@ -1,5 +1,6 @@
 const merge = require('webpack-merge')
 const common = require('./common.js')
+const webpack = require('webpack')
 
 module.exports = merge(common[0], {
   mode: 'development',
@@ -9,7 +10,7 @@ module.exports = merge(common[0], {
 	publicPath: '/assets/',
 	compress: true,
 	port: 1400,
-	index: 'index.prod.html',
+	index: 'build/index.prod.html',
 	disableHostCheck: true,
 	headers: {
 		'X-Served-By': 'webpack'
@@ -18,7 +19,7 @@ module.exports = merge(common[0], {
 		ignored: /node_modules/
 	},
 	historyApiFallback: {
-		index: 'index.prod.html'
+		index: 'build/index.prod.html'
 	},
 	proxy: {
         '/': {
@@ -40,13 +41,12 @@ module.exports = merge(common[0], {
 			use: [
 				'style-loader',
 				{
-					loader: "css-loader",
+					loader: "typings-for-css-modules-loader",
 					options: {
-						importLoaders: 2,
+						namedExport: true,
+						camelCase: true,
 						modules: true,
-						url: false,
-						sourceMap: true,
-						localIdentName: '[local]___[hash:base64:4]',//_____________________[hash:base64:5]'
+						localIdentName: "[path]___[name]__[local]___[hash:base64:5]"
 					}
 				},
 				{ 
@@ -57,12 +57,12 @@ module.exports = merge(common[0], {
 					}
 				} 
 			]
-		},
-		{
-			test: /^\.css$/,
-			include: /node_modules/,
-			use: ['style-loader', 'css-loader']
 		}
 	  ]
-  }
+	},
+	plugins: [
+		new webpack.WatchIgnorePlugin([
+      /scss\.d\.ts$/
+    ])
+	]
 })

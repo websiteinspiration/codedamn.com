@@ -3,21 +3,26 @@
 	  "module": "commonjs",
 	  "noImplicitAny": false,
 	  "removeComments": true,
+	  "typeRoots": ["node_modules/@types", "./typings"],
 	  "esModuleInterop": true,
 	  "experimentalDecorators": true,
 	  "target": "es2017",
-	  "baseUrl": "./server",
+	  "baseUrl": ".",
+	  "jsx": "react",
 	  "sourceMap": true,
 	  "inlineSources": true,
 	  "paths": {
-		  "@controllers/*": ["controllers/*"],
-		  "@interfaces/*": ["interfaces/*"],
-		  "middlewares/*": ["middlewares/*"],
-		  "models/*": ["models/*"],
-		  "@root/*": ["*"],
-		  "@decorators/*": ["decorators/*"]
+		  "controllers/*": ["server/controllers/*"],
+		  "interfaces/*": ["server/interfaces/*"],
+		  "middlewares/*": ["server/middlewares/*"],
+		  "models/*": ["server/models/*"],
+		  "root/*": ["server/*"],
+		  "sdecorators/*": ["server/decorators/*"],
+		  "components/*": ["client/source/components/*"],
+		  "decorators/*": ["client/source/decorators/*"],
+		  "reducers/*": ["client/source/redux/reducers/*"]
 	  }
 	},
-	"include": ["./server/"],
+	"include": ["server/", "client/source"],
 	"exclude": ["node_modules", "./server/compiled"]
 }

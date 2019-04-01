@@ -13,11 +13,12 @@
 	},
 	"presets": ["@babel/react"],
 	"plugins": [
+		["@babel/plugin-proposal-pipeline-operator", { "proposal": "minimal" }],
 		"@babel/plugin-syntax-dynamic-import",
 		"@babel/proposal-optional-chaining",
 		"@babel/transform-runtime", 
 		"@babel/transform-react-jsx",
-		["@babel/plugin-proposal-decorators", { "legacy": true }],
+		//["@babel/plugin-proposal-decorators", { "legacy": true }],
 		["@babel/plugin-proposal-class-properties", { "loose": false }]
 	]
 }

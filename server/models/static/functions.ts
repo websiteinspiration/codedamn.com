@@ -1,5 +1,5 @@
 import Static from './model'
-import { statics } from '@interfaces/static'
+import { statics } from 'interfaces/static'
 
 class Functions {
 

@@ -12,15 +12,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = [
 {
 	entry: {
-		bundle_home: path.resolve(source, 'components/index.js'),///index.js`,
+		bundle_home: path.resolve(source, 'components/index.tsx'),///index.js`,
 		//hello: path.resolve(source, 'pages/hello/index.js')///embed.js`
 	},
 	resolve: {
+		extensions: ['.ts', '.tsx', '.scss', '.js', '.jsx'],
 		alias: {
 			'components': path.resolve(source, 'components'),
 			'decorators': path.resolve(source, 'decorators'),
 			'reducers': path.resolve(source, 'redux/reducers'),
-			'@assets': path.resolve(source, 'assets')
+			'assets': path.resolve(source, 'assets')
 		}
 	},
 	output: {
@@ -30,6 +31,11 @@ module.exports = [
 	},
 	module: {
 		rules: [
+			{
+				test: /\.tsx?$/,
+				exclude: /node_modules/,
+				use: ['awesome-typescript-loader']
+			},
 			{
 				test: /\.jsx?$/,
 				exclude: /node_modules/,
@@ -76,14 +82,14 @@ module.exports = [
 	target: 'node',
 	resolve: {
 		alias: {
-			'@controllers': path.resolve(server, 'controllers'),
-			'@interfaces': path.resolve(server, 'interfaces'),
+			'controllers': path.resolve(server, 'controllers'),
+			'interfaces': path.resolve(server, 'interfaces'),
 			'middlewares': path.resolve(server, 'middlewares'),
 			'models': path.resolve(server, 'models'),
-			'@root': server,
-			'decorators': path.resolve(server, 'decorators'),
+			'root': server,
+			'sdecorators': path.resolve(server, 'decorators'),
 		},
-		extensions: [ '.tsx', '.ts', '.js' ]
+		extensions: ['.tsx', '.ts', '.js']
 	},
 	output: {
 		path: path.resolve(__dirname, '../'),

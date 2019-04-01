@@ -1,7 +1,7 @@
 import Language from './model'
 import Quiz from 'models/quiz'
 import xdebug from 'debug'
-import { language } from '@interfaces/site'
+import { language } from 'interfaces/site'
 
 const debug = xdebug('cd:LangFunctions')
 

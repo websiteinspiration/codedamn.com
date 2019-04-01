@@ -2,7 +2,7 @@ import express from 'express'
 import xdebug from 'debug'
 
 import redirectAuthenticated from 'middlewares/AuthenticatedUsers/redirectAuthenticated'
-import { user } from '@interfaces/user'
+import { user } from 'interfaces/user'
 import User from 'models/user'
 import fetch from 'node-fetch'
 import * as bcrypt from 'bcrypt'
