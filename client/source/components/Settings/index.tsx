@@ -26,10 +26,12 @@ function Settings(props) {
 	}, [])
 
 	useEffect(() => {
-		setName(props.settings.name)
-		setEmail(props.settings.email)
-		setUsername(props.settings.username)
-	}, [props.settings.name, props.settings.username, props.settings.email])
+		if(props.settings) {
+			setName(props.settings.name)
+			setEmail(props.settings.email)
+			setUsername(props.settings.username)
+		}
+	}, [props.settings])
 
 
 	function saveSettings() {
