@@ -5,8 +5,17 @@ import css from 'react-css-modules'
 import Component from 'decorators/Component'
 
 import { Code, Beenhere, LocalAtm, FormatListBulletedSharp } from '@material-ui/icons'
-import SyntaxHighlighter from 'react-syntax-highlighter'
-import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
+import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript'
+import dart from 'react-syntax-highlighter/dist/esm/languages/hljs/dart'
+import python from 'react-syntax-highlighter/dist/esm/languages/hljs/python'
+import yaml from 'react-syntax-highlighter/dist/esm/languages/hljs/yaml'
+import { atomOneLight as docco } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+
+SyntaxHighlighter.registerLanguage('javascript', js)
+SyntaxHighlighter.registerLanguage('python', python)
+SyntaxHighlighter.registerLanguage('dart', dart)
+SyntaxHighlighter.registerLanguage('yaml', yaml)
 
 function Home(props) {
 	return (
@@ -42,7 +51,7 @@ function Home(props) {
 			<div styleName="fullblocks">
 			<div styleName="block">
 					<div styleName="code">
-						<SyntaxHighlighter showLineNumbers={false} customStyle={{
+						<SyntaxHighlighter style={docco} customStyle={{
 							fontSize: 20
 						}} language="javascript">
 {`(async () => \{
@@ -59,7 +68,7 @@ function Home(props) {
 					</div>
 					<div styleName="desc">
 						<h1>Frontend Web Development</h1>
-						<p>Average Salary: $100,000K</p>
+						<p>Average Salary: $88,000K</p>
 						<div styleName="learnbtn">Start Learning</div>
 					</div>
 				</div>
@@ -68,11 +77,11 @@ function Home(props) {
 				<div styleName="block">
 					<div styleName="desc">
 						<h1>Backend Development</h1>
-						<p>Average Salary: $100,000K</p>
+						<p>Average Salary: $113,000K</p>
 						<div styleName="learnbtn">Start Learning</div>
 					</div>
 					<div styleName="code">
-						<SyntaxHighlighter showLineNumbers={false} customStyle={{
+						<SyntaxHighlighter style={docco} customStyle={{
 							fontSize: 20
 						}} language="python">
 {`#!/usr/bin/env python
@@ -94,7 +103,7 @@ io.get_event_loop().run_forever()`}
 
 				<div styleName="block">
 					<div styleName="code">
-						<SyntaxHighlighter showLineNumbers={false} customStyle={{
+						<SyntaxHighlighter style={docco} customStyle={{
 							fontSize: 20
 						}} language="dart">
 {`import 'package:flutter/widgets.dart';
@@ -112,7 +121,7 @@ void main() {
 					</div>
 					<div styleName="desc">
 						<h1>Cross Platform Mobile Development</h1>
-						<p>Average Salary: $100,000K</p>
+						<p>Average Salary: $90,000K</p>
 						<div styleName="learnbtn">Start Learning</div>
 					</div>
 				</div>
@@ -120,11 +129,11 @@ void main() {
 				<div styleName="block">
 					<div styleName="desc">
 						<h1>DevOps</h1>
-						<p>Average Salary: $100,000K</p>
+						<p>Average Salary: $94,000K</p>
 						<div styleName="learnbtn">Start Learning</div>
 					</div>
 					<div styleName="code">
-					<SyntaxHighlighter showLineNumbers={false} customStyle={{
+					<SyntaxHighlighter style={docco} customStyle={{
 							fontSize: 20
 						}} language="yaml">
 {`version: 2
@@ -144,55 +153,6 @@ jobs:
 					</div>
 				</div>
 			</div>
-
-			{/*
-
-			<div styleName='learn-compete' ref={learnComplete}>
-				<div styleName='learn-box'>
-					<h1>Learn</h1>
-
-					<p>
-						Become a rockstar <strong>developer</strong> and <br />
-						<strong> master the hottest tech</strong> in the market right
-						now!
-					</p>
-					<div styleName='learn-iconset'>
-						<IconBox source='/assets/images/svg/html-5-logo.svg'
-							label='HTML' />
-						<IconBox source='/assets/images/svg/css3-logo.svg'
-							label='CSS3' />
-						<IconBox source='/assets/images/svg/javascript-original.svg'
-							label='JavaScript' />
-						<IconBox source='/assets/images/svg/angularjs-plain.svg'
-							label='AngularJS' />
-						<IconBox source='/assets/images/svg/react-original.svg'
-							label='ReactJS' />
-						<IconBox source='/assets/images/svg/ionic-original.svg'
-							label='Ionic 3' />
-					</div>
-					<div styleName='learn-compete-button'>
-						<a href="http://learn.codedamn.com"></a>
-						<span>Learn</span>
-					</div>
-				</div>
-
-				<div styleName='compete-box'>
-					<div>
-						<h1>Compete</h1>
-
-						<p>
-							Show off your skills, <strong> win prizes </strong> (soon)
-					and <strong> get hired </strong> (soon) doing it
-				</p>
-					</div>
-
-					<div styleName='learn-compete-button'>
-						<a href="http://do.codedamn.com"></a>
-						<span> Compete </span>
-					</div>
-				</div>
-				<input type="hidden" />
-			</div> */}
 		</>
 	)
 }

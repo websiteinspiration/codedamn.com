@@ -140,18 +140,13 @@ function Register(props) {
 
 	function OAuthFailed(error, provider) {
 		if (provider === 'google') {
-			props.errorNotification("Error logging you in! Error message: " + error.error)
+			props.errorNotification("Error logging in with Google")
+		} else if(provider === 'facebook') {
+			props.errorNotification("Error logging in with Facebook")
 		}
 
 		console.error('OAuth failed', error, provider)
 	}
-
-	/*componentDidUpdate() {
-		const script = document.createElement('script')
-		script.src = 'https://www.google.com/recaptcha/api.js'
-		script.async = true
-		document.head.appendChild(script)
-	}*/
 
 	function clearForm() {
 		props.clearRegForm()
@@ -264,7 +259,8 @@ function Register(props) {
 			}
 		} else {
 			console.error(response)
-			props.errorNotification("Error logging in with Facebook")
+			OAuthFailed(response, "facebook")
+			//props.errorNotification("Error logging in with Facebook")
 		}
 	}
 

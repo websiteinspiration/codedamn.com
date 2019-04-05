@@ -44,21 +44,13 @@ function Login(props) {
 	
 	useEffect(() => {
 		if (!(window as any).gapi) {
-			setEnableGoogleOAuth(false)
 			const script = document.createElement('script')
 			script.src = "https://apis.google.com/js/platform.js"
 			script.async = true
 			document.head.appendChild(script)
-			script.onload = function() {
-				setEnableGoogleOAuth(true)
-				;(window as any).gapi.load('auth2', _ => {
-					const auth2 = (window as any).gapi.auth2.init({
-						client_id: '300208123830-vhj94eso4u0uv1nk6mo3o73j3im7pvv1.apps.googleusercontent.com'
-					})
-		
-					auth2.attachClickHandler(googleOAuth, {}, user => onGoogleLogin(user), error => OAuthFailed(error, 'google'))
-				})
-			}
+			script.onload = enableGoogleButton
+		} else {
+			enableGoogleButton()
 		}
 
 		if (!(window as any).FB) {
@@ -67,23 +59,39 @@ function Login(props) {
 			script.src = "https://connect.facebook.net/en_US/sdk.js"
 			script.async = true
 			document.head.appendChild(script)
-			script.onload = function() {
-				setEnableFacebookOAuth(true)
-				;(window as any).FB.init({
-					appId: '261251371039658',
-					cookie: true,  // enable cookies to allow the server to access 
-					// the session
-					xfbml: true,  // parse social plugins on this page
-					version: 'v2.8' // use graph api version 2.8
-				})
-			}
+			script.onload = enableFacebookButton
+		} else {
+			enableFacebookButton()
 		}
 	}, [])
+
+	function enableGoogleButton() {
+		(window as any).gapi.load('auth2', _ => {
+			const auth2 = (window as any).gapi.auth2.init({
+				client_id: '300208123830-vhj94eso4u0uv1nk6mo3o73j3im7pvv1.apps.googleusercontent.com'
+			})
+			auth2.attachClickHandler(googleOAuth.current, {}, onGoogleLogin, error => OAuthFailed(error, 'google'))
+			setEnableGoogleOAuth(true)
+		})
+	}
+
+	function enableFacebookButton() {
+		(window as any).FB.init({
+			appId: '261251371039658',
+			cookie: true, 
+			xfbml: true, 
+			version: 'v2.8'
+		})
+
+		setEnableFacebookOAuth(true)
+	}
 
 
 	function OAuthFailed(error, provider) {
 		if (provider === 'google') {
-			props.errorNotification("Error logging you in! Error message: " + error.error)
+			props.errorNotification("Error logging in with Google")
+		} else if(provider === 'facebook') {
+			props.errorNotification("Error logging in with Facebook")
 		}
 
 		console.error('OAuth failed', error, provider)
@@ -96,7 +104,7 @@ function Login(props) {
 
 		const { data: { data } } = await axios.post(GRAPHQL, {
 			query: `query($id: String!) {
-				loginWithOAuth(oauthprovider: "google", id: $id) {
+				result: loginWithOAuth(oauthprovider: "google", id: $id) {
 					name
 					username
 					email
@@ -107,7 +115,7 @@ function Login(props) {
 			}
 		})
 
-		if (!data.loginWithOAuth) { // account not found
+		if (!data.result) { // account not found
 			const profile = user.getBasicProfile()
 			const name = profile.getName()
 			const email = profile.getEmail()
@@ -130,7 +138,8 @@ function Login(props) {
 
 		} else {
 
-			props.userLoggedIn(data.loginWithOAuth)
+			successNotification("Hi " + data.result.name + "!")
+			props.userLoggedIn(data.result)
 			setBusy(false)
 		}
 
@@ -217,13 +226,13 @@ function Login(props) {
 				})
 			} else {
 
+				successNotification("Hi " + data.result.name + "!")
 				props.userLoggedIn(data.loginWithOAuth)
 				setBusy(false)
 
 			}
 		} else {
-			console.error(response)
-			props.errorNotification("Error logging in with Facebook")
+			OAuthFailed(response, "facebook")
 		}
 	}
 
@@ -268,7 +277,7 @@ function Login(props) {
 					Sign In with Google
 				</Button>
 
-				<Button color="primary" onClick={_ => (window as any).FB.login(onFacebookLogin, { scope: 'public_profile,email' })} disabled={!enableFacebookOAuth} buttonRef={facebookOAuth} variant="contained" size="large">
+				<Button color="primary" onClick={_ => (window as any).FB.login(response => onFacebookLogin(response), { scope: 'public_profile,email' })} disabled={!enableFacebookOAuth} buttonRef={facebookOAuth} variant="contained" size="large">
 					<img src="/assets/images/png/facebook.png" styleName="icon" />
 					Sign In with Facebook
 				</Button>

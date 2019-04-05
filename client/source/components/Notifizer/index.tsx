@@ -64,7 +64,7 @@ function Notifizer(props) {
 					aria-label="Close"
 					color="inherit"
 					styleName="close"
-					onClick={e => this.handleClose(null)}
+					onClick={e => handleClose(null)}
 					>
 					<CloseIcon styleName="icon" />
 					</IconButton>,
