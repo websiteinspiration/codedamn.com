@@ -12,17 +12,7 @@ import Component from 'decorators/Component'
 import { Divider, Button, TextField } from '@material-ui/core'
 import { GRAPHQL } from 'components/globals'
 
-// TODO: Clean this up
-const mapStateToProps = ({ system: { userLoggedIn, register: regsystem } }, { location: { search } }) => {
-	let query = {}
-	if (search) {
-		// present
-		const pairs = (search[0] === '?' ? search.substr(1) : search).split('&')
-		for (let i = 0; i < pairs.length; i++) {
-			const pair = pairs[i].split('=');
-			query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '')
-		}
-	}
+const mapStateToProps = ({ system: { userLoggedIn, register: regsystem } }) => {
 	return {
 		name: regsystem.name || "",
 		username: regsystem.username || "",
@@ -33,9 +23,7 @@ const mapStateToProps = ({ system: { userLoggedIn, register: regsystem } }, { lo
 		oauth: regsystem.oauth,
 		oauthtoken: regsystem.oauthtoken,
 		isUserLoggedIn: userLoggedIn,
-		oauthprovider: regsystem.oauthprovider,
-		search,
-		redirectInfo: query
+		oauthprovider: regsystem.oauthprovider
 	}
 }
 
@@ -48,30 +36,23 @@ function Register(props) {
 	const googleOAuth = useRef(null)
 	const facebookOAuth = useRef(null)
 
-
 	useEffect(() => {
 		const script = document.createElement('script')
 		script.src = 'https://www.google.com/recaptcha/api.js'
 		script.async = true
 		document.head.appendChild(script)
+	}, [busy])
+
+	useEffect(() => {
 
 		if (!(window as any).gapi) {
 			const script = document.createElement('script')
 			script.src = 'https://apis.google.com/js/platform.js'
 			script.async = true
 			document.head.appendChild(script)
-			script.onload = function() {
-				(window as any).gapi.load('auth2', _ => {
-
-					const auth2 = (window as any).gapi.auth2.init({
-						client_id: '300208123830-vhj94eso4u0uv1nk6mo3o73j3im7pvv1.apps.googleusercontent.com'
-					})
-		
-					auth2.attachClickHandler(googleOAuth.current, {}, onGoogleRegister, error => OAuthFailed(error, 'google'))
-					setEnableGoogleOAuth(true)
-		
-				})
-			}
+			script.onload = enableGoogleButton
+		} else {
+			enableGoogleButton()
 		}
 
 		if (!(window as any).FB) {
@@ -79,21 +60,34 @@ function Register(props) {
 			script.src = "https://connect.facebook.net/en_US/sdk.js"
 			script.async = true
 			document.head.appendChild(script)
-			script.onload = function() {
-				;(window as any).FB.init({
-					appId: '261251371039658',
-					cookie: true,  // enable cookies to allow the server to access 
-					// the session
-					xfbml: true,  // parse social plugins on this page
-					version: 'v2.8' // use graph api version 2.8
-				})
-	
-				setEnableFacebookOAuth(true)
-			}
+			script.onload = enableFacebookButton
+		} else {
+			enableFacebookButton()
 		}
 
 		return () => clearForm()
 	}, [])
+
+	function enableGoogleButton() {
+		(window as any).gapi.load('auth2', _ => {
+			const auth2 = (window as any).gapi.auth2.init({
+				client_id: '300208123830-vhj94eso4u0uv1nk6mo3o73j3im7pvv1.apps.googleusercontent.com'
+			})
+			auth2.attachClickHandler(googleOAuth.current, {}, onGoogleRegister, error => OAuthFailed(error, 'google'))
+			setEnableGoogleOAuth(true)
+		})
+	}
+
+	function enableFacebookButton() {
+		(window as any).FB.init({
+			appId: '261251371039658',
+			cookie: true, 
+			xfbml: true, 
+			version: 'v2.8'
+		})
+
+		setEnableFacebookOAuth(true)
+	}
 
 	async function onGoogleRegister(user) {
 		const id = user.getAuthResponse().id_token
@@ -285,6 +279,7 @@ function Register(props) {
 
 			<TextField
 				styleName="name"
+				autoFocus={true}
 				variant="outlined"
 				label="Name"
 				fullWidth
@@ -360,7 +355,7 @@ function Register(props) {
 					Register with Google
 			</Button>
 
-				<Button color="primary" disabled={!enableFacebookOAuth} buttonRef={facebookOAuth} onClick={_ => (window as any).FB.login(onFacebookLogin, { scope: 'public_profile,email' })} variant="contained" size="large">
+				<Button color="primary" disabled={!enableFacebookOAuth} buttonRef={facebookOAuth} onClick={_ => (window as any).FB.login(response => onFacebookLogin(response), { scope: 'public_profile,email' })} variant="contained" size="large">
 					<img src="/assets/images/png/facebook.png" styleName="icon" />
 					Register with Facebook
 			</Button>
