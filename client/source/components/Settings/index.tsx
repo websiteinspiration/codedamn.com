@@ -25,6 +25,12 @@ function Settings(props) {
 		props.getUserSettings()
 	}, [])
 
+	useEffect(() => {
+		setName(props.settings.name)
+		setEmail(props.settings.email)
+		setUsername(props.settings.username)
+	}, [props.settings.name, props.settings.username, props.settings.email])
+
 
 	function saveSettings() {
 		const csrf = (document.getElementById('csrf-field') as HTMLInputElement).value
@@ -119,8 +125,8 @@ function Settings(props) {
 }
 
 let com = Settings
-com = Component({ gridClass: styles.grid })(com)
 com = css(styles, { handleNotFoundStyleName: 'log' })(com)
+com = Component({ gridClass: styles.grid })(com)
 com = connect(mapStateToProps, { getUserSettings, saveUserSettings })(com)
 
 export default com

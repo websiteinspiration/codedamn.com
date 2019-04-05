@@ -43,12 +43,12 @@ function Header(props) {
 				</Link>
 		</div>
 
-		<div styleName="center-nav">
+		{ userLoggedIn ? null : <div styleName="center-nav">
 			<div styleName="navbar-left-links">
 				<Link to="/about" styleName='item'>About us</Link>
 				<Link to="/feedback" styleName='item'>Got feedback?</Link>
 			</div>
-		</div>
+		</div> }
 
 		<div styleName="navbar-right">
 			{nav}

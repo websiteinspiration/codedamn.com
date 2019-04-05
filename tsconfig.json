@@ -1,6 +1,7 @@
 {
 	"compilerOptions": {
-	  "module": "commonjs",
+	  "module": "esnext",
+	  "moduleResolution": "node",
 	  "noImplicitAny": false,
 	  "removeComments": true,
 	  "typeRoots": ["node_modules/@types", "./typings"],
