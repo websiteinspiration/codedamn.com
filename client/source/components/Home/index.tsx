@@ -22,7 +22,7 @@ function Home(props) {
 		<>
 			<div styleName='splash'>
 				<div styleName='tagline'>
-					<span styleName="capitalize">Coding, learning and connecting with developers around world</span>
+					<h1>Coding, learning and connecting with developers around world</h1>
 				</div>
 
 

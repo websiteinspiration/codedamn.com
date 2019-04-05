@@ -22,6 +22,7 @@ export default router => {
 
 	router.get('*', (req, res) => {
 		//const url = process.env.NODE_ENV === 'production' ? 'index.prod.html' : 'index.html'
-		res.sendFile(path.resolve(__dirname, `../../build/index.prod.html`))
+		const pathname = process.env.NODE_ENV === 'production' ? '../../index.prod.html' : '../../build/index.prod.html'
+		res.sendFile(path.resolve(__dirname, pathname))
 	})
 }
