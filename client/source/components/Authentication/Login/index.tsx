@@ -191,7 +191,7 @@ function Login(props) {
 
 			const { data: { data } } = await axios.post(GRAPHQL, {
 				query: `query($id: String!) {
-					loginWithOAuth(oauthprovider: "facebook", id: $id) {
+					result: loginWithOAuth(oauthprovider: "facebook", id: $id) {
 						name
 						username
 						email
@@ -202,7 +202,7 @@ function Login(props) {
 				}
 			})
 
-			if (!data.loginWithOAuth) { // account not found
+			if (!data.result) { // account not found
 				(window as any).FB.api('/me?fields=id,name,email', rep2 => {
 					const { name, email } = rep2
 
@@ -227,7 +227,7 @@ function Login(props) {
 			} else {
 
 				successNotification("Hi " + data.result.name + "!")
-				props.userLoggedIn(data.loginWithOAuth)
+				props.userLoggedIn(data.result)
 				setBusy(false)
 
 			}
