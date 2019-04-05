@@ -4,16 +4,11 @@ import styles from './styles.scss'
 import css from 'react-css-modules'
 import Component from 'decorators/Component'
 
-import { Code, Beenhere, LocalAtm } from '@material-ui/icons'
+import { Code, Beenhere, LocalAtm, FormatListBulletedSharp } from '@material-ui/icons'
+import SyntaxHighlighter from 'react-syntax-highlighter'
+import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 function Home(props) {
-
-	const learnComplete = useRef(null)
-
-	function handleStartNow() {
-		learnComplete.current.scrollIntoView({ behavior: 'smooth' })
-	}
-
 	return (
 		<>
 			<div styleName='splash'>
@@ -39,17 +34,28 @@ function Home(props) {
 					</div>
 				</div>
 			
-				<div styleName='startnow' onClick={_ => handleStartNow()}>
+				<Link styleName='startnow' to="/register">
 					<span>Start for Free!</span>
-				</div>
+				</Link>
 			
 			</div>
-
-
 			<div styleName="fullblocks">
 			<div styleName="block">
 					<div styleName="code">
-						some code
+						<SyntaxHighlighter showLineNumbers={false} customStyle={{
+							fontSize: 20
+						}} language="javascript">
+{`(async () => \{
+  const url = "https://codedamn.com/awesome-developer"
+  const result = await (await fetch(url)).json()
+
+  if(result.name == 'you') \{
+  	alert('You are awesome!')
+  \} else \{
+  	alert('You are awesome too!')
+  \}
+\})();`}
+						</SyntaxHighlighter>
 					</div>
 					<div styleName="desc">
 						<h1>Frontend Web Development</h1>
@@ -66,14 +72,43 @@ function Home(props) {
 						<div styleName="learnbtn">Start Learning</div>
 					</div>
 					<div styleName="code">
-						some code
+						<SyntaxHighlighter showLineNumbers={false} customStyle={{
+							fontSize: 20
+						}} language="python">
+{`#!/usr/bin/env python
+import asyncio as io
+import websockets as ws
+
+async def hello(websocket, path):
+    name = await websocket.recv()
+    greeting = f"Hello {name}!"
+    await websocket.send(greeting)
+
+server = ws.serve(hello, 'localhost', 1337)
+io.get_event_loop().run_until_complete(server)
+io.get_event_loop().run_forever()`}
+						</SyntaxHighlighter>
 					</div>
 				</div>
 
 
 				<div styleName="block">
 					<div styleName="code">
-						some code
+						<SyntaxHighlighter showLineNumbers={false} customStyle={{
+							fontSize: 20
+						}} language="dart">
+{`import 'package:flutter/widgets.dart';
+void main() {
+  runApp(
+    const Center(
+      child: Text(
+        'Hello, world!',
+        textDirection: TextDirection.ltr
+      )
+    )
+  );
+}
+`}						</SyntaxHighlighter>
 					</div>
 					<div styleName="desc">
 						<h1>Cross Platform Mobile Development</h1>
@@ -89,7 +124,23 @@ function Home(props) {
 						<div styleName="learnbtn">Start Learning</div>
 					</div>
 					<div styleName="code">
-						some code
+					<SyntaxHighlighter showLineNumbers={false} customStyle={{
+							fontSize: 20
+						}} language="yaml">
+{`version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.11.2
+    working_directory: ~/codedamn
+
+    steps:
+      - checkout
+      - run: 
+          name: Install Dependencies
+          command: npm install
+      - run: npm run test
+`}						</SyntaxHighlighter>
 					</div>
 				</div>
 			</div>

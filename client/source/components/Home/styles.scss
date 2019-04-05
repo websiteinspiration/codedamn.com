@@ -266,13 +266,25 @@
 .code, .desc {
     flex: 1;
     height: 30vw;
+    width: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+}
+
+.code {
+    justify-content: stretch;
+    align-items: stretch;
+    pre {
+        width: 100%;
+        display: flex!important;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .desc {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     h1 {
         margin-bottom: 30px;
     }
@@ -292,4 +304,8 @@
         background: #eee;
         color: rgb(56, 56, 56);
     }
+}
+
+.syntax {
+    font-size: 20px;
 }

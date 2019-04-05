@@ -16,3 +16,4 @@ export const block: string;
 export const code: string;
 export const desc: string;
 export const learnbtn: string;
+export const syntax: string;
