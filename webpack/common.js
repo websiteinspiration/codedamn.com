@@ -34,7 +34,10 @@ module.exports = [
 			{
 				test: /\.tsx?$/,
 				exclude: /node_modules/,
-				use: ['awesome-typescript-loader']
+				loader: 'awesome-typescript-loader',
+				options: {
+					configFileName: "tsconfig.client.json"
+				},
 			},
 			{
 				test: /\.jsx?$/,
@@ -126,9 +129,10 @@ module.exports = [
 		rules: [
 			{
 			  test: /\.tsx?$/,
-			  use: [{
-				  loader: 'ts-loader'
-			  }],
+			  loader: "awesome-typescript-loader",
+			  options: {
+				configFileName: "tsconfig.server.json"
+			},
 			  exclude: /node_modules/
 			}
 		  ]

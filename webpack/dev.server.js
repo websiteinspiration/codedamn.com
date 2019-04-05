@@ -7,7 +7,7 @@ module.exports = merge(common[1], {
 		rules: [{
 			test: /^\.tsx?$/,
 			use: [{
-				loader: 'ts-loader',
+				loader: 'awesome-typescript-loader',
 				options: {
 					transpileOnly: true,
 					experimentalWatchApi: true,
