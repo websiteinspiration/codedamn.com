@@ -2,19 +2,19 @@ import React, { useEffect, Suspense } from 'react'
 import asyncComponent from 'components/AsyncComponent'
 import Header from 'components/Header'
 import Footer from 'components/Footer'
-const Home = React.lazy(() => import('components/Home' /* webpackChunkName: "Home" */))
-const Login = React.lazy(() => import('components/Authentication/Login' /* webpackChunkName: "Login" */))
-const Logout = React.lazy(() => import('components/Authentication/Logout' /* webpackChunkName: "Logout" */))
-const Register = React.lazy(() => import('components/Authentication/Register' /* webpackChunkName: "Register" */))
-const PasswordReset = React.lazy(() => import('components/Authentication/PasswordReset' /* webpackChunkName: "Password Reset" */))
-const Panel = React.lazy(() => import('components/Panel' /* webpackChunkName: "Panel" */))
-const Feedback = React.lazy(() => import('components/Feedback' /* webpackChunkName: "Feedback" */))
-const Settings = React.lazy(() => import('components/Settings' /* webpackChunkName: "Settings" */))
-const Four04 = React.lazy(() => import('components/404' /* webpackChunkName: "404" */))
-const About = React.lazy(() => import('components/About' /* webpackChunkName: "About" */))
-const DamnTable = React.lazy(() => import('components/DamnTable' /* webpackChunkName: "DamnTable" */))
-const PrivacyPolicy = React.lazy(() => import('components/PrivacyPolicy' /* webpackChunkName: "Privacy Policy" */))
-const TermsOfService = React.lazy(() => import('components/TermsOfService' /* webpackChunkName: "Terms of Service" */))
+const Home = React.lazy(() => import('components/Home'))
+const Login = React.lazy(() => import('components/Authentication/Login'))
+const Logout = React.lazy(() => import('components/Authentication/Logout'))
+const Register = React.lazy(() => import('components/Authentication/Register'))
+const PasswordReset = React.lazy(() => import('components/Authentication/PasswordReset'))
+const Panel = React.lazy(() => import('components/Panel'))
+const Feedback = React.lazy(() => import('components/Feedback'))
+const Settings = React.lazy(() => import('components/Settings'))
+const Four04 = React.lazy(() => import('components/404'))
+const About = React.lazy(() => import('components/About'))
+const DamnTable = React.lazy(() => import('components/DamnTable'))
+const PrivacyPolicy = React.lazy(() => import('components/PrivacyPolicy'))
+const TermsOfService = React.lazy(() => import('components/TermsOfService'))
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { checkForUpdates } from 'reducers/system/actions'
