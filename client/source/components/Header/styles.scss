@@ -1,30 +1,33 @@
 .main-navbar {
 	display: flex;
-	width: 100%;
+	width: 1176px;
+	margin: 0 auto;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	background-color: #ffffff5e;
 	border-bottom: 1px solid #eee;
 	font-weight: 500;
+	justify-content: space-between;
+	align-items: center;
 }
+
+.logo img {
+	height: 50px;
+	margin-right: 10px;
+}
+
+.logo .text {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+
 
 .navbar-left {
 	display: flex;
 	flex-direction: row;
 	flex: 1;
 	align-items: center;
-
-	img {
-		height: 37px;
-		width: 23px;
-	}
-
-	.navbar-left-links {
-		flex-direction: row;
-		align-items: center;
-
-		margin-left: 36px;
-	}
 }
 
 .image-text-pair {
@@ -73,86 +76,3 @@
 	color: white;
 	background-color: #e83f3f;
 }
-
-/* Media Queries and other settings */
-
-// Desktop/Tablets specific sizing
-@media only screen and (min-width: 900px) {
-	.main-navbar {
-		padding-left: 72px;
-		padding-right: 72px;
-
-		flex-direction: row;
-		align-items: center;
-
-		> .navbar-left {
-			.expand-icon {
-				display: none;
-			}
-		}
-	}
-}
-
-// For phones
-@media only screen and (max-width: 900px) {
-	.main-navbar {
-		align-items: flex-start;
-		justify-content: space-around;
-
-		flex-direction: column;
-		width: 100%;
-
-		.item {
-			padding: 4px;
-		}
-
-		.signup-button {
-			margin: 8px;
-		}
-
-		> .navbar-left {
-			flex-direction: column;
-			align-items: flex-start;
-			padding: 18px;
-			width: 100%;
-
-			> .image-text-pair {
-				width: 100%;
-				.textDiv {
-					flex: 1;
-				}
-			}
-
-			> .expand-icon {
-				text-align: right;
-			}
-
-			> .navbar-left-links {
-				width: 100%;
-				flex-direction: column;
-
-				margin-left: initial;
-			}
-		}
-
-		> .navbar-right {
-			flex-direction: column;
-			align-items: center;
-			width: 100%;
-
-			margin-bottom: 1em;
-		}
-	}
-}
-
-@media only screen and (max-width: 900px) {
-	.navbar-left-links {
-		display: flex;
-	}
-
-	.hideOnMobile {
-		display: none;
-	}
-}
-
-
