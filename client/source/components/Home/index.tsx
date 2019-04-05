@@ -157,17 +157,6 @@ jobs:
 	)
 }
 
-const IconBox = props => (
-	<div className={styles['icon-box']}>
-		<object type="image/svg+xml" className={styles['icon-box-image']}
-			data={props.source}>
-		</object>
-		<span>
-			{props.label}
-		</span>
-	</div>
-)
-
 let com = css(styles, { handleNotFoundStyleName: 'log', allowMultiple: true })(Home)
 com = Component({ title: 'codedamn', gridClass: (styles as any).grid, sharedHeightClass: (styles as any).shareHeight })(com)
 

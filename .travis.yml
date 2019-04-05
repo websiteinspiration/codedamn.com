@@ -12,11 +12,12 @@ before_install:
 install:
   - npm ci
   - npm i -g concurrently
+  - npm install -g increase-memory-limit
 before_script:
   - echo -e "Host $CODEDAMNIP\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 script:
-  - npm test
   - export NODE_ENV=production
+  - increase-memory-limit
   - npm run wp-prod
 deploy:
 - provider: script
