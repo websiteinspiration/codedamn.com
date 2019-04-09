@@ -2,7 +2,7 @@ import axios from 'axios'
 axios.defaults.withCredentials = true
 
 import { successNotification, errorNotification } from 'reducers/notifizer/actions'
-import { STORE_COURSES, CLEAR_TIMELINE_INFO, STORE_TIMELINE_INFO } from './types'
+import { STORE_COURSES, TOGGLE_TIMELINE_VISIBILITY, SAVE_SIDEBAR_TIMELINE, STORE_DOT_INFO, CLEAR_TIMELINE_INFO, COMMENT_POSTED, STORE_TIMELINE_INFO, CLEAR_LEARNING_GROUND } from './types'
 import { GRAPHQL } from 'components/globals'
 
 export const getCourses = () => async dispatch => {
@@ -69,7 +69,30 @@ export const getTimelineInfo = payload => async dispatch => {
 	}
 }
 
-/*
+export const clearLearningGround = _ => ({ type: CLEAR_LEARNING_GROUND })
+
+export const postComment = payload => async dispatch => {
+	try {
+		const { data: { data } } = await axios.post(GRAPHQL, {
+			query: `mutation($parentSlug: String!, $slug: String!, $comment: String!) {
+				addDotCommentBySlug(parentSlug: $parentSlug, slug: $slug, comment: $comment) {
+					comment
+					author
+					date
+					id
+					avatar
+				}
+			}`,
+			variables: payload
+		})
+
+		dispatch({ type: COMMENT_POSTED, payload: data.addDotCommentBySlug })
+	} catch(error) {
+		console.error(error)
+	}
+}
+
+
 
 export const getDotInfo = payload => async dispatch => {
 	try {
@@ -112,6 +135,8 @@ export const getDotInfo = payload => async dispatch => {
 	}
 }
 
+export const toggleTimelineVisibility = _ => ({ type: TOGGLE_TIMELINE_VISIBILITY })
+
 export const getSidebarTimeline = payload => async dispatch => {
 	try {
 		const { data: {data } } = await axios.post(GRAPHQL, {
@@ -132,32 +157,12 @@ export const getSidebarTimeline = payload => async dispatch => {
 		console.error(error)
 	}
 }
+/*
 
-export const toggleTimelineVisibility = _ => ({ type: TOGGLE_TIMELINE_VISIBILITY })
+
 
 export const toggleChatVisibility = _ => ({ type: TOGGLE_CHAT_VISIBILITY })
 
-export const clearLearningGround = _ => ({ type: CLEAR_LEARNING_GROUND })
-
 export const staticHeaderTitle = payload => ({ type: SET_STATIC_HEADER_TITLE, payload })
 
-export const postComment = payload => async dispatch => {
-	try {
-		const { data: { data } } = await axios.post(GRAPHQL, {
-			query: `mutation($parentSlug: String!, $slug: String!, $comment: String!) {
-				addDotCommentBySlug(parentSlug: $parentSlug, slug: $slug, comment: $comment) {
-					comment
-					author
-					date
-					id
-					avatar
-				}
-			}`,
-			variables: payload
-		})
-
-		dispatch({ type: COMMENT_POSTED, payload: data.addDotCommentBySlug })
-	} catch(error) {
-		console.error(error)
-	}
-}*/
+*/

@@ -1,0 +1,94 @@
+.ytplayer {
+	justify-self: center;
+	align-self: center;
+    position: relative;
+    //width: 160vh;
+    //height: 90vh;
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+}
+
+.feedback {
+	position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+	flex-direction: column;
+	h1 {
+		font-size: 65px;
+	}
+	h2 {
+		font-size: 30px;
+		text-align: center;
+		margin-top:10px;
+	}
+}
+
+.controls {
+    display: flex;
+	margin-top: 30px;
+	div {
+		padding: 30px;
+		font-size: 30px;
+		margin: 10px 30px;
+	//	background: #00324a;
+	//	color: white;
+		cursor: pointer;
+	}
+}
+
+.progress {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	&>div {
+		height: 20px;
+		margin: 20px 40px 20px 0;
+		flex-grow: 1;
+	}
+}
+
+svg.close {
+	font-size: 60px;
+    position: fixed;
+    top: 0;
+    color: #c9ceea;
+    right: 0;
+    cursor: pointer;
+}
+
+svg.done {
+	font-size: 115px;
+    color: #3faa30;
+}
+
+svg.go-now {
+    padding: 0px;
+    margin-right: 20px;
+    color: #eee;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    background: #e83e3e;
+    color: white;
+    border-radius: 2px;
+}
+
+@media only screen and (max-width: 1152px) {
+	.ytplayer {
+		width: 100%!important;
+		height: 0!important;
+		padding-top: 56.5%!important;
+	}
+}

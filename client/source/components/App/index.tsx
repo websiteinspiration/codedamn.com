@@ -9,6 +9,7 @@ const Register = React.lazy(() => import('components/Authentication/Register'))
 const PasswordReset = React.lazy(() => import('components/Authentication/PasswordReset'))
 const Panel = React.lazy(() => import('components/Panel'))
 const Feedback = React.lazy(() => import('components/Feedback'))
+const LearningGround = React.lazy(() => import('components/LearningGround'))
 const Settings = React.lazy(() => import('components/Settings'))
 const Visualizer = React.lazy(() => import('components/Visualizer'))
 const Four04 = React.lazy(() => import('components/404'))
@@ -85,6 +86,7 @@ function App(props) {
 						<Route path="/privacy-policy" exact component={PrivacyPolicy} />
 						<Route path="/terms-of-service" exact component={TermsOfService} />
 						<Route path="/learn/:slug" exact component={Visualizer} />
+						<Route path="/learn/:parentslug/:dotslug" exact component={LearningGround} />
 						<Route component={Four04} />
 					</Switch>
 				</div>

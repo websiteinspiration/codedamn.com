@@ -70,7 +70,7 @@ function Feedback(props) {
 					<div className="g-recaptcha" data-sitekey="6Lel8U8UAAAAAPZlTTEo6LRv2H59m-uNcuJQudAX"></div>
 				</div>
 
-				<Button variant="contained" color="primary" styleName="submit" onClick={() => this.sendFeedback()}>
+				<Button variant="contained" color="primary" styleName="submit" onClick={sendFeedback}>
 					Send
 				</Button>
 			</form>

@@ -16,7 +16,7 @@ module.exports = [
 			//hello: path.resolve(source, 'pages/hello/index.js')///embed.js`
 		},
 		resolve: {
-			extensions: ['.ts', '.tsx', '.scss', '.js', '.jsx'],
+			extensions: ['.ts', '.tsx', '.scss', '.css', '.js', '.jsx'],
 			alias: {
 				'components': path.resolve(source, 'components'),
 				'decorators': path.resolve(source, 'decorators'),

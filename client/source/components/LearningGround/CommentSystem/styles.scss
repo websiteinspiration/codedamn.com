@@ -1,0 +1,128 @@
+$gridelems: date-of-publish comment-count social-icons add-comment avatar textbox comments comment main-comment author-name author-pic content votes upvote downvote;
+
+@each $elem in $gridelems {
+	.#{$elem} {
+		grid-area: $elem
+	}
+}
+
+.avatar {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
+
+.comments-parent {
+	grid-column: 1/4;
+	border-top: 1px solid #eee;
+	margin-bottom: 20px;
+}
+
+.n60 {
+	width: 960px;
+	margin: 0 auto;
+}
+
+.add-comment {
+    grid-area: add-comment;
+    display: flex;
+	flex-direction: row;
+	margin-top: 30px;
+}
+
+.textbox textarea {
+    width: 100%;
+    height: 100px;
+    border-radius: 4px 4px 0 0;
+	border: 2px solid #dbdfe4;
+	border-bottom: 0;
+    font-size: 16px;
+	font-family: inherit;
+	outline: 0;
+    padding: 10px;
+}
+
+.textbox {
+    flex-grow: 1;
+	margin-left: 25px;
+	display: flex;
+    flex-direction: column;
+    /* outline: 0; */
+    /* border-radius: 10px; */
+    /* border: 1px solid black; */
+}
+
+.textbox-footer {
+	background: #f6f8f9;
+    display: flex;
+    justify-content: flex-end;
+	align-items: stretch;;
+}
+
+.other-buttons {
+	flex-grow: 1;
+	border: 2px solid #dbdfe4;
+	border-radius: 0 0 4px 4px;
+	border-right: 0
+}
+
+.submit-comment {
+	padding: 15px;
+	color: white;
+	background: #737f86;
+	border-radius: 0 0 4px 0;
+    cursor: pointer;
+}
+
+
+.comment-count {
+	font-weight: bold;
+	display: inline-block;
+    border-bottom: 2px solid #288ce4;
+    color: #2a2e2e;
+    padding: 12px 0;
+}
+
+.author-pic {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.date-of-publish {
+	font-size: 12px;
+	color: grey;
+	font-style: italic;
+	margin-bottom: 12px;
+}
+
+.main-comment {
+    display: grid;
+	grid-template-areas: "author-pic author-name" 
+						"author-pic date-of-publish"
+						"author-pic content"
+						"author-pic votes";
+    grid-template-rows: 1fr;
+    grid-template-columns: 30px 1fr;
+    grid-column-gap: 25px;
+    margin-top: 20px;
+}
+
+.author-name {
+    grid-area: author-name;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.votes {
+    display: flex;
+    margin-top: 8px;
+    font-size: 12px;
+    width: 150px;
+    justify-content: space-between;
+    color: grey;
+}
+
+.votes div {
+	cursor: pointer;
+}
