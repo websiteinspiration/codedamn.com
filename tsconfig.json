@@ -1,0 +1,31 @@
+// only for vscode
+{
+    "compilerOptions": {
+        "module": "esnext",
+        "moduleResolution": "node",
+        "noImplicitAny": false,
+        "removeComments": true,
+        "typeRoots": ["node_modules/@types", "./typings"],
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "target": "es2017",
+        "baseUrl": ".",
+        "jsx": "react",
+        "skipLibCheck" : true,
+        "sourceMap": true,
+        "inlineSources": true,
+        "paths": {
+            "controllers/*": ["server/controllers/*"],
+            "interfaces/*": ["server/interfaces/*"],
+            "middlewares/*": ["server/middlewares/*"],
+            "models/*": ["server/models/*"],
+            "root/*": ["server/*"],
+            "sdecorators/*": ["server/decorators/*"],
+            "components/*": ["client/source/components/*"],
+            "decorators/*": ["client/source/decorators/*"],
+            "reducers/*": ["client/source/redux/reducers/*"]
+        }
+    },
+    "include": ["server/", "client/source/"],
+	"exclude": ["node_modules"]
+}

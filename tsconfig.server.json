@@ -18,12 +18,9 @@
 		  "middlewares/*": ["server/middlewares/*"],
 		  "models/*": ["server/models/*"],
 		  "root/*": ["server/*"],
-		  "sdecorators/*": ["server/decorators/*"],
-		  "components/*": ["client/source/components/*"],
-		  "decorators/*": ["client/source/decorators/*"],
-		  "reducers/*": ["client/source/redux/reducers/*"]
+		  "sdecorators/*": ["server/decorators/*"]
 	  }
 	},
-	"include": ["server/", "client/source"],
-	"exclude": ["node_modules", "./server/compiled"]
+	"include": ["server/"],
+	"exclude": ["node_modules", "./client", "./server/compiled"]
 }

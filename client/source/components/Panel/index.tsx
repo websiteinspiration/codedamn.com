@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import styles from './styles.scss'
 import css from 'react-css-modules'
 import Component from 'decorators/Component'
-import { Card, CardActionArea, CardContent, CardMedia, Typography, Button } from '@material-ui/core'
+import { Card, CardActionArea, CardContent, CardMedia, Typography, Button, Paper, Tabs, Tab } from '@material-ui/core'
 import Loading from 'components/Loading'
 
 import { checkForUpdates } from 'reducers/system/actions'
@@ -42,6 +42,8 @@ function Panel(props) {
 	useEffect(() => {
 		props.checkForUpdates()
 	}, [])
+
+	const [activeTab, setActiveTab] = useState(0)
 
 
 	if (!props.user) return <Loading />
@@ -83,6 +85,19 @@ function Panel(props) {
 				<p>You're worth {damns || 0} damns and you're <b>{status}</b> at codedamn.</p>
 				<p>Your level is decided by how active you're on platform, how much you contribute, use codedamn. Beware! It degrades as well if you don't use it ;)</p>
 			</div>
+
+			<Paper>
+				<Tabs
+					value={activeTab}
+					onChange={(_, value) => setActiveTab(value)}
+					indicatorColor="primary"
+					textColor="primary"
+					centered>
+						<Tab label="Item One" />
+						<Tab label="Item Two" />
+						<Tab label="Item Three" />
+				</Tabs>
+			</Paper>
 
 			<div styleName="things2do">
 
