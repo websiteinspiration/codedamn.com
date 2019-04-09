@@ -1,13 +1,23 @@
 .grid {
-	grid-template-rows: 1fr auto;
+	display: flex;
+	flex-direction: column;
 }
 
 div.red {
 	background: #e8eb3a;
 }
 
-.greeting-section {
+.dashboard-tab {
+
 	padding: 100px 20px;
+}
+
+.courses-tab {
+	
+	padding: 50px 60px;
+}
+
+.greeting-section {
 	text-align: center;
 	h1 {
 		font-size: 4em;
@@ -33,16 +43,99 @@ div.red {
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
+.card {
+	position: relative;
+}
 
-@media only screen and (max-width: 850px) {
-	.things2do {
-		grid-template-columns: 1fr 1fr;
+.media {
+	height: 0;
+	padding-top: 56.25%;
+	width: 100%;
+}
+
+.cardaction {
+	display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
+    height: 100%;
+}
+
+.cardcontent {
+	flex-grow: 1;
+}
+
+
+.block-title {
+	font-size: 26px;
+	margin-bottom: 20px;
+	border-bottom: 2px solid #eee;
+	padding-bottom: 12px;
+	//color:
+}	
+
+.block-list {
+	display: grid;
+	grid-column-gap: 1.5rem;
+	grid-row-gap: 30px;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	margin-bottom: 50px;
+}
+
+
+.block {
+	cursor: pointer;
+	color: #bebebe;
+	background: #101010;
+	box-shadow: 0 0 10px #0e0e0e;
+	height: 200px;
+	text-align: center;
+	font-size: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	flex-direction: row;
+	overflow: hidden;
+	.block-images {
+		width: 150px;
+		display: flex;
+		flex-direction: row;
+		.img {
+			flex: 1;
+			position: relative;
+			overflow: hidden;
+			box-shadow: 0 0 15px #101010;
+			img {
+				height: 200px;
+				width: auto;
+				max-width: 100em;
+			}
+		}
+	}
+	.block-details {
+		text-align: left;
+		flex-grow: 1;
+		margin-left: 20px;
+		overflow: hidden;
+		h2 {
+			font-size: 35px;
+			margin-bottom: 20px;
+			padding-bottom: 5px;
+			border-bottom: 2px solid #eee;
+			margin-right: 20px;
+		}
+		.tech-details {
+			font-size: 15px;
+			p {
+				line-height: 25px;
+			}
+		}
 	}
 }
 
-@media only screen and (max-width: 490px) {
-	.things2do {
-		grid-template-columns: 1fr;
-		padding: 10px;
+.grid {
+	div[aria-hidden="true"] {
+		height: 0!important;
 	}
 }

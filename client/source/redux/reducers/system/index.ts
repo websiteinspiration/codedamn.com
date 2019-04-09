@@ -1,6 +1,6 @@
 import { 
 	SET_HEADER_TYPE, SET_KEY_VALUE, USER_LOGGED_IN, USER_LOGGED_OUT, 
-	SET_CSRF_TOKEN, STORE_DAMN_TABLE, CLEAR_REG_FORM
+	SET_CSRF_TOKEN, STORE_DAMN_TABLE, CLEAR_REG_FORM, STORE_COURSES
 } from './types'
 
 const initialState = {
@@ -8,11 +8,17 @@ const initialState = {
 	register: {},
 	userLoggedIn: false,
 	csrfToken: null,
-	headerType: null
+	headerType: null,
+	courses: []
 }
 
 export default function(state = initialState, {type, payload}) {
 	switch(type) {
+		case STORE_COURSES:
+			return {
+				...state,
+				courses: payload
+			}
 		case CLEAR_REG_FORM:
 			return {
 				...state,

@@ -1,12 +1,12 @@
 import { 
 	SET_KEY_VALUE, SET_CSRF_TOKEN, USER_LOGGED_IN, USER_LOGGED_OUT, 
-	STORE_DAMN_TABLE, SET_HEADER_TYPE, CLEAR_REG_FORM
+	STORE_DAMN_TABLE, SET_HEADER_TYPE, CLEAR_REG_FORM, STORE_COURSES
 } from './types'
 import axios from 'axios'
 
 import { history } from 'reducers/../store' // TODO: Clean fix this.
 import { GRAPHQL } from 'components/globals'
-import { successNotification } from 'reducers/notifizer/actions'
+import { successNotification, errorNotification } from 'reducers/notifizer/actions'
 
 export const setKeyValueRegister = payload => ({ type: SET_KEY_VALUE, payload })
 export const userLoggedIn = payload => ({ type: USER_LOGGED_IN, payload })
@@ -65,7 +65,32 @@ export const checkForUpdates = _ => async dispatch => {
 	} catch(error) {
 		console.error(error)
 	}
+}
 
+export const getCourses = () => async dispatch => {
+	try {
+		const { data: { data } } = await axios.post(GRAPHQL, {
+			query: `{
+				learnblocks {
+				  name
+				  score
+				  timelines {
+					description
+					creator
+					id
+					name
+					icon
+					slug
+				  }
+				}
+			  }`
+		})
+
+		dispatch({ type: STORE_COURSES, payload: data.learnblocks })
+	} catch(error) {
+		console.error(error)
+		errorNotification("Error fetching timelines. Are you online?")
+	}
 }
 
 export const getDamnTable = () => async dispatch => {
