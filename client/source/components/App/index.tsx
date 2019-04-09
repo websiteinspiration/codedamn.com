@@ -10,6 +10,7 @@ const PasswordReset = React.lazy(() => import('components/Authentication/Passwor
 const Panel = React.lazy(() => import('components/Panel'))
 const Feedback = React.lazy(() => import('components/Feedback'))
 const Settings = React.lazy(() => import('components/Settings'))
+const Visualizer = React.lazy(() => import('components/Visualizer'))
 const Four04 = React.lazy(() => import('components/404'))
 const About = React.lazy(() => import('components/About'))
 const DamnTable = React.lazy(() => import('components/DamnTable'))
@@ -83,6 +84,7 @@ function App(props) {
 						<Route path="/logout" condition={props.userLoggedIn} component={Logout} />
 						<Route path="/privacy-policy" exact component={PrivacyPolicy} />
 						<Route path="/terms-of-service" exact component={TermsOfService} />
+						<Route path="/learn/:slug" exact component={Visualizer} />
 						<Route component={Four04} />
 					</Switch>
 				</div>

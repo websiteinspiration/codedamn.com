@@ -3,10 +3,11 @@ import { connect } from 'react-redux'
 import styles from './styles.scss'
 import css from 'react-css-modules'
 import Component from 'decorators/Component'
-import { Paper, Tabs, Tab, Card, CardActionArea, Link, CardMedia, CardContent, Typography } from '@material-ui/core'
+import { Tabs, Tab, Card, CardActionArea, Link, CardMedia, CardContent, Typography } from '@material-ui/core'
 import Loading from 'components/Loading'
 import SwipeableViews from 'react-swipeable-views'
-import { checkForUpdates, getCourses } from 'reducers/system/actions'
+import { checkForUpdates } from 'reducers/system/actions'
+import { getCourses } from 'reducers/learn/actions'
 
 const greetings = ['Hey', 'Hello', 'Hi']
 const greeting = greetings[Math.floor(Math.random() * greetings.length)]
@@ -90,7 +91,7 @@ function Panel(props) {
 		const blockList = block.timelines.map(block => {
 			return (
 				<Card key={block.slug} styleName="card"> {/* styleName="block" onClick={() => this.props.history.push(`/${block.creator}/${block.slug}`)}> */}
-					<CardActionArea styleName="cardaction">
+					<CardActionArea styleName="cardaction" onClick={() => props.history.push(`/learn/${block.slug}`)}>
 						<CardMedia
 							styleName="media"
 							title={block.name}
@@ -116,22 +117,20 @@ function Panel(props) {
 			</React.Fragment>)
 	})
 
-	const Practice = <h1>P</h1>
+	const Practice = <h1>Coming soon</h1>
 
 	return (
 		<>
-			<Paper>
-				<Tabs
-					value={activeTab}
-					onChange={(_, value) => setActiveTab(value)}
-					indicatorColor="primary"
-					textColor="primary"
-					centered>
-					<Tab label="Dashboard" />
-					<Tab label="Courses" />
-					<Tab label="Practice" />
-				</Tabs>
-			</Paper>
+			<Tabs
+				value={activeTab}
+				onChange={(_, value) => setActiveTab(value)}
+				indicatorColor="primary"
+				textColor="primary"
+				centered>
+				<Tab label="Dashboard" />
+				<Tab label="Courses" />
+				<Tab label="Practice" />
+			</Tabs>
 
 			<SwipeableViews
 				axis={'x'}

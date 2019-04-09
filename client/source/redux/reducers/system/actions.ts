@@ -67,32 +67,6 @@ export const checkForUpdates = _ => async dispatch => {
 	}
 }
 
-export const getCourses = () => async dispatch => {
-	try {
-		const { data: { data } } = await axios.post(GRAPHQL, {
-			query: `{
-				learnblocks {
-				  name
-				  score
-				  timelines {
-					description
-					creator
-					id
-					name
-					icon
-					slug
-				  }
-				}
-			  }`
-		})
-
-		dispatch({ type: STORE_COURSES, payload: data.learnblocks })
-	} catch(error) {
-		console.error(error)
-		errorNotification("Error fetching timelines. Are you online?")
-	}
-}
-
 export const getDamnTable = () => async dispatch => {
 	const { data }  = await axios.post('/damn-table')
 	dispatch({ type: STORE_DAMN_TABLE, payload: data })
