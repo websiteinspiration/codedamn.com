@@ -70,7 +70,6 @@ const resolvers = {
 
 			const res = await fetch(`https://graph.facebook.com/debug_token?input_token=${id}&access_token=${FACEBOOK_ACCESS_TOKEN}`)
 
-
 			const d = await res.json()
 
 			const { data: { app_id, application, user_id } } = d

@@ -10,7 +10,7 @@ export default router => {
 
 //	auth(router)
 	githubHooks(router)
-	user(router)
+//	user(router)
 	socialLinks(router)
 //	APIv1_0(router)
    /* home(router)

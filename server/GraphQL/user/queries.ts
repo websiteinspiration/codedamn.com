@@ -96,9 +96,8 @@ const resolvers = {
 		} else {
 			throw new Error('Invalid OAuth provider')
 		}
-
 		
-
+		
 		if(user) {
 			req.session.user = user
 			req.session.auth = true

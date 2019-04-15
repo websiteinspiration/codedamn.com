@@ -10,7 +10,7 @@ type Userflow {
 }
 
 type RedirectResponse {
-	shouldRedirect: Boolean!,
+	shouldRedirect: Boolean!
 	path: String
 }
 

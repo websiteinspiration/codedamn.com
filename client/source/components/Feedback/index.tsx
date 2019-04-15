@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styles from './styles.scss'
 import css from 'react-css-modules'
 import { Button, TextField } from '@material-ui/core'
 import axios from 'axios'
 import { successNotification, errorNotification } from 'reducers/notifizer/actions'
 import { connect } from 'react-redux'
+import { GRAPHQL } from 'components/globals';
 
 function Feedback(props) {
 
 	const [name, setName] = useState('')
 	const [email, setEmail] = useState('')
 	const [message, setMessage] = useState('')
+
+	//const input = useRef(null)
 
 	useEffect(() => {
 		const script = document.createElement('script')
@@ -23,10 +26,28 @@ function Feedback(props) {
 		const { successNotification, errorNotification } = props
 		const captcha = (document.querySelector(`[name='g-recaptcha-response']`) as HTMLInputElement).value
 
-		const { data } = await axios.post('/send-feedback', { name, email, message, captcha })
-		if (data.status == "ok") {
-			successNotification('Your message is received! We\'ll get back to you soon!')
-		} else {
+		try {
+			const { data: { data } } = await axios.post(GRAPHQL, {
+				query: `mutation($captcha: String!, $email: String!, $name: String!, $message: String!) {
+					sendFeedback(name: $name, captcha: $captcha, email: $email, message: $message) {
+						status
+						data
+					}
+				}`,
+				variables: {
+					captcha, name, email, message
+				}
+			})
+
+			const { status, data: error } = data.sendFeedback
+
+			if (status == "ok") {
+				successNotification('Your message is received! We\'ll get back to you soon!')
+			} else {
+				throw error
+			}
+		} catch(error) {
+			console.error(error)
 			errorNotification('There were some errors sending your feedback. Try again?')
 		}
 	}
