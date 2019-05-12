@@ -81,35 +81,19 @@ function Panel(props) {
 		}
 	]
 
+	const blocks3 = <div styleName="random-recommendations">
+		{props.courses.map(block => block.timelines).sort(_ => 0.5 - Math.random()).slice(0, 3).map(getBlockMarkup)}
+	</div>
+
 	const Dashboard = (<div styleName="greeting-section">
 		<h1>{greeting} {name}!</h1>
-		<p>You're worth {damns || 0} damns and you're <b>{status}</b> at codedamn.</p>
-		<p>Your level is decided by how active you're on platform, how much you contribute, use codedamn. Beware! It degrades as well if you don't use it ;)</p>
+		<p>You're worth {damns || 0} damns at codedamn.</p>
+		<h2 styleName="learning-heading">Here's what people are learning:</h2>
+		{blocks3}
 	</div>)
 
 	const Courses = props.courses.map(block => {
-		const blockList = block.timelines.map(block => {
-			return (
-				<Card key={block.slug} styleName="card"> {/* styleName="block" onClick={() => this.props.history.push(`/${block.creator}/${block.slug}`)}> */}
-					<CardActionArea styleName="cardaction" onClick={() => props.history.push(`/learn/${block.slug}`)}>
-						<CardMedia
-							styleName="media"
-							title={block.name}
-							image={`/assets/images/courses/${block.icon}`}
-						/>
-
-						<CardContent styleName="cardcontent">
-							<Typography gutterBottom variant="headline" component="h2">
-								{block.name}
-							</Typography>
-							<Typography component="p">
-								{block.description}
-							</Typography>
-						</CardContent>
-					</CardActionArea>
-				</Card>)
-
-		})
+		const blockList = block.timelines.map(getBlockMarkup)
 		return (
 			<React.Fragment key={block.name}>
 				<h2 styleName="block-title">{block.name}</h2>
@@ -149,6 +133,28 @@ function Panel(props) {
 
 		</>
 	)
+
+	function getBlockMarkup(block) {
+		return (
+			<Card key={block.slug} styleName="card"> {/* styleName="block" onClick={() => this.props.history.push(`/${block.creator}/${block.slug}`)}> */}
+				<CardActionArea styleName="cardaction" onClick={() => props.history.push(`/learn/${block.slug}`)}>
+					<CardMedia
+						styleName="media"
+						title={block.name}
+						image={`/assets/images/courses/${block.icon}`}
+					/>
+
+					<CardContent styleName="cardcontent">
+						<Typography gutterBottom variant="headline" component="h2">
+							{block.name}
+						</Typography>
+						<Typography component="p">
+							{block.description}
+						</Typography>
+					</CardContent>
+				</CardActionArea>
+			</Card>)
+	}
 }
 
 let com = css(styles, { handleNotFoundStyleName: 'log', allowMultiple: true })(Panel)
