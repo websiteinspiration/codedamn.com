@@ -18,7 +18,7 @@ function Visualizer(props) {
 
     const { flow } = props.currentTimeline
 
-    props.history.push(props.slug+'/'+flow[0].slug)
+    props.history.replace(props.slug+'/'+flow[0].slug)
 
 	return <Loading />
 }
