@@ -50,6 +50,8 @@ function ContentInterface(props) {
 			case 'video':
 				return <Video
 					vidid={dotInfo.videoExtras.vidid}
+					slug={props.dotslug}
+					parentslug={props.parentslug}
 				/>
 			case 'task':
 				return <Task />

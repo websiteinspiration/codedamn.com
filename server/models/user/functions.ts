@@ -42,6 +42,14 @@ function sendEmail({ email, subject, message, name }) {
 
 class Functions {
 
+	static async markDone(slug, username) {
+		return await User.updateOne({ username }, { $addToSet: { completed: slug } })
+	}
+
+	static async setDamns(damns, username) {
+		return await User.updateOne({ username }, { $set: { damns } })
+	}
+
 	static async setActiveDate(today, streak, username) {
 		const res = await User.updateOne({ username }, { 
 			$addToSet: { activeDates: today },

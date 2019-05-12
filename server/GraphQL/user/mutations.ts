@@ -1,6 +1,7 @@
 import User from 'models/user'
 import xdebug from 'debug'
 import { checkAuth } from '../functions'
+import Language from 'models/language'
 
 const { FACEBOOK_APP_ID, FACEBOOK_ACCESS_TOKEN, GOOGLE_AUD_ID, RECAPTCHA_SECRET, COOKIE_SECRET, NODE_ENV } = process.env
 
@@ -162,6 +163,23 @@ const resolvers = {
 
 		return { error: "Invalid captcha response" }
 
+	},
+	async addEnergyPoints({ parentslug, slug }, req: Request) {
+		checkAuth({ req })
+		const username = req.session.user.username
+		
+		if(await Language.findDotBySlug(parentslug, slug)) {	
+			const res = await User.markDone(slug, username)
+			debugger
+			if(res.nModified === 1) {
+				// record not found
+				req.session.user.damns += 10
+				await User.setDamns(req.session.user.damns, username)
+				return true
+			}
+		}
+		
+		return false
 	}
 }
 
@@ -171,6 +189,7 @@ logout: Boolean!
 changeSettings(newusername: String!, newname: String!, newpassword: String, newcpassword: String): User!
 registerWithOAuth(name: String!, email: String!, username: String!, id: String!, oauthprovider: String!): RegistrationType!
 registerWithoutOAuth(name: String!, email: String!, username: String!, password: String!, cpassword: String!, captcha: String!): RegistrationType!
+addEnergyPoints(parentslug: String!, slug: String!): Boolean!
 `
 
 const exportObject = {

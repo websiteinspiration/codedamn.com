@@ -30,6 +30,7 @@ const UserSchema = new mongoose.Schema({
   damns: { type: Number, default: 0 },
   regIPaddress: { type: String, default: "127.0.0.1"},
   facebookID: String,
+  completed: { type: [String], default: [] },
   googleID: String,
   profilepic: { type: String, default: 'https://codedamn.com/assets/images/avatar.jpg' },
   username: String,

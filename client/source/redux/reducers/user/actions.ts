@@ -1,6 +1,9 @@
 import { GOT_USER_SETTINGS } from './types'
 import { FIRE_NOTIFICATION } from 'reducers/notifizer/types';
 import axios from 'axios'
+import { GRAPHQL } from 'components/globals'
+import { successNotification, errorNotification } from 'reducers/notifizer/actions'
+
 
 export const getUserSettings = _ => async dispatch => {
 	const { data: json } = await axios.post(`/settings`)
@@ -26,4 +29,20 @@ export const saveUserSettings = payload => async dispatch => {
  //	dispatch(updateCSRFToken())
 
 	//dispatch({ type: GOT_USER_SETTINGS, payload: json })
+}
+
+export const addEnergyPoints = payload => async dispatch => {
+	
+	
+	const { data: { data }} = await axios.post(GRAPHQL, {
+		query: `mutation($slug: String!, $parentslug: String!) {
+			addEnergyPoints(slug: $slug, parentslug: $parentslug)
+		}`,
+		variables: payload
+	})
+
+	if(data.addEnergyPoints) {
+		dispatch(successNotification("Nice work! ++damns"))
+	}
+
 }
