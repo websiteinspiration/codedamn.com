@@ -68,6 +68,21 @@ export const checkForUpdates = _ => async dispatch => {
 }
 
 export const getDamnTable = () => async dispatch => {
-	const { data }  = await axios.post('/damn-table')
-	dispatch({ type: STORE_DAMN_TABLE, payload: data })
+	try {
+		const { data: { data } } = await axios.post(GRAPHQL, {
+			query: `{
+				rankings {
+					damns
+					username
+					name
+					doj
+				}
+			}`
+		})
+
+		dispatch({ type: STORE_DAMN_TABLE, payload: data.rankings })
+
+	} catch(error) {
+		console.error(error)
+	}
 }

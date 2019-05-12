@@ -32,7 +32,7 @@ export default function(state = initialState, {type, payload}) {
 		case STORE_DAMN_TABLE:
 			return {
 				...state,
-				damntable: payload.data
+				damntable: payload
 			}
 		case USER_LOGGED_IN:
 			//debugger
