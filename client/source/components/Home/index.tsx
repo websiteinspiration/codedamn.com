@@ -157,7 +157,7 @@ jobs:
 	)
 }
 
-let com = css(styles, { handleNotFoundStyleName: 'log', allowMultiple: true })(Home)
+let com: any = css(styles, { handleNotFoundStyleName: 'log', allowMultiple: true })(Home)
 com = Component({ title: 'codedamn', gridClass: (styles as any).grid, sharedHeightClass: (styles as any).shareHeight })(com)
 
 export default com

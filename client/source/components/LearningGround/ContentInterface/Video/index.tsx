@@ -58,6 +58,6 @@ function Video(props) {
 	}
 }
 
-let com = css(styles, { allowMultiple: true, handleNotFoundStyleName: 'log' })(Video)
+let com: any = css(styles, { allowMultiple: true, handleNotFoundStyleName: 'log' })(Video)
 com = connect(mapStateToProps, { addEnergyPoints })(com)
 export default com

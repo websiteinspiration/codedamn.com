@@ -360,7 +360,7 @@ function Register(props) {
 	)
 }
 
-let com = css(styles, { handleNotFoundStyleName: 'log', allowMultiple: true })(Register)
+let com: any = css(styles, { handleNotFoundStyleName: 'log', allowMultiple: true })(Register)
 com = Component({ title: 'Register', gridClass: styles.grid })(com)
 com = connect(mapStateToProps, { setKeyValueRegister, warningNotification, successNotification, errorNotification, infoNotification, userLoggedIn, clearRegForm })(com)
 com = withRouter(com)

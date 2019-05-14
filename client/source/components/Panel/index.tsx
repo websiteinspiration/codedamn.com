@@ -82,7 +82,7 @@ function Panel(props) {
 	]
 
 	const blocks3 = <div styleName="random-recommendations">
-		{props.courses.map(block => block.timelines).sort(_ => 0.5 - Math.random()).slice(0, 3).map(getBlockMarkup)}
+		{props.courses.map(block => block.timelines).flat(Infinity).sort(_ => 0.5 - Math.random()).slice(0, 4).map(getBlockMarkup)}
 	</div>
 
 	const Dashboard = (<div styleName="greeting-section">
@@ -112,7 +112,7 @@ function Panel(props) {
 				textColor="primary"
 				centered>
 				<Tab label="Dashboard" />
-				<Tab label="Courses" />
+				<Tab label="All Courses" />
 				<Tab label="Practice" />
 			</Tabs>
 
@@ -137,6 +137,7 @@ function Panel(props) {
 	function getBlockMarkup(block) {
 		return (
 			<Card key={block.slug} styleName="card"> {/* styleName="block" onClick={() => this.props.history.push(`/${block.creator}/${block.slug}`)}> */}
+				<div styleName="ribbon">Free</div>
 				<CardActionArea styleName="cardaction" onClick={() => props.history.push(`/learn/${block.slug}`)}>
 					<CardMedia
 						styleName="media"
@@ -157,7 +158,7 @@ function Panel(props) {
 	}
 }
 
-let com = css(styles, { handleNotFoundStyleName: 'log', allowMultiple: true })(Panel)
+let com: any = css(styles, { handleNotFoundStyleName: 'log', allowMultiple: true })(Panel)
 com = Component({ title: 'User Dashboard', gridClass: styles.grid })(com)
 com = connect(mapStateToProps, { checkForUpdates, getCourses })(com)
 export default com

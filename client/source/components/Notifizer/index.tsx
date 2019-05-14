@@ -75,7 +75,7 @@ function Notifizer(props) {
 }
 
 
-let com = css(styles, { handleNotFoundStyleName: 'log', allowMultiple: true })(Notifizer)
+let com: any = css(styles, { handleNotFoundStyleName: 'log', allowMultiple: true })(Notifizer)
 com = connect(mapStateToProps, { hideNotifizer })(com)
 
 export default com

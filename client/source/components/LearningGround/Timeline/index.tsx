@@ -63,7 +63,7 @@ function Timeline(props) {
 	</div>)
 }
 
-let com = css(styles, { allowMultiple: true })(Timeline)
+let com: any = css(styles, { allowMultiple: true })(Timeline)
 com = connect(mapStateToProps, { getSidebarTimeline, toggleTimelineVisibility })(com)
 
 export default com

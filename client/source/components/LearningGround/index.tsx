@@ -32,7 +32,7 @@ function LearningGround(props) {
 	)
 }
 
-let com = css(styles)(LearningGround)
+let com: any = css(styles)(LearningGround)
 com = connect(mapStateToProps, { clearLearningGround })(com)
 com = Component({ gridClass: styles.grid })(com)
 

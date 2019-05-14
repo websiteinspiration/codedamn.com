@@ -99,7 +99,7 @@ function Feedback(props) {
 	)
 }
 
-let com = css(styles, { handleNotFoundStyleName: 'log', allowMultiple: true })(Feedback)
+let com: any = css(styles, { handleNotFoundStyleName: 'log', allowMultiple: true })(Feedback)
 com = connect(null, { successNotification, errorNotification })(com)
 
 export default com

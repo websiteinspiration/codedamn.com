@@ -52,7 +52,7 @@ function PasswordReset(props) {
 	)
 }
 
-let com = css(styles)(PasswordReset)
+let com: any = css(styles)(PasswordReset)
 com = connect(null, { successNotification, errorNotification })(com)
 
 export default com

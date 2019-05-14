@@ -126,7 +126,7 @@ function Settings(props) {
 		</>)
 }
 
-let com = Settings
+let com: any = Settings
 com = css(styles, { handleNotFoundStyleName: 'log' })(com)
 com = Component({ gridClass: styles.grid })(com)
 com = connect(mapStateToProps, { getUserSettings, saveUserSettings })(com)

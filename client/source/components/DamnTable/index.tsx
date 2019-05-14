@@ -57,7 +57,7 @@ function DamnTable(props) {
 	)
 }
 
-let com = css(styles, { handleNotFoundStyleName: 'log' })(DamnTable)
+let com: any = css(styles, { handleNotFoundStyleName: 'log' })(DamnTable)
 com = Component({ headerTitle: 'Damn Table', title: 'Damn Table' })(com)
 com = connect(mapStateToProps, { getDamnTable })(com)
 

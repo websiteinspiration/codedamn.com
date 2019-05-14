@@ -99,7 +99,7 @@ function App(props) {
 	)
 }
 
-let com = css(styles)(App)
+let com: any = css(styles)(App)
 com = connect(mapStateToProps, { checkForUpdates })(com)
 
 export default com

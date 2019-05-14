@@ -18,3 +18,5 @@ export const img: string;
 export const blockDetails: string;
 export const techDetails: string;
 export const learningHeading: string;
+export const randomRecommendations: string;
+export const ribbon: string;

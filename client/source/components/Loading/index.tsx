@@ -19,6 +19,6 @@ function Loading(props) {
 	)
 }
 
-let com = css(styles)(Loading)
+let com: any = css(styles)(Loading)
 
 export default com

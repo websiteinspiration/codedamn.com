@@ -22,7 +22,7 @@ function About(props) {
 	)
 }
 
-let com = css(styles)(About)
+let com: any = css(styles)(About)
 com = Component({ title: 'About Us', gridClass: (styles as any).grid })(com)
 
 export default com

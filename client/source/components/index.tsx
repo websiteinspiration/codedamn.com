@@ -18,6 +18,8 @@ if(document.location.hostname !== 'localhost') {
 	Sentry.init({
 		dsn: 'https://718860c7f084473ab5d175647d6d74f3@sentry.io/1226318'
 	})
+
+	// TODO: this doesn't disable react devtools on frontend
 	if((window as any).__REACT_DEVTOOLS_GLOBAL_HOOK__) {
 		;(window as any).__REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function () {}
 	}

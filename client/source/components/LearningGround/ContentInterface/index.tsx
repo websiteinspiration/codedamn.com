@@ -72,7 +72,7 @@ return <>
 	</>
 }
 
-let com = css(styles)(ContentInterface)
+let com: any = css(styles)(ContentInterface)
 com = connect(mapStateToProps, { getDotInfo, postComment })(com)
 
 export default com

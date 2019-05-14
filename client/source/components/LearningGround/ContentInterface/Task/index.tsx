@@ -69,7 +69,7 @@ function Task(props) {
 	)
 }
 
-let com = css(styles)(Task)
+let com: any = css(styles)(Task)
 com = connect(mapStateToProps, {})(com)
 com = withRouter(com)
 

@@ -57,7 +57,7 @@ function Header(props) {
 	)
 }
 
-let com = css(styles, { handleNotFoundStyleName: 'log', allowMultiple: true })(Header)
+let com: any = css(styles, { handleNotFoundStyleName: 'log', allowMultiple: true })(Header)
 com = connect(mapStateToProps, {})(com)
 
 export default com

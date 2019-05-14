@@ -286,7 +286,7 @@ function Login(props) {
 	)
 }
 
-let com = css(styles, { handleNotFoundStyleName: 'log' })(Login)
+let com: any = css(styles, { handleNotFoundStyleName: 'log' })(Login)
 com = Component({ gridClass: styles.grid, title: 'Login' })(com)
 com = connect(mapStateToProps, { successNotification, userLoggedIn, errorNotification, infoNotification, setKeyValueRegister })(com)
 com = withRouter(com)

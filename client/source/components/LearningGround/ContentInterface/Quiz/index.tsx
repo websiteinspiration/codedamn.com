@@ -50,7 +50,7 @@ function Quiz(props) {
 	)
 }
 
-let com = css(styles, { handleNotFoundStyleName: 'log' })(Quiz)
+let com: any = css(styles, { handleNotFoundStyleName: 'log' })(Quiz)
 com = Component({ })(com)
 com = connect(mapStateToProps, {})(com)
 com = withRouter(com)
