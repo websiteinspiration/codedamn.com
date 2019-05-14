@@ -34,7 +34,7 @@ function Footer(props) {
 						<li><a target="_blank" href="https://github.com/codedamn">GitHub</a></li>
 					</ul>
 
-					<p>Copyright &copy; 2015-{new Date().getFullYear()} | All Rights Reserved.</p>
+					<p>Copyright &copy; codedamn&trade; 2015-{new Date().getFullYear()} | All Rights Reserved.</p>
 				</div>
 		</footer>	
 	)
