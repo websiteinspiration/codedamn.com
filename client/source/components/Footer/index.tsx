@@ -17,16 +17,13 @@ function Footer(props) {
 						<li><a target="_blank" href="https://www.youtube.com/c/codedamn">YouTube</a></li>
 						<li><a target="_blank" href="http://bit.ly/codedamn-android">Android App</a></li>
 						<li><a target="_blank" href="https://bit.ly/codedamn-ios">iOS App</a></li>
-						<li><Link to={'/feedback'}>Contact</Link></li>
 					</ul>
 				</div>
 				<div styleName="internallinks">
 					<h3>Quick Links</h3>
 					<ul>
 						<li><Link to={'/privacy-policy'}>Privacy Policy</Link></li>
-						<li><a href="https://do.codedamn.com">Developer Portal</a></li>
-						<li><a href="https://learn.codedamn.com">Learning Portal</a></li>
-						<li><a href="https://discuss.codedamn.com">Discussion Portal</a></li>
+						<li><Link to={'/feedback'}>Contact</Link></li>
 					</ul>
 				</div>
 				<div styleName="sociallinks">
