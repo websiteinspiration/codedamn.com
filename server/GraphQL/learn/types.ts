@@ -57,11 +57,9 @@ type TimelineFlow {
 type Timeline {
 	id: ID!
 	category: String!
-	creator: String!
 	description: String!
 	icon: String!
 	name: String!
-	shortname: String!
 	tags: [String!]!
 	views: Int!
 	slug: String!

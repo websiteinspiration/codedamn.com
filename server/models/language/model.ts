@@ -42,16 +42,12 @@ const TaskType = new mongoose.Schema({
 const LangSchema = new mongoose.Schema({  
   name: String,
   slug: String,
-  shortname: String,
   tags: [String],
   description: String,
   flow: [FlowType],
   icon: String,
-  creator: String,
-  cocreators: [String],
   tasks: [TaskType],
   category: String,
-  subcategory: String,
   views: { type: Number, default: 0 },
   live: Boolean
 }, { collection: 'languages' })
