@@ -14,7 +14,6 @@ export const getCourses = () => async dispatch => {
 				  score
 				  timelines {
 					description
-					creator
 					id
 					name
 					icon
