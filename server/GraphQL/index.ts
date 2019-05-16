@@ -3,14 +3,16 @@ import User from './user'
 import Learn from './learn'
 import Community from './community'
 import System from './system'
+import Practice from './practice'
 
-const { buildSchema } = require('graphql') // UNABLE TO CONVERT TO IMPORT!!
+const { buildSchema } = require('graphql') // TODO: UNABLE TO CONVERT TO IMPORT!!
 
 const resolver = {
 	...Community.resolvers,
 	...User.resolvers,
 	...Learn.resolvers,
-	...System.resolvers
+	...System.resolvers,
+	...Practice.resolvers
 }
 
 const schema = buildSchema(`
@@ -20,10 +22,13 @@ ${Learn.types}
 ${Community.types}
 ${System.types}
 
+${Practice.types}
+
 type RootQuery {
 	${User.queries}
 	${Learn.queries}
 	${Community.queries}
+	${Practice.queries}
 }
 
 type RootMutation {

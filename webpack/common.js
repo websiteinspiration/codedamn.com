@@ -8,6 +8,7 @@ const server = path.resolve(__dirname, '../server/')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
 
 module.exports = [
 	{
@@ -16,7 +17,7 @@ module.exports = [
 			//hello: path.resolve(source, 'pages/hello/index.js')///embed.js`
 		},
 		resolve: {
-			extensions: ['.ts', '.tsx', '.scss', '.css', '.js', '.jsx'],
+			extensions: ['.ts', '.tsx', '.scss', '.css', '.js', '.jsx', '.txt'],
 			alias: {
 				'components': path.resolve(source, 'components'),
 				'decorators': path.resolve(source, 'decorators'),
@@ -31,6 +32,10 @@ module.exports = [
 		},
 		module: {
 			rules: [
+				{
+					test: /\.txt$/i,
+					use: 'raw-loader',
+				},
 				{
 					test: /\.tsx?$/,
 					exclude: /node_modules/,
@@ -74,6 +79,7 @@ module.exports = [
 			}),
 			new HtmlWebpackHarddiskPlugin(),
 			new webpack.HashedModuleIdsPlugin(), // so that file hashes don't change unexpectedly
+			new MonacoWebpackPlugin()
 		],
 		optimization: {
 			runtimeChunk: 'single',

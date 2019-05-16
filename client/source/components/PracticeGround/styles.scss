@@ -1,0 +1,78 @@
+.practice-ground * {
+	max-width: 100em;
+}
+
+.practice-ground {
+	display: block;
+}
+
+.center {
+	width: 50%;
+	float: left;
+	height: 100vh;
+}
+
+.right {
+	clear: right;
+	width: 30%;
+	border-left: 0;
+}
+
+.left, .right {
+    float: left;
+    min-height: 1px;
+    border: 3px solid #1f1f1f;
+	//padding: 7px;
+	height: 100vh; // TODO: calculate this appropirately
+	overflow-y: auto;
+}
+
+.left {
+	width: 20%;
+    border-right: 0;
+	p {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+}
+
+:global {
+
+	.iframe {
+		width: 100%;
+		background: white;
+		flex-grow: 1;
+		border: 0;
+		border-bottom: 1px solid #000;
+	}
+	
+	.iframe-header {
+		background: black;
+		color: white;
+		padding: 10px 40px;
+		position: relative;
+	}
+	
+	.iframe-header:before {
+		content: '\01F512';
+		display: block;
+		color: white;
+		top: 50%;
+		transform: translateY(-50%);
+		left: 10px;
+		position: absolute;
+	}
+	.rightiframe {
+		grid-area: right;
+		display: flex;
+		flex-direction: column;
+		overflow-y: auto;
+		position: relative;
+	}
+}
+
+
+.preview, .challenges, .challenge, .status, .instruction {
+	color: inherit;
+}
+

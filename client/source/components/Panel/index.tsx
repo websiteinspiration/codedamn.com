@@ -106,19 +106,19 @@ function Panel(props) {
 		<div styleName="practice-modules">
 			<Card styleName="card"> {/* styleName="block" onClick={() => this.props.history.push(`/${block.creator}/${block.slug}`)}> */}
 				<div styleName="ribbon"><span>Free</span></div>
-				<CardActionArea styleName="cardaction">
+				<CardActionArea styleName="cardaction"  onClick={() => props.history.push(`/practice/html5/crFGvFuvY`)}>
 					<CardMedia
 						styleName="media"
-						title={"Basic HTML/HTML5"}
+						title={"Basic HTML5"}
 						image={`/assets/images/courses/`}
 					/>
-
+					
 					<CardContent styleName="cardcontent">
 						<Typography gutterBottom variant="headline" component="h2">
-							Basic HTML/HTML5
+							Basic HTML5
 						</Typography>
 						<Typography component="p">
-							Get your basics of HTML/HTML5 up and ready!
+							Get your basics of HTML5 up and ready!
 						</Typography>
 					</CardContent>
 				</CardActionArea>
