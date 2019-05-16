@@ -46,7 +46,7 @@ function Panel(props) {
 		props.getCourses()
 	}, [])
 
-	const [activeTab, setActiveTab] = useState(2)
+	const [activeTab, setActiveTab] = useState(0)
 
 
 	if (!props.user) return <Loading />
