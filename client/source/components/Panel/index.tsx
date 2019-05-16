@@ -46,7 +46,7 @@ function Panel(props) {
 		props.getCourses()
 	}, [])
 
-	const [activeTab, setActiveTab] = useState(0)
+	const [activeTab, setActiveTab] = useState(2)
 
 
 	if (!props.user) return <Loading />
@@ -101,7 +101,30 @@ function Panel(props) {
 			</React.Fragment>)
 	})
 
-	const Practice = <h1>Coming soon</h1>
+	const Practice = <div styleName="practice">
+		<h1 styleName="heading">Available Modules</h1>
+		<div styleName="practice-modules">
+			<Card styleName="card"> {/* styleName="block" onClick={() => this.props.history.push(`/${block.creator}/${block.slug}`)}> */}
+				<div styleName="ribbon"><span>Free</span></div>
+				<CardActionArea styleName="cardaction">
+					<CardMedia
+						styleName="media"
+						title={"Basic HTML/HTML5"}
+						image={`/assets/images/courses/`}
+					/>
+
+					<CardContent styleName="cardcontent">
+						<Typography gutterBottom variant="headline" component="h2">
+							Basic HTML/HTML5
+						</Typography>
+						<Typography component="p">
+							Get your basics of HTML/HTML5 up and ready!
+						</Typography>
+					</CardContent>
+				</CardActionArea>
+			</Card>
+		</div>
+	</div>
 
 	return (
 		<>

@@ -20,3 +20,6 @@ export const techDetails: string;
 export const learningHeading: string;
 export const randomRecommendations: string;
 export const ribbon: string;
+export const practice: string;
+export const practiceModules: string;
+export const heading: string;

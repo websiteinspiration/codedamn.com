@@ -205,10 +205,28 @@ div.red {
 
 .ribbon::before {
 	top: 0;
-    left: 20px;
+    left: 21px;
 }
 
 .ribbon::after {
-	bottom: 10px;
+	bottom: 11px;
     right: 0;
+}
+
+.practice {
+	display: flex;
+	flex-direction: column;
+	padding: 50px 60px;
+}
+
+.practice-modules {
+	display: flex;
+	flex-direction: row;
+	.card {
+		overflow: visible;
+	}
+}
+
+.heading {
+	margin-bottom: 20px;
 }
