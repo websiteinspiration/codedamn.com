@@ -18,7 +18,7 @@ const langmap = {
 function PracticeGround(props) {
 
 	const [value, setValue] = useState(null)
-	const [currentUID, setcurrentUID] = useState(0)
+	const [currentUID, setcurrentUID] = useState(1)
 	const [challengesDone, setChallengesDone] = useState({})
 	const coder = useRef(null)
 
@@ -46,8 +46,9 @@ function PracticeGround(props) {
 
 	return (
 		<div styleName="practice-ground">
-			<div styleName="left" dangerouslySetInnerHTML={{ __html: props.pblock.description }}>
-
+			<div styleName="left">
+				<h2>Instructions</h2>
+				<div styleName="left-content" dangerouslySetInnerHTML={{ __html: props.pblock.description }}></div>
 			</div>
 			<div styleName="center">
 				<MonacoEditor
@@ -73,7 +74,7 @@ function PracticeGround(props) {
 				<div styleName="challenges">
 					{props.pblock.challenges.map(challenge => {
 						return (<div styleName="challenge" key={challenge.text}>
-							<span styleName="status">{challengesDone[challenge.text] === 1 ? 'OK' : 'X'}</span>
+							<span styleName="status" data-now={currentUID === 1 ? 'X' : challengesDone[challenge.text] === 1 ? 'OK' : 'X'}>{currentUID === 1 ? 'X' : challengesDone[challenge.text] === 1 ? 'OK' : 'X'}</span>
 							<span styleName="instruction" dangerouslySetInnerHTML={{ __html: challenge.text }}></span>
 						</div>)
 					})}
@@ -99,6 +100,6 @@ const mapStateToProps = ({ practice }, { match : { params } }) => ({
 })
 
 let com: any = css(styles, { handleNotFoundStyleName: 'log', allowMultiple: true })(PracticeGround)
-com = Component({ title: 'Challenge' })(com)
+com = Component({ title: 'Challenge', sharedHeightClass: styles.turnFlex, gridClass: styles.turnGrid })(com)
 com = connect(mapStateToProps, { getPracticeBlock, clearReduxProps })(com)
 export default com

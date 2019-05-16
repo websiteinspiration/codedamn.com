@@ -7,3 +7,6 @@ export const challenges: string;
 export const challenge: string;
 export const status: string;
 export const instruction: string;
+export const next: string;
+export const turnFlex: string;
+export const turnGrid: string;

@@ -6,6 +6,7 @@ import jquery from './jquery.txt'
 import chai from './chai.txt'
 
 //@css(styles)
+// TODO: Convert this into functional component
 class iFrame extends React.Component<any, any> {
 
 	iframe = null
