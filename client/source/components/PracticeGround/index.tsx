@@ -64,6 +64,7 @@ function PracticeGround(props) {
 							roundedSelection: false,
 							scrollBeyondLastLine: false,
 							readOnly: false,
+							fontSize: 16
 						}}
 					/>
 				</div>
