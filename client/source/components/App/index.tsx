@@ -18,6 +18,7 @@ const DamnTable = React.lazy(() => import('components/DamnTable'))
 const PrivacyPolicy = React.lazy(() => import('components/PrivacyPolicy'))
 const TermsOfService = React.lazy(() => import('components/TermsOfService'))
 const PracticeGround = React.lazy(() => import('components/PracticeGround'))
+const Tasker = React.lazy(() => import('components/PracticeGround/Tasker'))
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { checkForUpdates } from 'reducers/system/actions'
@@ -88,7 +89,8 @@ function App(props) {
 						<Route path="/terms-of-service" exact component={TermsOfService} />
 						<Route path="/learn/:slug" exact component={Visualizer} />
 						<Route path="/learn/:parentslug/:dotslug" exact component={LearningGround} />
-						<Route path="/practice/:moduleid/:challengeid" exact component={PracticeGround} />
+						<Route path="/practice/:moduleid/:challengeid" exact component={Tasker} />
+						<Route path="/practice/:moduleid" exact component={PracticeGround} />
 						<Route component={Four04} />
 					</Switch>
 				</div>

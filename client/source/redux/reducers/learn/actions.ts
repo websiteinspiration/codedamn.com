@@ -48,20 +48,12 @@ export const getTimelineInfo = payload => async dispatch => {
 						type
 					}
 				}
-				userflow(timelineslug: $slug) {
-					done
-					watched
-				}
 			}`,
 			variables: payload
 		})
 
-		if(!data.userflow) {
-			// user not logged in
-			dispatch({ type: STORE_TIMELINE_INFO, payload: { ...data, userflow: { done: [], watched: [] } } })
-		} else {
-			dispatch({ type: STORE_TIMELINE_INFO, payload: data })
-		}
+		// TODO: fix the done and watched part
+		dispatch({ type: STORE_TIMELINE_INFO, payload: { ...data, userflow: { done: [], watched: [] } } })
 
 	} catch(error) {
 		console.error(error)

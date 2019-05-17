@@ -7,6 +7,9 @@ class Functions {
 		return await Practice.findOne({ slug: moduleid, "flow.slug": challengeid }, { "flow.$": 1, _id: 0 })
 	}
 
+	static async getNodes(moduleid: string): Promise<practice | null> {
+		return await Practice.findOne({ slug: moduleid }, { _id: 0, flow: 1 })
+	}
 }
 
 export default Functions

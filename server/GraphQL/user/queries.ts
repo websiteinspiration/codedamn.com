@@ -146,7 +146,7 @@ const resolvers = {
 		
 		if(!isLoggedIn(req)) return null
 
-		const user = req.session.user
+		const user = await User.findDamner({ username: req.session.user.username })
 
 		return {
 			progressBar: user.progressBar, 
@@ -161,26 +161,9 @@ const resolvers = {
 			favtags: user.favtags,
 			doj: user.doj,
 			activeStreak: user.streak,
-			activeDates: user.activeDates
-		}
-	},
-
-	async userflow({ timelineslug }, req: Request) {
-
-		if(!isLoggedIn(req)) return null
-
-		const { username } = req.session.user
-
-		const user = await User.findDamner({ username })
-		
-		if(!user.data) return { done: [], watched: [] }
-
-		user.data.doneDots = user.data.doneDots || {}
-		user.data.watchDots = user.data.watchDots || {}
-
-		return { 
-			done: user.data.doneDots[timelineslug] || [], 
-			watched: user.data.watchDots[timelineslug] || [] 
+			activeDates: user.activeDates,
+			practiceDone: user.practiceDone,
+			completed: user.completed
 		}
 	}
 }
@@ -190,7 +173,6 @@ loginWithUsernamePassword(username: String!, password: String!): User
 loginWithOAuth(oauthprovider: String!, id: String!): User
 loginWithToken(token: String!): User
 profileData: User
-userflow(timelineslug: String!): Userflow
 `;
 
 const exportObj = {

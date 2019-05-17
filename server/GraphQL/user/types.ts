@@ -29,5 +29,7 @@ type User {
 	activeDates: [String]
 	activeStreak: Int
 	selfRank: Int!
+	completed: [String]!
+	practiceDone: [String]!
 }
 `

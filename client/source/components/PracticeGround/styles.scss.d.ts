@@ -1,13 +1,1 @@
-export const practiceGround: string;
-export const center: string;
-export const editor: string;
-export const right: string;
-export const left: string;
-export const preview: string;
-export const challenges: string;
-export const challenge: string;
-export const status: string;
-export const instruction: string;
-export const next: string;
-export const turnFlex: string;
-export const turnGrid: string;
+export {};
