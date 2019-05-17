@@ -106,7 +106,7 @@ function Panel(props) {
 		<div styleName="practice-modules">
 			<Card styleName="card"> {/* styleName="block" onClick={() => this.props.history.push(`/${block.creator}/${block.slug}`)}> */}
 				<div styleName="ribbon"><span>Free</span></div>
-				<CardActionArea styleName="cardaction"  onClick={() => props.history.push(`/practice/html5/crFGvFuvY`)}>
+				<CardActionArea styleName="cardaction"  onClick={() => props.history.push(`/practice/html5`)}>
 					<CardMedia
 						styleName="media"
 						title={"Basic HTML5"}
