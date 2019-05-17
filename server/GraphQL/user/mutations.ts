@@ -170,7 +170,6 @@ const resolvers = {
 		
 		if(await Language.findDotBySlug(parentslug, slug)) {	
 			const res = await User.markDone(slug, username)
-			debugger
 			if(res.nModified === 1) {
 				// record not found
 				req.session.user.damns += 10

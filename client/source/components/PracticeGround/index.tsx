@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import css from 'react-css-modules'
 import Component from 'decorators/Component'
 import Loading from 'components/Loading'
-import { getPracticeBlock, clearReduxProps } from 'reducers/practice/actions'
+import { getPracticeBlock, clearReduxProps, practiceCompleted } from 'reducers/practice/actions'
 import MonacoEditor from 'react-monaco-editor'
 import styles from './styles.scss'
 import IFrame from './iFrame'
@@ -17,9 +17,10 @@ const langmap = {
 
 function PracticeGround(props) {
 
-	const [value, setValue] = useState(null)
+	const [value, setValue] = useState('')
 	const [currentUID, setcurrentUID] = useState(1)
 	const [challengesDone, setChallengesDone] = useState({})
+	const [allDone, setAllDone] = useState(false)
 	const coder = useRef(null)
 
 	useEffect(() => {
@@ -83,17 +84,25 @@ function PracticeGround(props) {
 						</div>)
 					})}
 
-					{Object.keys(challengesDone).map(t => challengesDone[t]).reduce((a, b) => a && b, true) ? <Link styleName="next" to={props.pblock.nextslug}>Go to next challenge</Link> : null}
+					{allDone ? <Link styleName="next" to={props.pblock.nextslug}>Go to next challenge</Link> : null}
 				</div>
 			</div>
 		</div>
 	)
 
 	function setTaskerState(event) {
-		setChallengesDone({
+		const finalObj = {
 			...challengesDone,
 			...event
-		})
+		}
+		const isAllDone = Object.keys(finalObj).map(t => finalObj[t]).reduce((a, b) => a && b, true)
+		setChallengesDone(finalObj)
+		setAllDone(isAllDone)
+
+		if(isAllDone) {
+			// all challenges complete. notify the server
+			props.practiceCompleted({ challengeid: props.challengeid, moduleid: props.moduleid })
+		}
 	}
 }
 
@@ -105,5 +114,5 @@ const mapStateToProps = ({ practice }, { match : { params } }) => ({
 
 let com: any = css(styles, { handleNotFoundStyleName: 'log', allowMultiple: true })(PracticeGround)
 com = Component({ title: 'Challenge', sharedHeightClass: styles.turnFlex, gridClass: styles.turnGrid })(com)
-com = connect(mapStateToProps, { getPracticeBlock, clearReduxProps })(com)
+com = connect(mapStateToProps, { getPracticeBlock, clearReduxProps, practiceCompleted })(com)
 export default com

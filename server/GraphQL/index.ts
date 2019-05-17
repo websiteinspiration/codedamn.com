@@ -21,7 +21,6 @@ ${User.types}
 ${Learn.types}
 ${Community.types}
 ${System.types}
-
 ${Practice.types}
 
 type RootQuery {
@@ -35,6 +34,7 @@ type RootMutation {
 	${User.mutations}
 	${Learn.mutations}
 	${System.mutations}
+	${Practice.mutations}
 }
 
 schema {

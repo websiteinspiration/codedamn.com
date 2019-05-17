@@ -42,6 +42,10 @@ function sendEmail({ email, subject, message, name }) {
 
 class Functions {
 
+	static async practiceCompleted(id, username) {
+		return await User.updateOne({ username }, { $addToSet: { practiceDone: id } })
+	}
+
 	static async markDone(slug, username) {
 		return await User.updateOne({ username }, { $addToSet: { completed: slug } })
 	}
