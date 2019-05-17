@@ -109,13 +109,13 @@ function Panel(props) {
 				<CardActionArea styleName="cardaction"  onClick={() => props.history.push(`/practice/html5`)}>
 					<CardMedia
 						styleName="media"
-						title={"Basic HTML5"}
+						title={"HTML5 Basics"}
 						image={`/assets/images/courses/html5.jpg`}
 					/>
 					
 					<CardContent styleName="cardcontent">
 						<Typography gutterBottom variant="headline" component="h2">
-							Basic HTML5
+							HTML5 Basics
 						</Typography>
 						<Typography component="p">
 							Get your basics of HTML5 up and ready!
@@ -126,19 +126,19 @@ function Panel(props) {
 
 			<Card styleName="card"> {/* styleName="block" onClick={() => this.props.history.push(`/${block.creator}/${block.slug}`)}> */}
 				<div styleName="ribbon"><span>Free</span></div>
-				<CardActionArea styleName="cardaction"  onClick={() => props.history.push(`/practice/css3`)}>
+				<CardActionArea styleName="cardaction" onClick={() => props.history.push(`/practice/css3`)}>
 					<CardMedia
 						styleName="media"
-						title={"Basic HTML5"}
+						title={"CSS3 Basics"}
 						image={`/assets/images/courses/html5css3.jpg`}
 					/>
 					
 					<CardContent styleName="cardcontent">
 						<Typography gutterBottom variant="headline" component="h2">
-							Basic CSS3
+							CSS3 Basics
 						</Typography>
 						<Typography component="p">
-							Get your basics of CSS3 up and ready!
+							Get your CSS3 basics up and ready!
 						</Typography>
 					</CardContent>
 				</CardActionArea>
