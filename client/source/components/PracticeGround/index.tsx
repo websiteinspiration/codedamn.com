@@ -51,19 +51,22 @@ function PracticeGround(props) {
 				<div styleName="left-content" dangerouslySetInnerHTML={{ __html: props.pblock.description }}></div>
 			</div>
 			<div styleName="center">
-				<MonacoEditor
-					theme="vs-dark"
-					value={value}
-					ref={coder}
-					onChange={(value, event) => setValue(value)}
-					language={langmap[props.pblock.type]}
-					options={{
-						lineNumbers: "on",
-						roundedSelection: false,
-						scrollBeyondLastLine: false,
-						readOnly: false,
-					}}
-				/>
+				<h2>{props.pblock.title}</h2>
+				<div styleName="editor">
+					<MonacoEditor
+						theme="vs-dark"
+						value={value}
+						ref={coder}
+						onChange={(value, event) => setValue(value)}
+						language={langmap[props.pblock.type]}
+						options={{
+							lineNumbers: "on",
+							roundedSelection: false,
+							scrollBeyondLastLine: false,
+							readOnly: false,
+						}}
+					/>
+				</div>
 			</div>
 			<div styleName="right">
 

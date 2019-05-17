@@ -1,5 +1,6 @@
 export const practiceGround: string;
 export const center: string;
+export const editor: string;
 export const right: string;
 export const left: string;
 export const preview: string;
