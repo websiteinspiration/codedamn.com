@@ -5,6 +5,7 @@ import Component from 'decorators/Component'
 import Loading from 'components/Loading'
 import styles from './styles.scss'
 import { getPracticeNodes } from 'reducers/practice/actions'
+import { Link } from 'react-router-dom'
 
 function PracticeGround(props) {
 
@@ -16,10 +17,10 @@ function PracticeGround(props) {
 
 	return (<div styleName="pnodes">
 		{props.pnodes.map(node => {
-			return (<div styleName="node">
+			return (<Link key={node.slug} styleName="node" to={`/practice/${props.moduleid}/${node.slug}`}>
 				<div styleName={`status ${node.done ? 'done' : '' }`}></div>
 				<div styleName="title">{node.title}</div>
-			</div>)
+			</Link>)
 		})}
 	</div>)
 }
