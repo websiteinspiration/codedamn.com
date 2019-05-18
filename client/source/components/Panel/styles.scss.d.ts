@@ -23,3 +23,4 @@ export const ribbon: string;
 export const practice: string;
 export const practiceModules: string;
 export const heading: string;
+export const paid: string;

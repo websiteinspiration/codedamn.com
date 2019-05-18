@@ -62,8 +62,11 @@ type Timeline {
 	name: String!
 	tags: [String!]!
 	views: Int!
-	slug: String!
-	flow: [TimelineFlow!]!
+	slug: String
+	flow: [TimelineFlow!]
+	
+	paidPrice: String
+	paidURL: String
 }
 
 type LearnBlock {

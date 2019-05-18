@@ -156,6 +156,7 @@ div.red {
 
 .ribbon {
 	width: 140px;
+	pointer-events: none;
     height: 130px;
     overflow: hidden;
     position: absolute;
@@ -218,4 +219,13 @@ div.red {
 
 .heading {
 	margin-bottom: 20px;
+}
+
+.ribbon.paid {
+	span {
+		background-color: #e73232;
+	}
+	&::before,&::after {
+		border: 5px solid #b92929;
+	}
 }

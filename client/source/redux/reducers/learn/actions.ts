@@ -18,6 +18,8 @@ export const getCourses = () => async dispatch => {
 					name
 					icon
 					slug
+					paidPrice
+					paidURL
 				  }
 				}
 			  }`

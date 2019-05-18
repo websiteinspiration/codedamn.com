@@ -38,6 +38,7 @@ const isMobile = {
 	}
 }
 
+// TODO: Move activeTab to redux for persisted tab on navigation
 
 function Panel(props) {
 
@@ -199,10 +200,21 @@ function Panel(props) {
 	)
 
 	function getBlockMarkup(block) {
+
+		let onClick = () => props.history.push(`/learn/${block.slug}`)
+		let ribbonClass = 'ribbon'
+		let ribbonLabel = 'Free'
+
+		if(block.paidPrice) {
+			ribbonClass += ' paid'
+			ribbonLabel = block.paidPrice
+			onClick = () => window.open(block.paidURL)
+		}
+
 		return (
 			<Card key={block.slug} styleName="card"> {/* styleName="block" onClick={() => this.props.history.push(`/${block.creator}/${block.slug}`)}> */}
-				<div styleName="ribbon"><span>Free</span></div>
-				<CardActionArea styleName="cardaction" onClick={() => props.history.push(`/learn/${block.slug}`)}>
+				<div styleName={ribbonClass}><span>{ribbonLabel}</span></div>
+				<CardActionArea styleName="cardaction" onClick={onClick}>
 					<CardMedia
 						styleName="media"
 						title={block.name}
