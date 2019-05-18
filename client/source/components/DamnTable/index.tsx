@@ -46,7 +46,7 @@ function DamnTable(props) {
 								<TableCell>#{index + 1}</TableCell>
 								<TableCell>{entry.username}</TableCell>
 								<TableCell>{entry.name}</TableCell>
-								<TableCell>{new Date(entry.doj).toDateString()}</TableCell>
+								<TableCell>{new Date(parseInt(entry.doj, 10)).toDateString()}</TableCell>
 								<TableCell>{entry.damns}</TableCell>
 							</TableRow>
 						)
