@@ -5,6 +5,7 @@ import { TextField, Button } from '@material-ui/core'
 import axios from 'axios'
 import css from 'react-css-modules'
 import styles from './styles.scss'
+import { GRAPHQL } from 'components/globals';
 
 
 function PasswordReset(props) {
@@ -21,19 +22,32 @@ function PasswordReset(props) {
 
 	async function resetPass() {
 		const { successNotification, errorNotification } = props
-		const { data } = await axios.post('/password-reset', { email, 'g-recaptcha-response': (document.querySelector(`[name='g-recaptcha-response']`) as HTMLInputElement).value })
 
-		if (data.status == "ok") {
-			successNotification("Your password has been reset! Check your inbox")
-			//alert('Password reset successful. Check your inbox')
-		} else {
-			errorNotification(data.data)
+		try {
+			const { data: { data } } = await axios.post(GRAPHQL, {
+				query: `mutation($email: String!, $captcha: String!) {
+					resetPassword(captcha: $captcha, email: $email)
+				}`,
+				variables: {
+					email,
+					captcha: (document.querySelector(`[name='g-recaptcha-response']`) as HTMLInputElement).value
+				}
+			})
+
+			if (data.resetPassword) {
+				successNotification("Your new password has been mailed to you!")
+				//alert('Password reset successful. Check your inbox')
+			} else {
+				errorNotification("Please check if email/captcha is correct")
+			}
+		} catch(error) {
+			errorNotification("Please check if email/captcha is correct")
 		}
 	}
 
 	return (
 		<form styleName="reset" onSubmit={e => { e.preventDefault(); resetPass() }} name="contact_form">
-			<h1 styleName="heading">Reset Password [under maintenance. Please check back in an hour]</h1>
+			<h1 styleName="heading">Reset Password</h1>
 			<TextField
 				id="something3"
 				styleName="email"

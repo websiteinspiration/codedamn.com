@@ -8,6 +8,8 @@ const { FACEBOOK_APP_ID, FACEBOOK_ACCESS_TOKEN, GOOGLE_AUD_ID, RECAPTCHA_SECRET,
 import fetch from 'node-fetch'
 import cookie from 'cookie-signature'
 import { Request } from 'express'
+import { user } from 'interfaces/user'
+import bcrypt from 'bcrypt'
 
 const debug = xdebug('cd:users/MutationResolvers')
 
@@ -179,6 +181,37 @@ const resolvers = {
 		}
 		
 		return false
+	},
+	async resetPassword({ email, captcha }, req: Request) {
+
+		const result = await fetch(`https://www.google.com/recaptcha/api/siteverify?response=${captcha}&secret=${RECAPTCHA_SECRET}`, {
+			method: 'GET'
+		})
+
+		const json = await result.json()
+		
+		if(json.success) {
+			const user: user = await User.findDamner({ email })
+
+			if(user) {
+				const rawPassword = Math.random().toString(36).substring(7)
+				user.password = bcrypt.hashSync(rawPassword, 10)
+				await user.save()
+
+				const r = await User.sendResetEmail({ name: user.name, email, password: rawPassword})
+
+				if(r) {
+					debug(`Sent reset email successfully to ${email}`)
+				} else {
+					debug(`Error sending password reset email to ${email}`, r)
+				}
+
+				return true
+			}
+			return false
+		}
+
+		return false
 	}
 }
 
@@ -189,6 +222,7 @@ changeSettings(newusername: String!, newname: String!, newpassword: String, newc
 registerWithOAuth(name: String!, email: String!, username: String!, id: String!, oauthprovider: String!): RegistrationType!
 registerWithoutOAuth(name: String!, email: String!, username: String!, password: String!, cpassword: String!, captcha: String!): RegistrationType!
 addEnergyPoints(parentslug: String!, slug: String!): Boolean!
+resetPassword(email: String!, captcha: String!): Boolean!
 `
 
 const exportObject = {
