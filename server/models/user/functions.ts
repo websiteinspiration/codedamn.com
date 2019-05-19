@@ -133,8 +133,11 @@ class Functions {
 				return { status: 'error', data: 'Username already exists' }
 			}
 		}
-		debugger
-		debug(`Updating ${sessionUsername} details to `, details)
+
+		if(value.password) {
+			const saltRounds = 10
+			value.password = bcrypt.hashSync(value.password, saltRounds)
+		}
 		
 		await User.updateOne({username: sessionUsername}, { $set: value })
 		
