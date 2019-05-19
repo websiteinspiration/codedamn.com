@@ -33,7 +33,7 @@ function PasswordReset(props) {
 
 	return (
 		<form styleName="reset" onSubmit={e => { e.preventDefault(); resetPass() }} name="contact_form">
-			<h1 styleName="heading">Reset Password</h1>
+			<h1 styleName="heading">Reset Password [under maintenance. Please check back in an hour]</h1>
 			<TextField
 				id="something3"
 				styleName="email"
