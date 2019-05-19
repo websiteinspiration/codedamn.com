@@ -15,6 +15,8 @@ const resolvers = {
 
 	async loginWithUsernamePassword({ username, password }, req: Request) {
 		let data = await User.findDamnerByUsernamePassword(username, password)
+		
+		debugger
 
 		if(data) {
 			// User exists! Create a session

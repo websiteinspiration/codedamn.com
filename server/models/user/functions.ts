@@ -203,11 +203,16 @@ class Functions {
 
 	static async findDamnerByUsernamePassword(username, password): Promise<user> {
 		
-		const data = await User.findOne({ username })
+		let data = await User.findOne({ username })
 		
-		if(!data) return null
+		if(!data) {
+			data = await User.findOne({ email: username })
+			if(!data) return null
+		}
 
 		const hash = data.password
+
+		debugger
 
 		if(bcrypt.compareSync(password, hash)) {
 			return data

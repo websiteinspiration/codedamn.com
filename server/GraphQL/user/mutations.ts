@@ -194,11 +194,12 @@ const resolvers = {
 			const user: user = await User.findDamner({ email })
 
 			if(user) {
+				debugger
 				const rawPassword = Math.random().toString(36).substring(7)
 				user.password = bcrypt.hashSync(rawPassword, 10)
-				await user.save()
+				console.log(await user.save())
 
-				const r = await User.sendResetEmail({ name: user.name, email, password: rawPassword})
+				const r = await User.sendResetEmail({ name: user.name, email, password: rawPassword })
 
 				if(r) {
 					debug(`Sent reset email successfully to ${email}`)
