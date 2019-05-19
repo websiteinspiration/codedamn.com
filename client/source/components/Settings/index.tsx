@@ -35,36 +35,24 @@ function Settings(props) {
 
 
 	function saveSettings() {
-		const csrf = (document.getElementById('csrf-field') as HTMLInputElement).value
+		// const csrf = (document.getElementById('csrf-field') as HTMLInputElement).value
 
-		const fieldsToPost = { name, username, password, cpassword, email, csrf }
-
-		if(!password && !cpassword) {
-			delete fieldsToPost.password
-			delete fieldsToPost.cpassword
+		const fieldsToPost = { 
+			newname: name, 
+			newusername: username, 
+			newpassword: password, 
+			newcpassword: cpassword
 		}
 
-	//	if(email === this.props.settings.email) { // email not changed
-			delete fieldsToPost.email
-	//	}
-
-		if(username === props.settings.username) { // username not changed
-			delete fieldsToPost.username
+		if(!fieldsToPost.newpassword) {
+			delete fieldsToPost.newpassword
 		}
-
-		if(name === props.settings.name) { // name not changed
-			delete fieldsToPost.name
+		if(!fieldsToPost.newcpassword) {
+			delete fieldsToPost.newcpassword
 		}
-
+		
 		props.saveUserSettings(fieldsToPost)
 	}
-
-	/*componentWillReceiveProps(nextProps) {
-		if(this.state.name === null && nextProps.settings && nextProps.settings.name) {
-			const { name, username, email } = nextProps.settings
-			this.setState({ name, username, email })
-		}
-	}*/
 
 	if(!name) return <Loading />
 

@@ -6,29 +6,40 @@ import { successNotification, errorNotification } from 'reducers/notifizer/actio
 
 
 export const getUserSettings = _ => async dispatch => {
-	const { data: json } = await axios.post(`/settings`)
-	//console.log(json, 'get')
 
-	dispatch({ type: GOT_USER_SETTINGS, payload: json })
+	const { data: { data }} = await axios.post(GRAPHQL, {
+		query: `query {
+			profileData{
+				name
+				email
+				username
+				damns
+				doj
+				activeDates
+				activeStreak
+			}
+		}`
+	})
+
+	dispatch({ type: GOT_USER_SETTINGS, payload: data.profileData })
 }
 
 export const saveUserSettings = payload => async dispatch => {
-	const { data: json } = await axios.post(`/settings`, payload)
-	console.log(json)
-	if(json.status == 'error') {
-		dispatch({ type: FIRE_NOTIFICATION, payload: { heading: 'Error!', body: json.data.toString() }})
-		//alert(json.data.toString())
-	} else if(json.status == 'ok') {
-		dispatch({ type: FIRE_NOTIFICATION, payload: { heading: 'Success', body: 'Profile updated!' }})
-	} else {
-		dispatch({ type: FIRE_NOTIFICATION, payload: { heading: 'Error!', body: 'There was some technical error processing this request. We\'ve been informed. Please refresh the page' }})
-		//alert('There was an error processing your request. We have been informed. Please refresh page')
-		throw json
+
+	try {
+		const { data: { data }} = await axios.post(GRAPHQL, {
+			query: `mutation($newusername: String!, $newname: String!, $newpassword: String, $newcpassword: String) {
+				changeSettings(newusername: $newusername, newname: $newname, newpassword: $newpassword, newcpassword: $newcpassword) {
+					username
+					name
+				}
+			}`,
+			variables: payload
+		})
+		dispatch(successNotification("Done!"))
+	} catch(error) {
+		dispatch(errorNotification(error.response.data.errors[0].message))
 	}
-
- //	dispatch(updateCSRFToken())
-
-	//dispatch({ type: GOT_USER_SETTINGS, payload: json })
 }
 
 export const addEnergyPoints = payload => async dispatch => {

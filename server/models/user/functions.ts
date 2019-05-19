@@ -211,9 +211,7 @@ class Functions {
 		}
 
 		const hash = data.password
-
-		debugger
-
+		
 		if(bcrypt.compareSync(password, hash)) {
 			return data
 		}
