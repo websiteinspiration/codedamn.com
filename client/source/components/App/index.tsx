@@ -87,10 +87,10 @@ function App(props) {
 						<Route path="/logout" condition={props.userLoggedIn} component={Logout} />
 						<Route path="/privacy-policy" exact component={PrivacyPolicy} />
 						<Route path="/terms-of-service" exact component={TermsOfService} />
-						<Route path="/learn/:slug" exact component={Visualizer} />
-						<Route path="/learn/:parentslug/:dotslug" exact component={LearningGround} />
-						<Route path="/practice/:moduleid/:challengeid" exact component={Tasker} />
-						<Route path="/practice/:moduleid" exact component={PracticeGround} />
+						<CustomRoute path="/learn/:slug" condition={props.userLoggedIn} otherwise={'/login'} exact component={Visualizer} />
+						<CustomRoute path="/learn/:parentslug/:dotslug" condition={props.userLoggedIn} otherwise={'/login'} exact component={LearningGround} />
+						<CustomRoute path="/practice/:moduleid/:challengeid" condition={props.userLoggedIn} otherwise={'/login'} exact component={Tasker} />
+						<CustomRoute path="/practice/:moduleid" condition={props.userLoggedIn} otherwise={'/login'} exact component={PracticeGround} />
 						<Route component={Four04} />
 					</Switch>
 				</div>
