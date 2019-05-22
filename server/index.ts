@@ -47,6 +47,7 @@ NODE_ENV === 'production' && Sentry.init({
 	const app = express()
 	
 	app.use(Sentry.Handlers.requestHandler())
+	console.log(DB_CONNECTION_STRING, process.env)
 
     mongoose.connect(DB_CONNECTION_STRING)
 	const MongoStore = Store(session)
