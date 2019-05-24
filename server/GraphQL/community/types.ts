@@ -4,5 +4,6 @@ type UserRank {
 	doj: String!
 	username: String!
 	name: String!
+	lastActive: String!
 }
 `

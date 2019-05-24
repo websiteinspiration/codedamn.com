@@ -99,7 +99,7 @@ class Functions {
 
 	static async getDamnList() {
 		// TODO: expensive?
-		const users = await User.find({ damns: { $gt: 0 } }, { _id: 0, damns: 1, doj: 1, username: 1, name: 1 }).sort({ damns: -1 }).limit(150)
+		const users = await User.find({ damns: { $gt: 0 } }, { _id: 0, damns: 1, doj: 1, username: 1, name: 1, activeDates: 1 }).sort({ damns: -1 }).limit(150)
 		return users
 	}
 

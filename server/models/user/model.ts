@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema({
   level: { type: String, default: "0" },
   civilization: { type: Number, default: 0.7 },
   access: { type: String, default: "member" }, // [member, moderator, admin]
-  activeDates: [String],
+  activeDates: { type: [String], default: [] },
   streak: { default: 0, type: Number }
 }, { collection: 'users' })
 

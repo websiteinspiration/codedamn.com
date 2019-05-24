@@ -27,6 +27,7 @@ function DamnTable(props) {
 	const { damntable } = props
 	if (!damntable) return <Loading />
 
+
 	return (
 		<Paper styleName="root">
 			<Table styleName="table">
@@ -35,17 +36,20 @@ function DamnTable(props) {
 						<TableCell>Rank</TableCell>
 						<TableCell>Username</TableCell>
 						<TableCell>Name</TableCell>
+						<TableCell>Last Active</TableCell>
 						<TableCell>Date of join</TableCell>
 						<TableCell>Damns</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
 					{damntable.sort((u1, u2) => u2.damns - u1.damns).map((entry, index) => {
+	console.log(entry.lastActive)
 						return (
 							<TableRow key={index}>
 								<TableCell>#{index + 1}</TableCell>
 								<TableCell>{entry.username}</TableCell>
 								<TableCell>{entry.name}</TableCell>
+								<TableCell>{new Date(entry.lastActive).toDateString()}</TableCell>
 								<TableCell>{new Date(parseInt(entry.doj, 10)).toDateString()}</TableCell>
 								<TableCell>{entry.damns}</TableCell>
 							</TableRow>

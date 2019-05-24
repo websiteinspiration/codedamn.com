@@ -5,7 +5,6 @@ import xdebug from 'debug'
 import fetch from 'node-fetch'
 import { checkAuth, isLoggedIn } from '../functions'
 import { Request } from 'express';
-// deprecate checkAuth
 
 const debug = xdebug('cd:userResolver')
 
@@ -16,8 +15,6 @@ const resolvers = {
 	async loginWithUsernamePassword({ username, password }, req: Request) {
 		let data = await User.findDamnerByUsernamePassword(username, password)
 		
-		debugger
-
 		if(data) {
 			// User exists! Create a session
 	
@@ -165,7 +162,8 @@ const resolvers = {
 			activeStreak: user.streak,
 			activeDates: user.activeDates,
 			practiceDone: user.practiceDone,
-			completed: user.completed
+			completed: user.completed,
+			lastActive: user.activeDates[user.activeDates.length - 1]
 		}
 	}
 }

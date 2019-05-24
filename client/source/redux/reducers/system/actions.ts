@@ -76,6 +76,7 @@ export const getDamnTable = () => async dispatch => {
 					username
 					name
 					doj
+					lastActive
 				}
 			}`
 		})

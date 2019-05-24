@@ -7,6 +7,7 @@ import session from 'express-session'
 import routes from './controllers'
 import Store from 'connect-mongo'
 import mongoose from 'mongoose'
+// TODO: Implement CSP again with relaxed policies against the practice section
 import csp from 'helmet-csp'
 import graphqlHttp from 'express-graphql'
 import * as Sentry from '@sentry/node'
@@ -47,7 +48,6 @@ NODE_ENV === 'production' && Sentry.init({
 	const app = express()
 	
 	app.use(Sentry.Handlers.requestHandler())
-	console.log(DB_CONNECTION_STRING, process.env)
 
     mongoose.connect(DB_CONNECTION_STRING)
 	const MongoStore = Store(session)

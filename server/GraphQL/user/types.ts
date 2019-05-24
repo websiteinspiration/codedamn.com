@@ -27,6 +27,7 @@ type User {
 	damns: Int
 	doj: String
 	activeDates: [String]
+	lastActive: String
 	activeStreak: Int
 	selfRank: Int!
 	completed: [String]!

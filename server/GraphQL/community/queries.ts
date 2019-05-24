@@ -15,8 +15,12 @@ const resolvers = {
 		return selfRank
 	},
 	async rankings(_, req) {
-		// checkAuth(req)
+
 		const data = await User.getDamnList()
+		// TODO: Extending types
+		data.map(user => {
+			(user as any).lastActive = user.activeDates[user.activeDates.length - 1]
+		})
 		return data
 	}
 }
