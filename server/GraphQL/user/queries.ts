@@ -163,7 +163,7 @@ const resolvers = {
 			activeDates: user.activeDates,
 			practiceDone: user.practiceDone,
 			completed: user.completed,
-			lastActive: user.activeDates[user.activeDates.length - 1]
+			lastActive: user.activeDates[user.activeDates.length - 1] || '01-01-1970'
 		}
 	}
 }
