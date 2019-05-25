@@ -6,7 +6,7 @@ import {
 const initialState = {
 	user: null,
 	register: {},
-	userLoggedIn: false,
+	userLoggedIn: null,
 	csrfToken: null,
 	headerType: null,
 	courses: []
@@ -44,6 +44,7 @@ export default function(state = initialState, {type, payload}) {
 		case USER_LOGGED_OUT:
 			return {
 				...initialState,
+				userLoggedIn: false,
 				headerType: state.headerType,
 				csrfToken: state.csrfToken
 			}

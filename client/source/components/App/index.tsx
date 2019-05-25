@@ -67,6 +67,8 @@ function App(props) {
 		props.checkForUpdates()
 	}, [])
 
+	if(props.userLoggedIn === null) return <Loading />
+
 
 	return (<ConnectedRouter history={props.history}>
 		<MuiThemeProvider theme={theme}>
