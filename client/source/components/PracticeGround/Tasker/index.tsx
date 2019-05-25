@@ -104,6 +104,7 @@ function Tasker(props) {
 			})
 			setAllDone(true)
 			setChallengesDone(obj)
+			props.practiceCompleted({ challengeid: props.challengeid, moduleid: props.moduleid })
 		} else {
 			const finalObj = {
 				...challengesDone,
