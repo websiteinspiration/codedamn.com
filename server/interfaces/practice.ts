@@ -12,7 +12,8 @@ interface flowType {
 	defaultValue: string,
 	type: string,
 	slug: string,
-	nextslug: string
+	nextslug: string,
+	mode: string
 }
 
 export default interface practice extends mongoose.Document {

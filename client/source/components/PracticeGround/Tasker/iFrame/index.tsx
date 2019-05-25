@@ -131,7 +131,6 @@ class iFrame extends React.Component<any, any> {
 		const data = e.data || e.message
 		console.log('data!!')
 		if(Array.isArray(data)) {
-			console.log('iframe says', data)
 			const testResults = {}
 			data.map(test => {
 				testResults[test.title] = test.status ? 1 : 0
@@ -140,7 +139,17 @@ class iFrame extends React.Component<any, any> {
 		} else if(data === 'sendcontents') {
 			// this.iframe.contentWindow.document.open()
 			
-			const contents = this.props.rawCode
+			let contents = this.props.rawCode
+
+			console.log(`We're operating in ${this.props.mode}`)
+
+			if(this.props.mode === 'js-only') {
+				// we're expecting only javascript code
+				contents = `<script>
+${contents}
+;
+				</script>`
+			}
 
 			this.iframe.contentWindow.$('head').append(this.injectBeforeScripts())
 			this.iframe.contentWindow.$('body').append(contents)

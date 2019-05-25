@@ -12,5 +12,6 @@ type PracticeBlock {
 	type: String!
 	slug: String!
 	nextslug: String
+	mode: String
 }
 `

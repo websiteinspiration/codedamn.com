@@ -14,7 +14,8 @@ const FlowType = new mongoose.Schema({
 	defaultValue: String,
 	type: String,
 	slug: String,
-	nextslug: String
+	nextslug: String,
+	mode: { type: String, default: "normal" }
 })
 
 const PracticeSchema = new mongoose.Schema({  

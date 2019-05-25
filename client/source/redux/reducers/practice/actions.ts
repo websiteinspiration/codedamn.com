@@ -10,6 +10,7 @@ export const getPracticeBlock = payload => async dispatch => {
 				practiceBlock(challengeid: $challengeid, moduleid: $moduleid) {
 					title
 					description
+					mode
 					challenges {
 					  text
 					  testString

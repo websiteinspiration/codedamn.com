@@ -70,10 +70,10 @@ function Tasker(props) {
 					/>
 				</div>
 			</div>
-			<div styleName="right">
+			<div styleName={`right ${props.pblock.mode || ''}`}>
 
 				<div styleName="preview">
-					<IFrame key={currentUID} tests={props.pblock.challenges} rawCode={value} parentUpdateState={setTaskerState} />
+					<IFrame mode={props.pblock.mode} key={currentUID} tests={props.pblock.challenges} rawCode={value} parentUpdateState={setTaskerState} />
 				</div>
 
 				<div styleName="challenges">

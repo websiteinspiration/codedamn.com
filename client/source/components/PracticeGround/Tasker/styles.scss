@@ -37,6 +37,18 @@
 	flex-direction: column;
 }
 
+.right.js-only {
+	// javascript only mode
+	flex-direction: column-reverse;
+	.preview {
+		flex-grow: 0;
+		min-height: 200px;
+	}
+	.challenges {
+		flex-grow: 1;
+	}
+}
+
 .left, .right {
     float: left;
     min-height: 1px;
