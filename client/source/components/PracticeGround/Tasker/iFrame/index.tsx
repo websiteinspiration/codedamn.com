@@ -129,33 +129,44 @@ class iFrame extends React.Component<any, any> {
 
 	handleIframe(e) {
 		const data = e.data || e.message
-		console.log('data!!')
-		if(Array.isArray(data)) {
+		const mode = this.props.mode
+		console.log('Data from iframe', data)
+
+		if(mode === 'iframe-only') {
+			// Security analysis. Mark all as done
+			if(data === 'success') {
+				this.props.parentUpdateState(true)
+			}
+		} else if(Array.isArray(data)) {
+			
 			const testResults = {}
+			
 			data.map(test => {
 				testResults[test.title] = test.status ? 1 : 0
 			})
-			this.props.parentUpdateState(testResults)
-		} else if(data === 'sendcontents') {
-			// this.iframe.contentWindow.document.open()
+
 			
+			this.props.parentUpdateState(testResults)
+
+		} 
+		if(data === 'sendcontents') {
 			let contents = this.props.rawCode
-
-			console.log(`We're operating in ${this.props.mode}`)
-
-			if(this.props.mode === 'js-only') {
+			console.log(`Operating in ${mode}`)
+			if(mode === 'js-only') {
 				// we're expecting only javascript code
-				contents = `<script>
-${contents}
-;
-				</script>`
+				contents = `<script>\n${contents};\n</script>`
 			}
 
-			this.iframe.contentWindow.$('head').append(this.injectBeforeScripts())
-			this.iframe.contentWindow.$('body').append(contents)
-			this.iframe.contentWindow.$('head').append(this.injectAfterScripts())
-
-			// this.iframe.contentWindow.document.close()
+			if(mode === 'iframe-only') {
+				// XSS mode
+				this.iframe.contentWindow.document.open()
+				this.iframe.contentWindow.document.write(contents)
+				this.iframe.contentWindow.document.close()
+			} else {
+				this.iframe.contentWindow.$('head').append(this.injectBeforeScripts())
+				this.iframe.contentWindow.$('body').append(contents)
+				this.iframe.contentWindow.$('head').append(this.injectAfterScripts())
+			}
 		}
 	}
 

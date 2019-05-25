@@ -9,7 +9,7 @@ type PracticeBlock {
 	description: String!
 	challenges: [ChallengeBlockType]
 	defaultValue: String
-	type: String!
+	type: String
 	slug: String!
 	nextslug: String
 	mode: String

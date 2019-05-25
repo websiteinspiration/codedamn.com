@@ -5,6 +5,7 @@ export const right: string;
 export const jsOnly: string;
 export const preview: string;
 export const challenges: string;
+export const iframeOnly: string;
 export const left: string;
 export const challenge: string;
 export const status: string;

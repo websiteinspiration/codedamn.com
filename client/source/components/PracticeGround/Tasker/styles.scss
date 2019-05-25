@@ -49,6 +49,16 @@
 	}
 }
 
+.right.iframe-only {
+	width: 80%;
+    display: flex;
+    flex-direction: row;
+	overflow: hidden;
+	.preview {
+		border-right: 3px solid #1f1f1f;
+	}
+}
+
 .left, .right {
     float: left;
     min-height: 1px;

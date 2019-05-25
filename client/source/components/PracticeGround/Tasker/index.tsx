@@ -35,10 +35,15 @@ function Tasker(props) {
 		
 		if(props.pblock) {
 			setValue(props.pblock.defaultValue)
-			coder.current.editor.addCommand(67, () => {
+			if(props.pblock.mode === 'iframe-only') {
+				// initialize iframe
 				setcurrentUID(Math.random())
-				console.log('Key pressed')
-			}) // F9 key
+			} else {
+				coder.current.editor.addCommand(67, () => {  // F9 key
+					setcurrentUID(Math.random())
+					console.log('Key pressed')
+				})
+			}
 		}
 	}, [props.pblock])
 
@@ -51,7 +56,7 @@ function Tasker(props) {
 				<h2>Instructions</h2>
 				<div styleName="left-content" dangerouslySetInnerHTML={{ __html: props.pblock.description }}></div>
 			</div>
-			<div styleName="center">
+			{props.pblock.mode !== "iframe-only" && <div styleName="center">
 				<h2>{props.pblock.title}</h2>
 				<div styleName="editor">
 					<MonacoEditor
@@ -69,7 +74,7 @@ function Tasker(props) {
 						}}
 					/>
 				</div>
-			</div>
+			</div>}
 			<div styleName={`right ${props.pblock.mode || ''}`}>
 
 				<div styleName="preview">
@@ -91,17 +96,27 @@ function Tasker(props) {
 	)
 
 	function setTaskerState(event) {
-		const finalObj = {
-			...challengesDone,
-			...event
-		}
-		const isAllDone = Object.keys(finalObj).map(t => finalObj[t]).reduce((a, b) => a && b, true)
-		setChallengesDone(finalObj)
-		setAllDone(isAllDone)
-
-		if(isAllDone) {
-			// all challenges complete. notify the server
-			props.practiceCompleted({ challengeid: props.challengeid, moduleid: props.moduleid })
+		if(event === true) {
+			// coming from an XSS challenge. force mark everything as done
+			let obj = {}
+			props.pblock.challenges.forEach(challenge => {
+				obj[challenge.text] = 1
+			})
+			setAllDone(true)
+			setChallengesDone(obj)
+		} else {
+			const finalObj = {
+				...challengesDone,
+				...event
+			}
+			const isAllDone = Object.keys(finalObj).map(t => finalObj[t]).reduce((a, b) => a && b, true)
+			setChallengesDone(finalObj)
+			setAllDone(isAllDone)
+	
+			if(isAllDone) {
+				// all challenges complete. notify the server
+				props.practiceCompleted({ challengeid: props.challengeid, moduleid: props.moduleid })
+			}
 		}
 	}
 }
