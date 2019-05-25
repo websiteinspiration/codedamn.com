@@ -7,6 +7,8 @@ import { getUserSettings, saveUserSettings } from 'reducers/user/actions'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Component from 'decorators/Component'
+import CalendarHeatmap from 'react-calendar-heatmap'
+import md5 from 'js-md5'
 
 const mapStateToProps = ({user, system}) => ({
 	settings: user.settings,
@@ -15,11 +17,11 @@ const mapStateToProps = ({user, system}) => ({
 
 function Settings(props) {
 
-	const [name, setName] = useState(null)
-	const [email, setEmail] = useState(null)
-	const [username, setUsername] = useState(null)
-	const [password, setPassword] = useState(null)
-	const [cpassword, setCpassword] = useState(null)
+	const [name, setName] = useState('')
+	const [email, setEmail] = useState('')
+	const [username, setUsername] = useState('')
+	const [password, setPassword] = useState('')
+	const [cpassword, setCpassword] = useState('')
 
 	useEffect(() => {
 		props.getUserSettings()
@@ -56,10 +58,31 @@ function Settings(props) {
 
 	if(!name) return <Loading />
 
+	console.log(props.settings.activeDates)
 	return (
 		<>
-			<div styleName="profile-image">
-				<img src="/assets/images/avatar.jpg" />
+
+
+			<div styleName="activity-chart">
+				<div styleName="profile-image">
+					<img src={`https://www.gravatar.com/avatar/${md5(email.toLowerCase())}?s=200`} />
+				</div>
+
+				<CalendarHeatmap
+					endDate={new Date()}
+					startDate={new Date(new Date().getTime() - 186 *24*60*60*1000)}
+					values={(props.settings.activeDates || []).map(date => ({ date, count: 1 })) /*[
+						// YYYY-MM-DD
+						{ date: '2018-10-01', count: 1 }
+						// ...and so on
+					]*/}
+					classForValue={(value) => {
+						if (!value) {
+						return 'color-empty';
+						}
+						return `color-scale-${value.count}`;
+					}}
+				/>
 			</div>
 			<div styleName="profile-details">
 

@@ -17,6 +17,7 @@ const resolvers = {
 	async rankings(_, req) {
 
 		const data = await User.getDamnList()
+		
 		// TODO: Extending types
 		data.map(user => {
 			(user as any).lastActive = user.activeDates[user.activeDates.length - 1] || '01-01-1970'
