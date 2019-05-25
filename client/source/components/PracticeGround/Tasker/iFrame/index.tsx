@@ -13,7 +13,7 @@ class iFrame extends React.Component<any, any> {
 
 	constructor(props) {
 		super(props)
-		this.state = { busy: false, iframe: <iframe sandbox="allow-modals allow-forms allow-pointer-lock allow-popups allow-orientation-lock allow-same-origin allow-scripts allow-top-navigation" ref={e => { this.iframe = e; e && this.initializeIframe() }} className="iframe" src="about:blank"></iframe> }
+		this.state = { busy: false, iframe: <iframe sandbox="allow-modals allow-forms allow-pointer-lock allow-popups allow-orientation-lock allow-same-origin allow-scripts" ref={e => { this.iframe = e; e && this.initializeIframe() }} className="iframe" src="about:blank"></iframe> }
 		this.handleIframe = this.handleIframe.bind(this)
 	}
 
