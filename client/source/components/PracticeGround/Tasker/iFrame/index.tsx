@@ -66,6 +66,7 @@ class iFrame extends React.Component<any, any> {
 			var assert = chai.assert
 			var updatedTests = tests.map(test => {
 				try {
+					debugger;
 					eval(test.testString) // TODO: async?
 					return { title: test.text, status: true }
 				} catch(e) {
@@ -167,9 +168,11 @@ class iFrame extends React.Component<any, any> {
 				this.iframe.contentWindow.$('body').append(`<script>${this.props.headScript || ""}</script>`)
 
 				this.iframe.contentWindow.$('body').append(contents)
+				this.iframe.contentWindow.$('body').append(`<script>${this.props.tailScript || ""}</script>`)
+
+				
 				this.iframe.contentWindow.$('head').append(this.injectAfterScripts())
 				
-				this.iframe.contentWindow.$('body').append(`<script>${this.props.tailScript || ""}</script>`)
 				
 			}
 		}
