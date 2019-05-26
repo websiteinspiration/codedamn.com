@@ -12,6 +12,8 @@ const FlowType = new mongoose.Schema({
 	description: String,
 	challenges: [ChallengeType],
 	defaultValue: String,
+	headScript: String,
+	tailScript: String,
 	type: String,
 	slug: String,
 	nextslug: String,

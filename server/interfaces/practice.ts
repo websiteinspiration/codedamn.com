@@ -10,6 +10,8 @@ interface flowType {
 	description: string,
 	challenges: [ChallengeType],
 	defaultValue: string,
+	headScript: string,
+	tailScript: string,
 	type: string,
 	slug: string,
 	nextslug: string,

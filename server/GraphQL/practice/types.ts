@@ -9,6 +9,8 @@ type PracticeBlock {
 	description: String!
 	challenges: [ChallengeBlockType]
 	defaultValue: String
+	headScript: String
+	tailScript: String
 	type: String
 	slug: String!
 	nextslug: String

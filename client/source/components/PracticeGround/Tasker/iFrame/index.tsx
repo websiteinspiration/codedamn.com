@@ -52,7 +52,6 @@ class iFrame extends React.Component<any, any> {
 	injectAfterScripts() {
 		const tests = this.props.tests
 		const script = `<script>
-
 			String.prototype.has = function(regexOrString) {
 				if(typeof regexOrString === "string") {
 					return this.indexOf(regexOrString) !== -1
@@ -164,8 +163,14 @@ class iFrame extends React.Component<any, any> {
 				this.iframe.contentWindow.document.close()
 			} else {
 				this.iframe.contentWindow.$('head').append(this.injectBeforeScripts())
+
+				this.iframe.contentWindow.$('body').append(`<script>${this.props.headScript || ""}</script>`)
+
 				this.iframe.contentWindow.$('body').append(contents)
 				this.iframe.contentWindow.$('head').append(this.injectAfterScripts())
+				
+				this.iframe.contentWindow.$('body').append(`<script>${this.props.tailScript || ""}</script>`)
+				
 			}
 		}
 	}

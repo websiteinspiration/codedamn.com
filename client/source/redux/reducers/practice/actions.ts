@@ -15,6 +15,8 @@ export const getPracticeBlock = payload => async dispatch => {
 					  text
 					  testString
 					}
+					headScript
+					tailScript
 					defaultValue
 					nextslug
 					type
