@@ -54,34 +54,6 @@ function Panel(props) {
 
 	const { name, damns, status } = props.user
 
-	const links = [
-		{
-			heading: "Read",
-			link: isMobile.iOS() ? 'https://bit.ly/codedamn-ios' : 'https://bit.ly/codedamn-android',
-			description: "Keep yourself updated with latest tech news!",
-			icon: null
-		},
-		{
-			heading: "Learn",
-			link: "https://learn.codedamn.com",
-			description: "This is the gym of developers. Upgrade yourself!",
-			bg: "red",
-			icon: null
-		},
-		{
-			heading: "Projects",
-			link: "https://do.codedamn.com/projects",
-			description: "Think you're good? Prove it among the community!",
-			icon: null
-		},
-		{
-			heading: "Discuss",
-			link: "https://discuss.codedamn.com",
-			description: "A modern RTC built by developers, for developers.",
-			icon: null
-		}
-	]
-
 	const blocks3 = <div styleName="random-recommendations">
 		{props.courses.map(block => block.timelines).flat(Infinity).sort(_ => 0.5 - Math.random()).slice(0, 4).map(getBlockMarkup)}
 	</div>
