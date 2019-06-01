@@ -210,10 +210,12 @@ div.red {
 
 .practice-modules {
 	display: flex;
+	flex-wrap: wrap;
 	flex-direction: row;
 	.card {
 		overflow: visible;
 		margin: 20px;
+		flex: 1;
 	}
 }
 
