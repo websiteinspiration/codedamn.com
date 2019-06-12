@@ -10,12 +10,15 @@ import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript'
 import dart from 'react-syntax-highlighter/dist/esm/languages/hljs/dart'
 import python from 'react-syntax-highlighter/dist/esm/languages/hljs/python'
 import yaml from 'react-syntax-highlighter/dist/esm/languages/hljs/yaml'
-import { atomOneLight as docco } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import docco from 'react-syntax-highlighter/dist/esm/styles/hljs/monokai'
+
 
 SyntaxHighlighter.registerLanguage('javascript', js)
 SyntaxHighlighter.registerLanguage('python', python)
 SyntaxHighlighter.registerLanguage('dart', dart)
 SyntaxHighlighter.registerLanguage('yaml', yaml)
+
+console.log(js, python, dart, yaml)
 
 function Home(props) {
 	return (

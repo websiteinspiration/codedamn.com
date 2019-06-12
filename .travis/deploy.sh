@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-pwd
 
 rm -rf .git
 rm -rf .gitignore
