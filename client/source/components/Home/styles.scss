@@ -268,7 +268,7 @@
     flex: 1;
     height: 30vw;
     width: 0;
-    display: flex;
+	display: flex;
 }
 
 .code {
@@ -279,7 +279,11 @@
         display: flex!important;
         justify-content: center;
         align-items: center;
-    }
+	}
+	code {
+		background: transparent;
+		font-size: inherit;
+	}
 }
 
 .desc {
