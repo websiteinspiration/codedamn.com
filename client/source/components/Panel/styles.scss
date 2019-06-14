@@ -251,6 +251,12 @@ div.red {
 	.practice-modules, .block-list, .random-recommendations {
 		flex-direction: column;
 	}
+	.dashboard-tab {
+		padding: 50px 20px;
+	}
+	.greeting-section h1 {
+		font-size: 48px;
+	}
 	.block-list > div, .practice-modules > .card, .random-recommendations > div {
 		margin: 10px 0;
 		flex-basis: auto;
