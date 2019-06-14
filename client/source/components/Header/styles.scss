@@ -65,3 +65,27 @@
 	color: white;
 	background-color: #e83f3f;
 }
+
+.center-nav, .navbar-left-links, .navbar-right {
+	color: inherit;
+}
+
+@media only screen and (max-width: 1200px) {
+	.main-navbar {
+		width: 760px;
+	}
+}
+
+@media only screen and (max-width: 810px) {
+	.main-navbar {
+		flex-direction: column;
+		align-items: stretch;
+		margin: 0;
+		width: 100%;
+	}
+	.navbar-left-links, .navbar-right {
+		display: flex;
+		justify-content: center;
+		margin: 10px 0;
+	}
+}

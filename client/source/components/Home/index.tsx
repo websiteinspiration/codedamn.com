@@ -72,7 +72,7 @@ function Home(props) {
 					<div styleName="desc">
 						<h1>Frontend Web Development</h1>
 						<p>Average Salary: $88,000K</p>
-						<div styleName="learnbtn">Start Learning</div>
+						<Link to="/register" styleName="learnbtn">Start Learning</Link>
 					</div>
 				</div>
 
@@ -81,7 +81,7 @@ function Home(props) {
 					<div styleName="desc">
 						<h1>Backend Development</h1>
 						<p>Average Salary: $113,000K</p>
-						<div styleName="learnbtn">Start Learning</div>
+						<Link to="/register" styleName="learnbtn">Start Learning</Link>
 					</div>
 					<div styleName="code">
 						<SyntaxHighlighter style={docco} customStyle={{
@@ -125,7 +125,7 @@ void main() {
 					<div styleName="desc">
 						<h1>Cross Platform Mobile Development</h1>
 						<p>Average Salary: $90,000K</p>
-						<div styleName="learnbtn">Start Learning</div>
+						<Link to="/register" styleName="learnbtn">Start Learning</Link>
 					</div>
 				</div>
 
@@ -133,7 +133,7 @@ void main() {
 					<div styleName="desc">
 						<h1>DevOps</h1>
 						<p>Average Salary: $94,000K</p>
-						<div styleName="learnbtn">Start Learning</div>
+						<Link to="/register" styleName="learnbtn">Start Learning</Link>
 					</div>
 					<div styleName="code">
 					<SyntaxHighlighter style={docco} customStyle={{
