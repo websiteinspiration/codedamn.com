@@ -5,7 +5,8 @@ import { Button, TextField } from '@material-ui/core'
 import axios from 'axios'
 import { successNotification, errorNotification } from 'reducers/notifizer/actions'
 import { connect } from 'react-redux'
-import { GRAPHQL } from 'components/globals';
+import { GRAPHQL } from 'components/globals'
+import Component from 'decorators/Component'
 
 function Feedback(props) {
 
@@ -100,6 +101,7 @@ function Feedback(props) {
 }
 
 let com: any = css(styles, { handleNotFoundStyleName: 'log', allowMultiple: true })(Feedback)
+com = Component({ title: 'Send Feedback' })(com)
 com = connect(null, { successNotification, errorNotification })(com)
 
 export default com
