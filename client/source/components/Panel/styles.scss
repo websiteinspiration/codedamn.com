@@ -231,3 +231,34 @@ div.red {
 		border: 5px solid #b92929;
 	}
 }
+
+@media only screen and (max-width: 1024px) {
+	.random-recommendations > div {
+		flex: 1 0 40%;
+		margin: 20px 10px;
+	}
+	.block-list > div, .practice-modules > .card {
+		margin: 4%;
+		flex-basis: 42%;
+		width: auto;
+	}
+	.courses-tab, .practice {
+		padding: 50px 10px;
+	}
+}
+
+@media only screen and (max-width: 620px) {
+	.practice-modules, .block-list, .random-recommendations {
+		flex-direction: column;
+	}
+	.block-list > div, .practice-modules > .card, .random-recommendations > div {
+		margin: 10px 0;
+		flex-basis: auto;
+		width: 100%;
+	}
+	:global {
+		.react-swipeable-view-container {
+			width: 100vw;
+		}
+	}
+}
