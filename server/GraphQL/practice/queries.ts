@@ -25,12 +25,21 @@ const resolvers = {
 		}
 
 		return (<practice>data).flow
+	},
+
+	async practiceBlocks({ }, req: Request) {
+		checkAuth({ req })
+
+		const data = await Practice.getBlocksInfo()
+
+		return data
 	}
 }
 
 const queries = `
 practiceBlock(challengeid: String!, moduleid: String!): PracticeBlock!
 practiceNodes(moduleid: String!): [PracticeBlock]!
+practiceBlocks: [PracticeBlocksInfo]
 `
 
 const exportObject = {

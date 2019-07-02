@@ -16,4 +16,12 @@ type PracticeBlock {
 	nextslug: String
 	mode: String
 }
+
+type PracticeBlocksInfo {
+	title: String!
+	image: String
+	desc: String
+	category: String
+	slug: String!
+}
 `

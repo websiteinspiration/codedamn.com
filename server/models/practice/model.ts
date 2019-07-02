@@ -22,7 +22,11 @@ const FlowType = new mongoose.Schema({
 
 const PracticeSchema = new mongoose.Schema({  
   category: String,
-  flow: [FlowType]
+  flow: [FlowType],
+  title: String,
+  slug: String,
+  image: String,
+  desc: String
 }, { collection: 'practice' })
 
 const model = mongoose.model<practice>('Practice', PracticeSchema)
