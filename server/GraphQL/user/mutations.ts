@@ -129,8 +129,8 @@ const resolvers = {
 		})
 
 		const json = await result.json()
-		
-		if (json.success || 1 == 1) {
+
+		if (json.success) {
 			const { error, data } = await User.create({
 				name,
 				username,

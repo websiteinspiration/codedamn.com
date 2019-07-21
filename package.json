@@ -9,7 +9,7 @@
 		"dev-all": "concurrently --kill-others \"npm run hot-front\" \"npm run development\" \"npm run hot-back\"",
 		"dev-all-https": "concurrently --kill-others \"npm run hot-front -- --https --cert ./ssl/server.crt --key ./ssl/server.key\" \"npm run development\" \"npm run hot-back\"",
 		"production": "npm run wp-prod && pm2 start ./server/server.js --name 'codedamn.com'",
-		"wp-prod": "concurrently \"webpack --config webpack/prod.server.js -p\" \"webpack --config webpack/prod.client.js\"",
+		"wp-prod": "npm test && concurrently \"webpack --config webpack/prod.server.js -p\" \"webpack --config webpack/prod.client.js\"",
 		"wp-dev-watch": "webpack --config webpack/prodAsDev.client.js",
 		"test": "jest --config jest.config.js"
 	},
