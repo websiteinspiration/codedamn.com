@@ -15,6 +15,13 @@ const debug = xdebug('cd:users/MutationResolvers')
 
 const resolvers = {	
 	
+	async fcmToken({ token }, req: Request) {
+		checkAuth({ req })
+		const username = req.session.user.username
+		await User.setFCMToken(username, token)
+		return true
+	},
+
 	async logout(_, req: Request) {
 		req.session.destroy(_ => _)
 		return true
