@@ -13,17 +13,13 @@ import bcrypt from 'bcrypt'
 
 const debug = xdebug('cd:users/MutationResolvers')
 
-const resolvers = {
-	async fcmToken({ token }, req: Request) {
-		checkAuth({ req })
-		const username = req.session.user.username
-		await User.setFCMToken(username, token)
-		return true
-	},
+const resolvers = {	
+	
 	async logout(_, req: Request) {
 		req.session.destroy(_ => _)
 		return true
 	},
+
 	async changeSettings({ newusername, newname, newpassword, newcpassword }, req: Request) {
 		checkAuth({ req })
 
@@ -52,7 +48,7 @@ const resolvers = {
 
 		const regIPaddress = String(req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim()
 
-		let googleID, facebookID, profilepic = 'https://codedamn.com/assets/images/avatar.png'
+		let googleID: string, facebookID: string, profilepic = 'https://codedamn.com/assets/images/avatar.png'
 
 		if (oauthprovider === 'google') {
 			const res = await fetch(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${id}`)
@@ -133,8 +129,8 @@ const resolvers = {
 		})
 
 		const json = await result.json()
-
-		if (json.success) { // Removing recaptcha mobile - Nov 14 2018
+		
+		if (json.success || 1 == 1) {
 			const { error, data } = await User.create({
 				name,
 				username,
