@@ -9,6 +9,8 @@ import SwipeableViews from 'react-swipeable-views'
 import { checkForUpdates } from 'reducers/system/actions'
 import { getCourses } from 'reducers/learn/actions'
 
+import PaymentButton from 'components/PaymentButton'
+
 const greetings = ['Hey', 'Hello', 'Hi']
 const greeting = greetings[Math.floor(Math.random() * greetings.length)]
 
@@ -62,6 +64,7 @@ function Panel(props) {
 	const Dashboard = (<div styleName="greeting-section">
 		<h1>{greeting} {name}!</h1>
 		<p>You have {damns || 0} damns at codedamn.</p>
+		<PaymentButton />
 		<h2 styleName="learning-heading">Here's what people are learning right now:</h2>
 		{blocks3}
 	</div>)
