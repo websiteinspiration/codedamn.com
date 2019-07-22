@@ -48,19 +48,20 @@ function Panel(props) {
 	}, [])
 
 	const [activeTab, setActiveTab] = useState(0)
-
-
+	
 	if (!props.user) return <Loading />
+
+	const tabs = props.courses.map(block => block.timelines).flat(Infinity).sort(_ => 0.5 - Math.random()).slice(0, 4).map(getBlockMarkup)
 
 	const { name, damns, status } = props.user
 
 	const blocks3 = <div styleName="random-recommendations">
-		{props.courses.map(block => block.timelines).flat(Infinity).sort(_ => 0.5 - Math.random()).slice(0, 4).map(getBlockMarkup)}
+		{tabs}
 	</div>
 
 	const Dashboard = (<div styleName="greeting-section">
 		<h1>{greeting} {name}!</h1>
-		<p>You're worth {damns || 0} damns at codedamn.</p>
+		<p>You have {damns || 0} damns at codedamn.</p>
 		<h2 styleName="learning-heading">Here's what people are learning right now:</h2>
 		{blocks3}
 	</div>)
@@ -77,86 +78,38 @@ function Panel(props) {
 	const Practice = <div styleName="practice">
 		<h1 styleName="heading">Available Modules</h1>
 		<div styleName="practice-modules">
-			<Card styleName="card"> {/* styleName="block" onClick={() => this.props.history.push(`/${block.creator}/${block.slug}`)}> */}
-				<div styleName="ribbon"><span>Free</span></div>
-				<CardActionArea styleName="cardaction" onClick={() => props.history.push(`/practice/html5`)}>
-					<CardMedia
-						styleName="media"
-						title={"HTML5 Basics"}
-						image={`/assets/images/courses/html5.jpg`}
-					/>
-					
-					<CardContent styleName="cardcontent">
-						<Typography gutterBottom variant="headline" component="h2">
-							HTML5 Basics
-						</Typography>
-						<Typography component="p">
-							Get your basics of HTML5 up and ready!
-						</Typography>
-					</CardContent>
-				</CardActionArea>
-			</Card>
+			{getBlockMarkup({
+				slug: 'html5',
+				isPractice: true,
+				description: 'Get your basics of HTML5 up and ready!',
+				icon: 'html5.jpg',
+				name: 'HTML5 Basics'
+			})}
 
-			<Card styleName="card"> {/* styleName="block" onClick={() => this.props.history.push(`/${block.creator}/${block.slug}`)}> */}
-				<div styleName="ribbon"><span>Free</span></div>
-				<CardActionArea styleName="cardaction" onClick={() => props.history.push(`/practice/css3`)}>
-					<CardMedia
-						styleName="media"
-						title={"CSS3 Basics"}
-						image={`/assets/images/courses/html5css3.jpg`}
-					/>
-					
-					<CardContent styleName="cardcontent">
-						<Typography gutterBottom variant="headline" component="h2">
-							CSS3 Basics
-						</Typography>
-						<Typography component="p">
-							Get your CSS3 basics up and ready!
-						</Typography>
-					</CardContent>
-				</CardActionArea>
-			</Card>
+			{getBlockMarkup({
+				slug: 'css3',
+				isPractice: true,
+				description: 'Get your CSS3 basics up and ready!',
+				icon: 'html5css3.jpg',
+				name: 'CSS3 Basics'
+			})}
 
 
-			<Card styleName="card"> {/* styleName="block" onClick={() => this.props.history.push(`/${block.creator}/${block.slug}`)}> */}
-				<div styleName="ribbon"><span>Free</span></div>
-				<CardActionArea styleName="cardaction" onClick={() => props.history.push(`/practice/javascript`)}>
-					<CardMedia
-						styleName="media"
-						title={"JavaScript Basics"}
-						image={`/assets/images/courses/javascript.jpg`}
-					/>
-					
-					<CardContent styleName="cardcontent">
-						<Typography gutterBottom variant="headline" component="h2">
-							JavaScript Basics
-						</Typography>
-						<Typography component="p">
-							Get your JavaScript basics up and ready!
-						</Typography>
-					</CardContent>
-				</CardActionArea>
-			</Card>
+			{getBlockMarkup({
+				slug: 'javascript',
+				isPractice: true,
+				description: 'Get your JavaScript basics up and ready!',
+				icon: 'javascript.jpg',
+				name: 'JavaScript Basics'
+			})}
 
-			<Card styleName="card"> {/* styleName="block" onClick={() => this.props.history.push(`/${block.creator}/${block.slug}`)}> */}
-				<div styleName="ribbon"><span>Free</span></div>
-				<CardActionArea styleName="cardaction" onClick={() => props.history.push(`/practice/xss`)}>
-					<CardMedia
-						styleName="media"
-						title={"XSS Basics"}
-						image={`/assets/images/courses/xss.jpg`}
-					/>
-					
-					<CardContent styleName="cardcontent">
-						<Typography gutterBottom variant="headline" component="h2">
-							XSS Basics
-						</Typography>
-						<Typography component="p">
-							Get your XSS basics up and ready!
-						</Typography>
-					</CardContent>
-				</CardActionArea>
-			</Card>
+			{getBlockMarkup({
+				slug: 'xss',
+				isPractice: true,
+				description: 'Get your XSS basics up and ready!',
+				icon: 'xss.jpg',
+				name: 'XSS Basics'
+			})}
 		</div>
 	</div>
 
@@ -193,16 +146,17 @@ function Panel(props) {
 
 	interface block {
 		slug: string
-		paidPrice: string
+		paidPrice?: string
 		paidURL?: string
 		name: string
 		icon: string
-		description: string
+		description: string,
+		isPractice: boolean
 	}
 
 	function getBlockMarkup(block: block) {
 
-		let onClick = () => props.history.push(`/learn/${block.slug}`)
+		let onClick = () => props.history.push(`/${block.isPractice ? 'practice' : 'learn'}/${block.slug}`)
 		let ribbonClass = 'ribbon'
 		let ribbonLabel = 'Free'
 
@@ -213,9 +167,9 @@ function Panel(props) {
 		}
 
 		return (
-			<div styleName="card" key={block.slug}>
+			<div styleName="card" key={block.slug} onClick={onClick}>
 				{/*<div styleName={ribbonClass}><span>{ribbonLabel}</span></div>*/}
-				<div styleName="cardaction" onClick={onClick}>
+				<div styleName="cardaction">
 					<img src={`/assets/images/courses/${block.icon}`} />
 				</div>
 				<div styleName="cardcontent">
