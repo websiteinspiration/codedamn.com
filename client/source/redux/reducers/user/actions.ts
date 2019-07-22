@@ -53,7 +53,8 @@ export const addEnergyPoints = payload => async dispatch => {
 	})
 
 	if(data.addEnergyPoints) {
-		dispatch(successNotification("Nice work! ++damns"))
+		dispatch(successNotification(`Awesome work! Added ${addEnergyPoints} damn points.`))
+	} else {
+		dispatch(successNotification("You're already awarded for this lesson!'"))
 	}
-
 }

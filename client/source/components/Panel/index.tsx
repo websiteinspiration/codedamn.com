@@ -79,7 +79,7 @@ function Panel(props) {
 		<div styleName="practice-modules">
 			<Card styleName="card"> {/* styleName="block" onClick={() => this.props.history.push(`/${block.creator}/${block.slug}`)}> */}
 				<div styleName="ribbon"><span>Free</span></div>
-				<CardActionArea styleName="cardaction"  onClick={() => props.history.push(`/practice/html5`)}>
+				<CardActionArea styleName="cardaction" onClick={() => props.history.push(`/practice/html5`)}>
 					<CardMedia
 						styleName="media"
 						title={"HTML5 Basics"}
@@ -191,7 +191,16 @@ function Panel(props) {
 		</>
 	)
 
-	function getBlockMarkup(block) {
+	interface block {
+		slug: string
+		paidPrice: string
+		paidURL?: string
+		name: string
+		icon: string
+		description: string
+	}
+
+	function getBlockMarkup(block: block) {
 
 		let onClick = () => props.history.push(`/learn/${block.slug}`)
 		let ribbonClass = 'ribbon'
@@ -204,25 +213,17 @@ function Panel(props) {
 		}
 
 		return (
-			<Card key={block.slug} styleName="card"> {/* styleName="block" onClick={() => this.props.history.push(`/${block.creator}/${block.slug}`)}> */}
-				<div styleName={ribbonClass}><span>{ribbonLabel}</span></div>
-				<CardActionArea styleName="cardaction" onClick={onClick}>
-					<CardMedia
-						styleName="media"
-						title={block.name}
-						image={`/assets/images/courses/${block.icon}`}
-					/>
-
-					<CardContent styleName="cardcontent">
-						<Typography gutterBottom variant="headline" component="h2">
-							{block.name}
-						</Typography>
-						<Typography component="p">
-							{block.description}
-						</Typography>
-					</CardContent>
-				</CardActionArea>
-			</Card>)
+			<div styleName="card" key={block.slug}>
+				{/*<div styleName={ribbonClass}><span>{ribbonLabel}</span></div>*/}
+				<div styleName="cardaction" onClick={onClick}>
+					<img src={`/assets/images/courses/${block.icon}`} />
+				</div>
+				<div styleName="cardcontent">
+					<h2>{block.name}</h2>
+					<p>{block.description}</p>
+				</div>
+			</div>
+		)
 	}
 }
 

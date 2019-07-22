@@ -169,7 +169,7 @@ const resolvers = {
 		return { error: "Invalid captcha response" }
 
 	},
-	async addEnergyPoints({ parentslug, slug }, req: Request) {
+	async addEnergyPoints({ parentslug, slug }, req: Request): Promise<number> {
 		checkAuth({ req })
 		const username = req.session.user.username
 		
@@ -179,11 +179,11 @@ const resolvers = {
 				// record not found
 				req.session.user.damns += 10
 				await User.setDamns(req.session.user.damns, username)
-				return true
+				return 10
 			}
 		}
 		
-		return false
+		return 0
 	},
 	async resetPassword({ email, captcha }, req: Request) {
 

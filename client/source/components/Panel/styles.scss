@@ -26,7 +26,7 @@ div.red {
     font-size: 1.5rem;
     font-style: italic;
   }
-  p {
+  & > p {
     margin-top: 20px;
     font-weight: 100;
     //color: #eee;
@@ -43,6 +43,10 @@ div.red {
 
 .card {
   position: relative;
+  cursor: pointer;
+  &, * {
+      transition: 0.2s ease-in-out all;
+  }
 }
 
 .media {
@@ -52,15 +56,59 @@ div.red {
 }
 
 .cardaction {
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   justify-content: stretch;
   align-items: stretch;
   height: 100%;
+  overflow: hidden;
+  img {
+    filter: brightness(0.4);
+  }
 }
 
 .cardcontent {
-  flex-grow: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  h2 {
+    color: white;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+    padding: 10px;
+    font-size: 18px;
+}
+  p {
+    opacity: 0;
+    padding: 10px;
+    color: white;
+    font-size: 15px;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.card:hover {
+  .cardcontent {
+    h2 {
+      font-size: 14px;
+    }
+    p {
+      opacity: 1;
+    }
+  }
+
+  .cardaction img {
+    filter: brightness(0.5) blur(1px);
+    transform: scale(1.03);
+  }
+
+  .cardaction {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.22);
+  }
 }
 
 .block-title {
@@ -78,8 +126,7 @@ div.red {
   & > div {
 	overflow: visible;
     margin: 2%;
-    flex-basis: 16%;
-    width: 207px;
+    flex-basis: 21%;
   }
 }
 

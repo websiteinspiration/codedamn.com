@@ -70,6 +70,12 @@ function ContentInterface(props) {
 	const { dotInfo } = props
 
 return <>
+
+		<h1 styleName="dot-heading">
+			{dotInfo.currentTitle}
+			<span styleName="damns-included">(10 damns++ on completion!)</span>
+		</h1>
+
 		<div styleName="top-component">
 			{component}
 			<Timeline parentslug={props.parentslug} dotslug={props.dotslug} />
