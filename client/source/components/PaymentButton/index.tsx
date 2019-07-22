@@ -78,10 +78,8 @@ function PaymentButton(props: props) {
         })
 
         if(!data.createOrder.result) {
-            console.error('Error')
-            return alert('Some error')
+            return swal('Error!', 'There was some error generating an order ID. Please contact support.', 'error')
         }
-
 
         const options = {
             key: "rzp_test_r5vdWCmEeFON22",
