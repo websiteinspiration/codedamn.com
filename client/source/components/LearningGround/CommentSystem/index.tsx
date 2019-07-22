@@ -1,21 +1,35 @@
 import React, { useState } from 'react'
 import css from 'react-css-modules'
 import styles from './styles.scss'
-import PropTypes from 'prop-types'
 
-function CommentSystem(props) {
+interface comment {
+	id: string
+	author: string
+	comment: string
+	date: string
+	avatar: string
+	upvotes: number
+}
 
-	const [comment, setComment] = useState('')
+interface CommentSystemProps {
+	postComment(comment: string): void
+	voteComment?(id: string): void
+	comments: comment[]
+	profilepic: string
+}
+
+function CommentSystem(props: CommentSystemProps) {
+
+	const [comment, setComment] = useState<string>('')
 
 	function postComment() {
 		if(comment && comment.trim() !== '') {
-		//	debugger
 			props.postComment(comment)
 			setComment('')
 		}
 	}
 
-	function upVote(id) {
+	function upVote(id: string) {
 		props.voteComment(id) // mainslug, topicslug, creator, id, action
 	}
 
@@ -33,7 +47,7 @@ function CommentSystem(props) {
 				<div styleName="social-icons"></div>
 
 				<div styleName="add-comment">
-					<img src="/assets/images/red-logo.png" styleName="avatar" />
+					<img src={props.profilepic} styleName="avatar" />
 					<div styleName="textbox">
 						<textarea placeholder="Join the discussion (markdown enabled)" value={comment} onChange={ e => setComment(e.target.value)}></textarea>
 						<div styleName="textbox-footer">
@@ -46,7 +60,7 @@ function CommentSystem(props) {
 				<div styleName="comments">
 					{comments.map((comment, i) => (<div key={comment.id} styleName="comment">
 						<div styleName="main-comment">
-							<img styleName="author-pic" src="/assets/images/logo.jpg" />
+							<img styleName="author-pic" src={ comment.avatar } />
 							<h2 styleName="author-name">{ comment.author }</h2>
 							<h3 styleName="date-of-publish">{new Date(+comment.date).toDateString()}</h3>
 							<p styleName="content">{comment.comment}</p>

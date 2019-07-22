@@ -16,10 +16,10 @@ type RedirectResponse {
 
 type User {
 	progressBar: Float
-	profilepic: String
+	profilepic: String!
 	email: String
-	name: String
-	username: String
+	name: String!
+	username: String!
 	firstTime: Boolean
 	token: String
 	status: String

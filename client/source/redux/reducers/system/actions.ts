@@ -49,6 +49,7 @@ export const checkForUpdates = _ => async dispatch => {
 				  damns
 				  email
 				  status
+				  profilepic
 				}
 			}`
 		})

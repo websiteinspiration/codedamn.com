@@ -1,8 +1,20 @@
 .dots {
 	display: flex;
 	flex-direction: column;
-	
 	overflow: auto;
+}
+
+.number {
+	color: inherit;
+    background: #6a6a6a;
+    color: white;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 14px;
 }
 
 .dot {
@@ -10,7 +22,7 @@
     padding: 15px 10px;
 	background: white;
 	border-right: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
@@ -19,35 +31,17 @@
 }
 
 .dot:last-child {
-	border-bottom: 0;
+	border-bottom: 1px solid #eee;
 }
 
 .bold {
 	background: #dddddd;
 	font-weight: bold;
-}
-
-.close {
-	background: #f5f5f5;
-    justify-self: stretch;
-    align-self: stretch;
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    border-right: 1px solid #eee;
-}
-
-.controls {
-	height: 50px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-	h2 {
-		flex-grow: 1;
-		text-align: center;
+	a {
+		color: black;
+	}
+	.number {
+		background: black;
 	}
 }
 
@@ -64,16 +58,5 @@
 		.dots, .controls h2 {
 			display: none;
 		}
-	}
-}
-
-@media only screen and (max-width: 1152px) {
-	.dots {
-		height: auto!important;
-	}
-	.timeline {
-		height: 300px;
-		width: 100%;
-		grid-row: 2;
 	}
 }

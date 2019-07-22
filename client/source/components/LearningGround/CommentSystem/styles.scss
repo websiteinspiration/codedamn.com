@@ -1,4 +1,4 @@
-$gridelems: date-of-publish comment-count social-icons add-comment avatar textbox comments comment main-comment author-name author-pic content votes upvote downvote;
+$gridelems: comments-parent date-of-publish comment-count social-icons add-comment avatar textbox comments comment main-comment author-name author-pic content votes upvote downvote;
 
 @each $elem in $gridelems {
 	.#{$elem} {
@@ -13,7 +13,6 @@ $gridelems: date-of-publish comment-count social-icons add-comment avatar textbo
 }
 
 .comments-parent {
-	grid-column: 1/4;
 	border-top: 1px solid #eee;
 	margin-bottom: 20px;
 }
@@ -32,14 +31,21 @@ $gridelems: date-of-publish comment-count social-icons add-comment avatar textbo
 
 .textbox textarea {
     width: 100%;
-    height: 100px;
+    height: 40px;
     border-radius: 4px 4px 0 0;
 	border: 2px solid #dbdfe4;
-	border-bottom: 0;
+	transition: 0.4s ease-in-out all;
     font-size: 16px;
 	font-family: inherit;
 	outline: 0;
-    padding: 10px;
+	padding: 10px;
+	&:focus {
+		height: 100px;
+	}
+	&:focus+.textbox-footer {
+		height: 48px;
+		opacity: 1;
+	}
 }
 
 .textbox {
@@ -55,25 +61,34 @@ $gridelems: date-of-publish comment-count social-icons add-comment avatar textbo
 .textbox-footer {
 	background: #f6f8f9;
     display: flex;
+	transition: 0.4s ease-in-out all;
     justify-content: flex-end;
-	align-items: stretch;;
+	align-items: stretch;
+	height: 0;
+	overflow: hidden;
 }
 
 .other-buttons {
 	flex-grow: 1;
 	border: 2px solid #dbdfe4;
-	border-radius: 0 0 4px 4px;
+	border-top: 0;
+	border-radius: 0 0 0 4px;
 	border-right: 0
 }
 
 .submit-comment {
 	padding: 15px;
-	color: white;
-	background: #737f86;
-	border-radius: 0 0 4px 0;
+    color: white;
+    background: #737f86;
+    border-radius: 0 0 4px 0;
     cursor: pointer;
+    z-index: 100000;
+    position: relative;
 }
 
+.comment {
+	margin-bottom: 30px;
+}
 
 .comment-count {
 	font-weight: bold;
@@ -84,9 +99,9 @@ $gridelems: date-of-publish comment-count social-icons add-comment avatar textbo
 }
 
 .author-pic {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
 }
 
 .date-of-publish {
@@ -103,7 +118,7 @@ $gridelems: date-of-publish comment-count social-icons add-comment avatar textbo
 						"author-pic content"
 						"author-pic votes";
     grid-template-rows: 1fr;
-    grid-template-columns: 30px 1fr;
+    grid-template-columns: 60px 1fr;
     grid-column-gap: 25px;
     margin-top: 20px;
 }
@@ -111,7 +126,8 @@ $gridelems: date-of-publish comment-count social-icons add-comment avatar textbo
 .author-name {
     grid-area: author-name;
     font-weight: bold;
-    padding-bottom: 10px;
+	padding-bottom: 2px;
+	font-size: 20px;
 }
 
 .votes {

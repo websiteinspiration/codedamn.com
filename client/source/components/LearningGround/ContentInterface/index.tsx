@@ -8,10 +8,15 @@ import css from 'react-css-modules'
 import Loading from 'components/Loading'
 import { getDotInfo, postComment } from 'reducers/learn/actions'
 import CommentSystem from 'components/LearningGround/CommentSystem'
-import Helmet from 'react-helmet'
+import Timeline from '../Timeline'
+import { clearLearningGround } from 'reducers/learn/actions'
+import Component from 'decorators/Component'
 
-const mapStateToProps = ({ learn }) => ({
-	dotInfo: learn.dotInfo
+const mapStateToProps = ({ learn, system: { user } }, { match: { params }}) => ({
+	dotInfo: learn.dotInfo,
+	parentslug: params.parentslug,
+	dotslug: params.dotslug,
+	profilepic: user.profilepic
 })
 
 function ContentInterface(props) {
@@ -22,6 +27,7 @@ function ContentInterface(props) {
 			dotSlug: props.dotslug
 		})
 
+		return () => props.clearLearningGround()
 	}, [])
 
 	useEffect(() => {
@@ -64,15 +70,21 @@ function ContentInterface(props) {
 	const { dotInfo } = props
 
 return <>
-		{component}
+		<div styleName="top-component">
+			{component}
+			<Timeline parentslug={props.parentslug} dotslug={props.dotslug} />
+		</div>
+
 		<CommentSystem
 			comments={dotInfo.comments}
 			postComment={comment => postComment(comment)}
+			profilepic={props.profilepic}
 		/>
 	</>
 }
 
-let com: any = css(styles)(ContentInterface)
-com = connect(mapStateToProps, { getDotInfo, postComment })(com)
+let com: any = css(styles, { handleNotFoundStyleName: 'log' })(ContentInterface)
+com = connect(mapStateToProps, { getDotInfo, clearLearningGround, postComment })(com)
+com = Component({ gridClass: styles.grid })(com)
 
 export default com

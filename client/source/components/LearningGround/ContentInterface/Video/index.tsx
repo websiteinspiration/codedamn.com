@@ -25,19 +25,10 @@ function Video(props) {
 		}
 	}
 
-	const { vidid, isTimelineActive, isChatActive } = props
+	const { vidid } = props
 	
-	let probableWidth = document.body.clientWidth - 40 - (isTimelineActive ? 300 : 0) - (isChatActive ? 300 : 0) // width of timeline/chat
-	let probableHeight = window.innerHeight - 73 // height of header
-
-	if(probableWidth/probableHeight >= 1.777) { // available width is more
-		probableWidth = 16*probableHeight/9
-	} else {
-		probableHeight = 9*probableWidth/16
-	}
-
 	return (
-		<div styleName="ytplayer" style={{width: probableWidth + 'px', height: probableHeight + 'px' }}>
+		<div styleName="ytplayer contentinterface">
 			<YouTube
 				videoId={vidid}
 				opts={opts}
