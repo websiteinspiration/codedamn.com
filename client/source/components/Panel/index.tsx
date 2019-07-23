@@ -53,20 +53,19 @@ function Panel(props) {
 	
 	if (!props.user) return <Loading />
 
-	const tabs = props.courses.map(block => block.timelines).flat(Infinity).sort(_ => 0.5 - Math.random()).slice(0, 4).map(getBlockMarkup)
+
+	const [blocks4, setBlocks4] = useState(props.courses.map(block => block.timelines).flat(Infinity).sort(_ => 0.5 - Math.random()).slice(0, 4).map(getBlockMarkup))
 
 	const { name, damns, status } = props.user
-
-	const blocks3 = <div styleName="random-recommendations">
-		{tabs}
-	</div>
 
 	const Dashboard = (<div styleName="greeting-section">
 		<h1>{greeting} {name}!</h1>
 		<p>You have {damns || 0} damns at codedamn.</p>
 		{/*<PaymentButton />*/}
 		<h2 styleName="learning-heading">Here's what people are learning right now:</h2>
-		{blocks3}
+		<div styleName="random-recommendations">
+			{blocks4}
+		</div>
 	</div>)
 
 	const Courses = props.courses.map(block => {
