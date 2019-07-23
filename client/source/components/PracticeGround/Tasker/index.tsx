@@ -95,7 +95,7 @@ function Tasker(props) {
 						</div>)
 					})}
 
-					{allDone && props.pblock.nextslug ? <Link styleName="next" to={props.pblock.nextslug}>Go to next challenge</Link> : null}
+					{allDone && props.pblock.nextslug ? <Link styleName="next" to={props.embedded ? props.nextslug : props.pblock.nextslug}>Go to next challenge</Link> : null}
 				</div>
 			</div>
 		</div>

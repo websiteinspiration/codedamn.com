@@ -68,6 +68,7 @@ function ContentInterface(props) {
 					forcedParentSlug={dotInfo.taskExtras.parentslug}
 					forcedTaskSlug={props.dotslug}
 					embedded={true}
+					nextslug={dotInfo.nextURL}
 				/>
 		}
 	}
