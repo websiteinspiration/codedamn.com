@@ -28,7 +28,7 @@ function Video(props) {
 	const { vidid } = props
 	
 	return (
-		<div styleName="ytplayer contentinterface">
+		<div styleName={`ytplayer ${props.className || ''}`}>
 			<YouTube
 				videoId={vidid}
 				opts={opts}

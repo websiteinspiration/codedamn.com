@@ -13,7 +13,7 @@ function PracticeGround(props) {
 		props.getPracticeNodes({ moduleid: props.moduleid })
 	}, [])
 
-	if(!props.pnodes) return <Loading />
+	if(!props.pnodes) return <Loading id="PracticeGround" />
 
 	return (<div styleName="pnodes">
 		{props.pnodes.map(node => {

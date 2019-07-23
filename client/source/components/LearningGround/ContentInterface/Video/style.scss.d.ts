@@ -1,4 +1,5 @@
 export const ytplayer: string;
+export const contentinterface: string;
 export const feedback: string;
 export const controls: string;
 export const progress: string;

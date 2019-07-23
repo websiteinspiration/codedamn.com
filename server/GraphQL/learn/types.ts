@@ -17,12 +17,17 @@ type DotInfo {
 	currentSlug: String!
 	displayLangName: String!
 	videoExtras: VideoType
+	taskExtras: TaskType
 	quizExtras: QuizType
 	nextTitle: String
 	nextURL: String
 	prevTitle: String
 	prevURL: String
 	type: String!
+}
+
+type TaskType {
+	parentslug: String
 }
 
 type VideoType {

@@ -105,6 +105,9 @@ export const getDotInfo = payload => async dispatch => {
 					videoExtras {
 						vidid
 					}
+					taskExtras {
+						parentslug
+					}
 					quizExtras {
 						code
 						options {

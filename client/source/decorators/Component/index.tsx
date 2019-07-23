@@ -4,6 +4,8 @@ const ComponentDecorator = args => Component => {
 
 	function Base(props) {
 
+		if(props.embedded) return <Component {...props} />
+
 		function updateComponentState(newprops) {
 			const props = args.async(newprops)
 			if(props) {

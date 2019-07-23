@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Video from './Video'
-import Task from './Task'
+import Task from 'components/PracticeGround/Tasker'
 import Quiz from './Quiz'
 import { connect } from 'react-redux'
 import styles from './style.scss'
@@ -49,6 +49,8 @@ function ContentInterface(props) {
 
 		const { dotInfo } = props
 		if (!dotInfo) return null
+		
+		console.log(dotInfo)
 
 		switch (dotInfo.type) {
 			case 'quiz':
@@ -57,16 +59,22 @@ function ContentInterface(props) {
 				return <Video
 					vidid={dotInfo.videoExtras.vidid}
 					slug={props.dotslug}
+					className="contentinterface"
 					parentslug={props.parentslug}
 				/>
 			case 'task':
-				return <Task />
+				return <Task
+					className="contentinterface"
+					forcedParentSlug={dotInfo.taskExtras.parentslug}
+					forcedTaskSlug={props.dotslug}
+					embedded={true}
+				/>
 		}
 	}
 
 	const component = getRenderComponent()
 
-	if (!component) return <Loading />
+	if (!component) return <div styleName="contentinterface"><Loading /></div>
 	const { dotInfo } = props
 
 return <>

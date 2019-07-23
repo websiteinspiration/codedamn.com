@@ -43,18 +43,23 @@ const isMobile = {
 // TODO: Move activeTab to redux for persisted tab on navigation
 
 function Panel(props) {
+	
+	const [blocks4, setBlocks4] = useState(null)
 
 	useEffect(() => {
 		props.checkForUpdates()
 		props.getCourses()
 	}, [])
 
+	useEffect(() => {
+		if(props.courses) {
+			setBlocks4(props.courses.map(block => block.timelines).flat(Infinity).sort(_ => 0.5 - Math.random()).slice(0, 4).map(getBlockMarkup))
+		}
+	}, [props.courses])
+
 	const [activeTab, setActiveTab] = useState(0)
 	
-	if (!props.user) return <Loading />
-
-
-	const [blocks4, setBlocks4] = useState(props.courses.map(block => block.timelines).flat(Infinity).sort(_ => 0.5 - Math.random()).slice(0, 4).map(getBlockMarkup))
+	if (!props.user || !props.courses) return <Loading />
 
 	const { name, damns, status } = props.user
 
@@ -122,6 +127,7 @@ function Panel(props) {
 				onChange={(_, value) => setActiveTab(value)}
 				indicatorColor="primary"
 				textColor="primary"
+				styleName="tabs"
 				centered>
 				<Tab label="Dashboard" />
 				<Tab label="All Courses" />
@@ -178,6 +184,7 @@ function Panel(props) {
 					<h2>{block.name}</h2>
 					<p>{block.description}</p>
 				</div>
+				<div styleName="startbtn">Start</div>
 			</div>
 		)
 	}

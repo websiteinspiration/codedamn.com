@@ -9,7 +9,7 @@ const initialState = {
 	userLoggedIn: null,
 	csrfToken: null,
 	headerType: null,
-	courses: []
+	courses: null
 }
 
 export default function(state = initialState, {type, payload}) {

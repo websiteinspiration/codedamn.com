@@ -18,6 +18,15 @@
 	}
 }
 
+.contentinterface {
+    width: 900px;
+	height: 506px;
+	position: relative;
+	.left,.right {
+		max-height: auto;
+	}
+}
+
 .center {
 	width: 50%;
 	float: left;
@@ -62,7 +71,8 @@
 .left, .right {
     float: left;
     min-height: 1px;
-    border: 3px solid #1f1f1f;
+	border: 3px solid #1f1f1f;
+	border-top: 0;
 	//padding: 7px;
 	max-height: calc(100vh - 70px); // header height = 70px
 	overflow-y: auto;
@@ -75,6 +85,7 @@
 		margin-top: 10px;
 		margin-bottom: 10px;
 		padding: 0 10px;
+		line-height: 26px;
 	}
 }
 
@@ -83,6 +94,7 @@
 		background: #1f1f1f;
 		color: white;
 		text-align: center;
+		font-weight: 100;
 	}
 }
 

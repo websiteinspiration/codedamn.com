@@ -148,6 +148,9 @@ class Functions {
 				const quizExtras = await Quiz.getQuizDetails({ slug: dot.slug })
 				reply.quizExtras = quizExtras			
 				break
+			case 'task':
+				reply.taskExtras = dot.extras
+				break
 		}
 
         if(i != doc.flow.length - 1) { // not last record

@@ -47,11 +47,14 @@ function Tasker(props) {
 		}
 	}, [props.pblock])
 
-	if(!props.pblock) return <Loading />
+	if(!props.pblock) {
+		if(props.embedded) return <div styleName="contentinterface"><Loading id="Tasker" /></div>
+		return <Loading />
+	}
 	
 
 	return (
-		<div styleName="practice-ground">
+		<div styleName={`practice-ground ${props.className || ''}`}>
 			<div styleName="left">
 				<h2>Instructions</h2>
 				<div styleName="left-content" dangerouslySetInnerHTML={{ __html: props.pblock.description }}></div>
@@ -70,7 +73,10 @@ function Tasker(props) {
 							roundedSelection: false,
 							scrollBeyondLastLine: false,
 							readOnly: false,
-							fontSize: 16
+							minimap: {
+								enabled: false
+							},
+							fontSize: 14
 						}}
 					/>
 				</div>
@@ -122,13 +128,27 @@ function Tasker(props) {
 	}
 }
 
-const mapStateToProps = ({ practice }, { match : { params } }) => ({
-	moduleid: params.moduleid,
-	challengeid: params.challengeid,
-	pblock: practice.activeBlock
-})
+const mapStateToProps = ({ practice }, props) => {
+
+	if(props.forcedParentSlug) {
+		return {
+			moduleid: props.forcedParentSlug,
+			challengeid: props.forcedTaskSlug,
+			pblock: practice.activeBlock
+		}
+	}
+
+	const { match: { params } } = props
+
+	return {
+		moduleid: params.moduleid,
+		challengeid: params.challengeid,
+		pblock: practice.activeBlock
+	}
+}
 
 let com: any = css(styles, { handleNotFoundStyleName: 'log', allowMultiple: true })(Tasker)
 com = Component({ title: 'Challenge', sharedHeightClass: styles.turnFlex, gridClass: styles.turnGrid })(com)
 com = connect(mapStateToProps, { getPracticeBlock, clearReduxProps, practiceCompleted })(com)
+
 export default com
